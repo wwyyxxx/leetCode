@@ -341,13 +341,19 @@ public class record{
         return min_depth+1;
     }
 
+    public void deleteNode(ListNode node) {
+        node.val = node.next.val;
+        node.next = node.next.next;
+    }
+
 }
 class ListNode {
     int val;
     ListNode next;
     ListNode(int x) { 
         val = x;
-        next = null; }
+        // next = null;
+    }
 }
 class TreeNode {
     int val;
