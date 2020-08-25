@@ -360,6 +360,10 @@ public class record{
         head.next = null;
         return cur;
     }
+    public void deleteNode(ListNode node) {
+        node.val = node.next.val;
+        node.next = node.next.next;
+    }
 
 }
 class ListNode {
@@ -367,7 +371,8 @@ class ListNode {
     ListNode next;
     ListNode(int x) { 
         val = x;
-        next = null; }
+        // next = null;
+    }
 }
 class TreeNode {
     int val;
