@@ -341,6 +341,26 @@ public class record{
         return min_depth+1;
     }
 
+    public ListNode reverseList(ListNode head) {
+        ListNode prev = null;
+        ListNode curr = head;
+        while (curr != null) {
+            ListNode nextTemp = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = nextTemp;
+        }
+        return prev;
+    }
+
+    public ListNode reverseList2(ListNode head) { //递归
+        if(head == null || head.next == null){return head}
+        ListNode cur = reverseList2(head.next);
+        head.next.next = head;
+        head.next = null;
+        return cur;
+    }
+
 }
 class ListNode {
     int val;
