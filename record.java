@@ -365,6 +365,24 @@ public class record{
         node.next = node.next.next;
     }
 
+    public boolean isPalindrome(ListNode head) {
+        List<Integer> arr = new ArrayList();
+        while(head != null) {
+            arr.add(head.val);
+            head = head.next;
+        }
+        int font = 0, end = arr.size() - 1;
+        while(font < end) {
+            if(!arr.get(font).equals(arr.get(end))) {
+                return false;
+            }
+            font++;
+            end--;
+        }
+        return true;
+        
+    }
+
 }
 class ListNode {
     int val;
