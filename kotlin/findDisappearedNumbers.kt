@@ -1,3 +1,10 @@
+/*
+ * @Author: Tungbo
+ * @Date: 2020-10-14 15:05:18
+ * @LastEditTime: 2021-06-07 11:26:46
+ * @LastEditors: Tungbo
+ * @Description: leecode: 
+ */
 class findDisappearedNumbers {
     fun findDisappearedNumbers(nums: IntArray): List<Int> {
         for (index in nums.indices) {
