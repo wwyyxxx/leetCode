@@ -1,7 +1,7 @@
 /*
  * @Author: Tungbo
  * @Date: 2021-07-05 17:15:40
- * @LastEditTime: 2021-07-05 17:15:58
+ * @LastEditTime: 2021-07-05 17:16:12
  * @LastEditors: Tungbo
  * @Description: leecode: 数值的整数次方
  */
