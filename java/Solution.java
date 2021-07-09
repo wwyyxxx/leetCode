@@ -1,7 +1,7 @@
 /*
  * @Author: Tungbo
  * @Date: 2021-07-06 14:44:26
- * @LastEditTime: 2021-07-07 16:22:17
+ * @LastEditTime: 2021-07-09 14:58:49
  * @LastEditors: Tungbo
  * @Description: leecode: leetcode记录
  */
@@ -84,6 +84,15 @@ public class Solution {
         return s.charAt(i - 1) == p.charAt(j - 1);
     }
     
+    // 二叉树的镜像
+    public TreeNode mirrorTree(TreeNode root) {
+        if(root == null) return null;
+        TreeNode tempLeft = root.left;
+        root.left = mirrorTree(root.right);
+        root.right = mirrorTree(tempLeft);
+        return root;
+    }
+
 }
 
 class TreeNode {
