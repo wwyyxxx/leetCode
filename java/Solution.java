@@ -1,7 +1,7 @@
 /*
  * @Author: Tungbo
  * @Date: 2021-07-06 14:44:26
- * @LastEditTime: 2021-07-09 14:58:49
+ * @LastEditTime: 2021-07-09 15:22:14
  * @LastEditors: Tungbo
  * @Description: leecode: leetcode记录
  */
@@ -93,6 +93,16 @@ public class Solution {
         return root;
     }
 
+    // 对称的二叉树
+    public boolean isSymmetric(TreeNode root) {
+        if(root == null) return true;
+        return isSymmetric(root.left,root.right);
+    }
+    public boolean isSymmetric(TreeNode rootL,TreeNode rootR) {
+        if(rootL == null && rootR == null) return true;
+        if(rootL == null || rootR == null) return false;
+        return rootL.val == rootR.val && isSymmetric(rootL.left,rootR.right) && isSymmetric(rootL.right,rootR.left);
+    }
 }
 
 class TreeNode {
