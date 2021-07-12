@@ -1,7 +1,7 @@
 /*
  * @Author: Tungbo
  * @Date: 2021-07-06 14:44:26
- * @LastEditTime: 2021-07-09 17:12:12
+ * @LastEditTime: 2021-07-12 14:34:01
  * @LastEditors: Tungbo
  * @Description: leecode: leetcode记录
  */
@@ -124,6 +124,7 @@ public class Solution {
     public boolean isNUm(char c) {
         return c =='0'||c =='1'||c =='2'||c =='3'||c =='4'||c =='5'||c =='6'||c =='7'||c =='8'||c =='9'||c =='-'||c =='+'||c =='e'||c =='E';
     }
+    
     // 表示数值的字符串
     public boolean isNumber(String s) {
         Map<State, Map<CharType, State>> transfer = new HashMap<State, Map<CharType, State>>();
@@ -194,7 +195,6 @@ public class Solution {
         }
         return state == State.STATE_INTEGER || state == State.STATE_POINT || state == State.STATE_FRACTION || state == State.STATE_EXP_NUMBER || state == State.STATE_END;
     }
-
     public CharType toCharType(char ch) {
         if (ch >= '0' && ch <= '9') {
             return CharType.CHAR_NUMBER;
@@ -210,7 +210,6 @@ public class Solution {
             return CharType.CHAR_ILLEGAL;
         }
     }
-
     enum State {
         STATE_INITIAL,
         STATE_INT_SIGN,
@@ -223,7 +222,6 @@ public class Solution {
         STATE_EXP_NUMBER,
         STATE_END
     }
-
     enum CharType {
         CHAR_NUMBER,
         CHAR_EXP,
@@ -231,6 +229,25 @@ public class Solution {
         CHAR_SIGN,
         CHAR_SPACE,
         CHAR_ILLEGAL
+    }
+
+    // 调整数组顺序使奇数位于偶数前面
+    public int[] exchange(int[] nums) {
+        if(nums.length() == 0) return nums;
+        int left = 0, right = nums.length();
+        while(left<right) {
+            if(nums[left] % 2 ==0) {
+                if(nums[right] %2 ==0) {
+                    right--;
+                } else{
+                    int temp = nums[left];
+                    nums[left] = nums[right];
+                    nums[right] = temp;
+                }
+            } else {
+                left++;
+            }
+        }
     }
 }
 
