@@ -1,7 +1,7 @@
 /*
  * @Author: Tungbo
  * @Date: 2021-07-06 14:44:26
- * @LastEditTime: 2021-07-12 16:01:28
+ * @LastEditTime: 2021-07-12 16:14:48
  * @LastEditors: Tungbo
  * @Description: leecode: leetcode记录
  */
@@ -286,6 +286,20 @@ public class Solution {
         }
         return res;
     }
+
+    // 链表中倒数第k个节点
+    public ListNode getKthFromEnd(ListNode head, int k) {
+        ListNode fast = head, slow = head;
+        while(fast!=null || k<0) {
+            fast = fast.next;
+            k--;
+        }
+        while(fast!= null){
+            fast = fast.next;
+            slow = slow.next;
+        }
+        return slow;
+    }
 }
 
 class TreeNode {
@@ -293,4 +307,9 @@ class TreeNode {
     TreeNode left;
     TreeNode right;
     TreeNode(int x) { val = x; }
+}
+class ListNode {
+    int val;
+    ListNode next;
+    ListNode(int x) { val = x; }
 }
