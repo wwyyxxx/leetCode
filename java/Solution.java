@@ -1,7 +1,7 @@
 /*
  * @Author: Tungbo
  * @Date: 2021-07-06 14:44:26
- * @LastEditTime: 2021-07-12 16:14:48
+ * @LastEditTime: 2021-07-13 15:15:08
  * @LastEditors: Tungbo
  * @Description: leecode: leetcode记录
  */
@@ -299,6 +299,23 @@ public class Solution {
             slow = slow.next;
         }
         return slow;
+    }
+
+    // 反转链表
+    public ListNode reverseList(ListNode head) {
+        if (head == null) return head;
+        Stack<Integer> stack = new Stack<>();
+        ListNode temp = new ListNode(0);
+        ListNode result = temp;
+        while(head!=null){
+            stack.push(head.val);
+            head = head.next;
+        }
+        while(!stack.isEmpty()){
+            temp.next = new ListNode(stack.pop());
+            temp = temp.next;
+        }
+        return result.next;
     }
 }
 
