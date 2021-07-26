@@ -1,17 +1,19 @@
+import java.util.Stack;
+
 /*
  * @Author: Tungbo
  * @Date: 2021-07-26 15:03:05
- * @LastEditTime: 2021-07-26 15:08:51
+ * @LastEditTime: 2021-07-26 15:13:07
  * @LastEditors: Tungbo
  * @Description: leecode: 包含min函数的栈
  */
-class MinStack {
+class MinStack1 {
 
     Stack<Integer> st;
     Stack<Integer> minSt;
 
     /** initialize your data structure here. */
-    public MinStack() {
+    public MinStack1() {
         st = new Stack<Integer>();
         minSt = new Stack<Integer>();
     }

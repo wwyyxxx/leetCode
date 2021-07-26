@@ -1,4 +1,10 @@
-import org.junit.Test;
+/*
+ * @Author: Tungbo
+ * @Date: 2020-10-10 13:38:58
+ * @LastEditTime: 2021-07-26 15:18:40
+ * @LastEditors: Tungbo
+ * @Description: leecode: 
+ */
 
 import java.util.*;
 
@@ -31,7 +37,6 @@ public class TwoSum {
         return ints;
     }
 
-    @Test
     public static  int[] twoSum2(int[] nums, int target) {
         for (int i = 0; i < nums.length; i++) {
             for (int j = i + 1; j < nums.length; j++) {
@@ -43,7 +48,6 @@ public class TwoSum {
         throw new IllegalArgumentException("No two sum solution");
     }
 
-    @Test
     public int[] twoSum()  {
         int[] nums = new int[]{-1,-2,-3,-4,-5,-7};
         int target = -8;

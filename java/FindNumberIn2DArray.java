@@ -1,11 +1,11 @@
 /*
  * @Author: Tungbo
  * @Date: 2021-06-10 15:24:26
- * @LastEditTime: 2021-06-11 11:12:33
+ * @LastEditTime: 2021-07-26 15:11:31
  * @LastEditors: Tungbo
  * @Description: leecode: 二维数组中的查找
  */
-public class findNumberIn2DArray {
+public class FindNumberIn2DArray {
 
     public static void main(String[] args) {
 

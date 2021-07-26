@@ -1,13 +1,15 @@
+import java.util.Stack;
+
 /*
  * @Author: Tungbo
  * @Date: 2021-06-16 15:56:52
- * @LastEditTime: 2021-06-17 17:40:20
+ * @LastEditTime: 2021-07-26 15:19:47
  * @LastEditors: Tungbo
  * @Description: leecode: 从尾到头打印链表
  */
 public class ReversePrint {
     public static void main(String[] args) {
-        reversePrint()
+        
     }
     
     public int[] reversePrint(ListNode head) {
@@ -24,9 +26,4 @@ public class ReversePrint {
         return ids;
     }
 
-}
-class ListNode {
-    int val;
-    ListNode next;
-    ListNode(int x) { val = x; }
 }

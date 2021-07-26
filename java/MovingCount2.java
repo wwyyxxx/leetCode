@@ -1,7 +1,7 @@
 /*
  * @Author: Tungbo
  * @Date: 2021-06-28 15:31:05
- * @LastEditTime: 2021-06-28 16:20:49
+ * @LastEditTime: 2021-07-26 15:13:59
  * @LastEditors: Tungbo
  * @Description: leecode: 机器人的运动范围
  */
@@ -24,7 +24,7 @@ public class MovingCount2 {
     private int dfs(int m, int n, int si, int sj) {
         if (this.m < m || this.n < n || si+sj > this.k || visited[m][n]) return 0;
         visited[m][n] = true;
-        return 1 + dfs(i + 1, j, (i + 1) % 10 != 0 ? si + 1 : si - 8, sj) + dfs(i, j + 1, si, (j + 1) % 10 != 0 ? sj + 1 : sj - 8);
+        return 1 + dfs(si + 1, sj, (si + 1) % 10 != 0 ? si + 1 : si - 8, sj) + dfs(si, sj + 1, si, (sj + 1) % 10 != 0 ? sj + 1 : sj - 8);
     }
 
 }

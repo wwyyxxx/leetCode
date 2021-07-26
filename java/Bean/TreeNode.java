@@ -1,7 +1,9 @@
+package Bean;
+
 /*
  * @Author: Tungbo
  * @Date: 2021-07-06 14:43:38
- * @LastEditTime: 2021-07-06 14:44:06
+ * @LastEditTime: 2021-07-26 15:11:11
  * @LastEditors: Tungbo
  * @Description: leecode: 
  */

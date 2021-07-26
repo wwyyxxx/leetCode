@@ -1,13 +1,13 @@
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Queue;
 import java.util.Set;
 import java.util.Stack;
-
-import javafx.beans.binding.IntegerBinding;
 
 public class record{
     public static void main(String[] args) {
@@ -281,21 +281,20 @@ public class record{
 
     public static void selectSort(int[] arr) {
         
-        for(int i=0;i<nums.length - 1;i++){
+        for(int i=0;i<arr.length - 1;i++){
             int min = i;
-            for(int j=i+1;j < nums.length; j++) {
-                if(nums[j]<nums[min]){
+            for(int j=i+1;j < arr.length; j++) {
+                if(arr[j]<arr[min]){
                     min = j;
                 }
             }
             
             if(min != i) {
-                int temp = nums[i];
-                nums[i] = nums[min];
-                nums[min] = temp;
+                int temp = arr[i];
+                arr[i] = arr[min];
+                arr[min] = temp;
             }
         }
-        return nums;
         System.out.println(Arrays.toString(arr));
     }
 
@@ -333,10 +332,10 @@ public class record{
         if(root.left ==null && root.right==null) return 1;
         int min_depth = Integer.MAX_VALUE;
         if(root.left != null){
-            min_depth = Math.min(min_depth,minDepth(min_depth.left));
+            min_depth = Math.min(min_depth,minDepth(root.left));
         }
         if(root.right != null){
-            min_depth = Math.min(min_depth,minDepth(min_depth.right));
+            min_depth = Math.min(min_depth,minDepth(root.right));
         }
         return min_depth+1;
     }
@@ -354,7 +353,7 @@ public class record{
     }
 
     public ListNode reverseList2(ListNode head) { //递归
-        if(head == null || head.next == null){return head}
+        if(head == null || head.next == null){return head;}
         ListNode cur = reverseList2(head.next);
         head.next.next = head;
         head.next = null;
@@ -384,20 +383,7 @@ public class record{
     }
 
 }
-class ListNode {
-    int val;
-    ListNode next;
-    ListNode(int x) { 
-        val = x;
-        // next = null;
-    }
-}
-class TreeNode {
-    int val;
-    TreeNode left;
-    TreeNode right;
-    TreeNode(int x) { val = x; }
-}
+
 
 class MinStack {
     Stack<Integer> stack;

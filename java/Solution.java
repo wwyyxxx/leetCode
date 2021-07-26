@@ -1,7 +1,11 @@
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Stack;
+
 /*
  * @Author: Tungbo
  * @Date: 2021-07-06 14:44:26
- * @LastEditTime: 2021-07-14 10:29:51
+ * @LastEditTime: 2021-07-26 15:20:30
  * @LastEditors: Tungbo
  * @Description: leecode: leetcode记录
  */
@@ -233,8 +237,8 @@ public class Solution {
 
     // 调整数组顺序使奇数位于偶数前面
     public int[] exchange(int[] nums) {
-        if(nums.length() == 0) return nums;
-        int left = 0, right = nums.length();
+        if(nums.length == 0) return nums;
+        int left = 0, right = nums.length;
         while(left<right) {
             if(nums[left] % 2 ==0) {
                 if(nums[right] %2 ==0) {
@@ -248,6 +252,7 @@ public class Solution {
                 left++;
             }
         }
+        return nums;
     }
 
     // 顺时针打印矩阵
@@ -270,7 +275,7 @@ public class Solution {
         }
         return result;
     }
-    public int[] spiralOrder(int[][] matrix) {
+    public int[] spiralOrder1(int[][] matrix) {
         if(matrix.length == 0) return new int[0];
         int l = 0, r = matrix[0].length - 1, t = 0, b = matrix.length - 1, x = 0;
         int[] res = new int[(r + 1) * (b + 1)];
