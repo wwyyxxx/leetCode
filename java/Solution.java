@@ -5,7 +5,7 @@ import java.util.Stack;
 /*
  * @Author: Tungbo
  * @Date: 2021-07-06 14:44:26
- * @LastEditTime: 2021-07-26 15:20:30
+ * @LastEditTime: 2021-07-26 15:38:05
  * @LastEditors: Tungbo
  * @Description: leecode: leetcode记录
  */
@@ -336,6 +336,20 @@ public class Solution {
             map.get(n).random = n.random;
         }
         return map.get(head);
+    }
+
+    //栈的压入、弹出序列
+    public boolean validateStackSequences(int[] pushed, int[] popped) {
+        Stack<Integer> stack = new Stack<>();
+        int j = 0;
+        for(int i=0;i<pushed.length;i++) {
+            stack.push(pushed[i]);
+            while(!stack.isEmpty() && stack.peek() == popped[j]){
+                stack.pop();
+                j++;
+            }
+        }
+        return stack.isEmpty();
     }
 }
 

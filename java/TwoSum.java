@@ -25,7 +25,7 @@ public class TwoSum {
                 }
             }
         }
-        Iterator iterator = indexs.iterator();
+        Iterator<Integer> iterator = indexs.iterator();
         int[] ints = new int[indexs.size()];
         int z = 0;
         while(iterator.hasNext()){
