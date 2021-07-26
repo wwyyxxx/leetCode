@@ -1,7 +1,7 @@
 /*
  * @Author: Tungbo
  * @Date: 2021-07-06 14:44:26
- * @LastEditTime: 2021-07-13 15:15:08
+ * @LastEditTime: 2021-07-14 10:29:51
  * @LastEditors: Tungbo
  * @Description: leecode: leetcode记录
  */
@@ -317,6 +317,21 @@ public class Solution {
         }
         return result.next;
     }
+
+    // 复杂链表的复制
+    public Node copyRandomList(Node head) {
+        if (head == null) return null;
+        Node cur = head;
+        Map<Node,Node> map = new HashMap<>();
+        for(Node n = cur;n != null; n = n.next) {
+            map.put(n, new Node(n.val));
+        }
+        for(Node n = cur;n != null; n = n.next) {
+            map.get(n).next = n.next;
+            map.get(n).random = n.random;
+        }
+        return map.get(head);
+    }
 }
 
 class TreeNode {
@@ -329,4 +344,15 @@ class ListNode {
     int val;
     ListNode next;
     ListNode(int x) { val = x; }
+}
+class Node {
+    int val;
+    Node next;
+    Node random;
+
+    public Node(int val) {
+        this.val = val;
+        this.next = null;
+        this.random = null;
+    }
 }
