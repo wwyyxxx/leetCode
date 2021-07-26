@@ -1,13 +1,12 @@
 /*
  * @Author: Tungbo
  * @Date: 2021-06-22 17:13:50
- * @LastEditTime: 2021-06-28 15:25:11
+ * @LastEditTime: 2021-07-26 15:21:54
  * @LastEditors: Tungbo
  * @Description: leecode: 机器人的运动范围
  */
 public class MovingCount {
     public static void main(String[] args) {
-        int[][] res = new int[1][2];
         System.out.println(movingCount(36,11,15));
     }
     

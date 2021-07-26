@@ -203,7 +203,7 @@ public class record{
     }
 
     public int singleNumber(int[] nums) {
-        Set set = new HashSet<>();
+        Set<Integer> set = new HashSet<>();
         for(int i=0;i<nums.length;i++) {
             if(!set.add(nums[i])) {
                 set.remove(nums[i]);
@@ -365,7 +365,7 @@ public class record{
     }
 
     public boolean isPalindrome(ListNode head) {
-        List<Integer> arr = new ArrayList();
+        List<Integer> arr = new ArrayList<>();
         while(head != null) {
             arr.add(head.val);
             head = head.next;

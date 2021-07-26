@@ -6,7 +6,7 @@
  * @Description: leecode: 青蛙跳台阶问题
  */
 class numWays{
-    public int numWays(int n) {
+    public int numWays1(int n) {
         if(n==0||n==1) return 1;
         if(n==2)return 2;
         int a=1,b=1,sum=0;

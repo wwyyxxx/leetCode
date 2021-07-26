@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 
 class findDisappearedNumbers {
-    public List<Integer> findDisappearedNumbers(int[] nums) {
+    public List<Integer> findDisappearedNumbers1(int[] nums) {
         HashMap<Integer,Boolean> temp = new HashMap<>();
         for (int i=0;i<nums.length;i++) {
             temp.put(nums[i],true);
