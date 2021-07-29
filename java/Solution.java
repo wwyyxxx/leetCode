@@ -5,7 +5,7 @@ import java.util.Stack;
 /*
  * @Author: Tungbo
  * @Date: 2021-07-06 14:44:26
- * @LastEditTime: 2021-07-26 15:38:05
+ * @LastEditTime: 2021-07-29 15:27:41
  * @LastEditors: Tungbo
  * @Description: leecode: leetcode记录
  */
@@ -350,6 +350,32 @@ public class Solution {
             }
         }
         return stack.isEmpty();
+    }
+
+    // 连续子数组的最大和
+    public int maxSubArray(int[] nums) {
+        int res = nums[0];
+        for(int i =1;i<nums.length;i++) {
+            nums[i] += Math.max(nums[i-1],0);
+            res = Math.max(nums[i],res);
+        }
+        return res;
+    }
+
+    //数组中出现次数超过一半的数字
+    public int majorityElement(int[] nums) {
+        int count = nums.length / 2;
+        int res = nums[0];
+        Map<Integer,Integer> map = new HashMap<>();
+        for(int i=0; i<nums.length;i++) {
+            if(map.get(nums[i]) == null) { map.put(nums[i], 1); }
+            else {
+                res = map.get(nums[i]) + 1;
+                if(res>count) return nums[i];
+                map.put(nums[i], res);
+            }
+        }
+        return res;
     }
 }
 
