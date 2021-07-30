@@ -1,11 +1,15 @@
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
+import java.util.Queue;
 import java.util.Stack;
 
 /*
  * @Author: Tungbo
  * @Date: 2021-07-06 14:44:26
- * @LastEditTime: 2021-07-29 15:27:41
+ * @LastEditTime: 2021-07-30 15:05:09
  * @LastEditors: Tungbo
  * @Description: leecode: leetcode记录
  */
@@ -377,6 +381,25 @@ public class Solution {
         }
         return res;
     }
+
+    // 从上到下打印二叉树
+    public int[] levelOrder(TreeNode root) {
+        if(root==null) return new int[0];
+        List<Integer> res = new ArrayList<>();
+        Queue<TreeNode> queue = new LinkedList<>(){{ add(root); }};
+        while(!queue.isEmpty()) {
+            TreeNode node = queue.poll();
+            res.add(node.val);
+            if(node.left!=null) queue.add(node.left);
+            if(node.right!=null) queue.add(node.right);
+        }
+        int[] r = new int[res.size()];
+        for(int i =0;i<res.size();i++){
+            r[i] = res.get(i);
+        }
+        return r;
+    }
+    
 }
 
 class TreeNode {
