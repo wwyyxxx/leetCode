@@ -6,10 +6,12 @@ import java.util.Map;
 import java.util.Queue;
 import java.util.Stack;
 
+import jdk.nashorn.internal.ir.IfNode;
+
 /*
  * @Author: Tungbo
  * @Date: 2021-07-06 14:44:26
- * @LastEditTime: 2021-07-30 15:16:25
+ * @LastEditTime: 2021-07-30 15:44:08
  * @LastEditors: Tungbo
  * @Description: leecode: leetcode记录
  */
@@ -402,8 +404,8 @@ public class Solution {
 
     // 从上到下打印二叉树
     public List<List<Integer>> levelOrder2(TreeNode root) {
-        if(root==null) return null;
         List<List<Integer>> res = new ArrayList<>();
+        if(root==null) return res;
         Queue<TreeNode> queue = new LinkedList<>(){{ add(root); }};
         while(!queue.isEmpty()) {
             List<Integer> rows = new ArrayList<>();
@@ -417,7 +419,25 @@ public class Solution {
         }
         return res;
     }
-    
+
+     // 从上到下打印二叉树3
+     public List<List<Integer>> levelOrder3(TreeNode root) {
+        List<List<Integer>> res = new ArrayList<>();
+        if(root==null) return res;
+        Queue<TreeNode> queue = new LinkedList<>(){{ add(root); }};
+        while(!queue.isEmpty()) {
+            List<Integer> rows = new ArrayList<>();
+            for (int i=queue.size();i>0;i--) {
+                TreeNode node = queue.poll();
+                rows.add(node.val);
+                if(node.left!=null) queue.add(node.left);
+                if(node.right!=null) queue.add(node.right);
+            }
+            if(res.size() % 2 == 1) Collections.reverse(rows);
+            res.add(rows);
+        }
+        return res;
+    }
 }
 
 class TreeNode {
