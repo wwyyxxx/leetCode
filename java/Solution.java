@@ -493,6 +493,22 @@ public class Solution {
         }
         return null;
     }
+
+    // 两个链表的第一个公共节点
+    public ListNode getIntersectionNode2(ListNode headA, ListNode headB) {
+        Map<ListNode,Boolean> temp = new HashMap<>();
+        ListNode nodeTemp = headA;
+        while(nodeTemp != null) {
+            temp.put(nodeTemp, true);
+            nodeTemp = nodeTemp.next;
+        }
+        nodeTemp = headB;
+        while(nodeTemp!= null) {
+            if(temp.containsKey(nodeTemp)) return nodeTemp;
+            nodeTemp = nodeTemp.next;
+        }
+        return null;
+    }
 }
 
 class TreeNode {
