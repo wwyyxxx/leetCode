@@ -11,7 +11,7 @@ import jdk.nashorn.internal.ir.IfNode;
 /*
  * @Author: Tungbo
  * @Date: 2021-07-06 14:44:26
- * @LastEditTime: 2021-07-30 15:44:08
+ * @LastEditTime: 2021-08-03 15:35:12
  * @LastEditors: Tungbo
  * @Description: leecode: leetcode记录
  */
@@ -437,6 +437,23 @@ public class Solution {
             res.add(rows);
         }
         return res;
+    }
+
+    // 二叉树深度
+    public int maxDepth(TreeNode root) {
+        if(root==null) return 0;
+        List<TreeNode> queue = new LinkedList<TreeNode>(){{ add(root); }},temp;
+        int count =0;
+        while(!queue.isEmpty()) {
+            temp = new LinkedList<TreeNode>();
+            for(TreeNode node : queue) {
+                if(node.right!=null) temp.add(node.right);
+                if(node.left!=null) temp.add(node.left);
+            }
+            queue = temp;
+            count++;
+        }
+        return count;
     }
 }
 
