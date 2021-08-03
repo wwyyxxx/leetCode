@@ -1,3 +1,4 @@
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -11,7 +12,7 @@ import jdk.nashorn.internal.ir.IfNode;
 /*
  * @Author: Tungbo
  * @Date: 2021-07-06 14:44:26
- * @LastEditTime: 2021-08-03 15:35:12
+ * @LastEditTime: 2021-08-03 15:48:58
  * @LastEditors: Tungbo
  * @Description: leecode: leetcode记录
  */
@@ -454,6 +455,26 @@ public class Solution {
             count++;
         }
         return count;
+    }
+
+    // 第一个只出现一次的字符
+    public char firstUniqChar(String s) {
+        char[] chars = s.toCharArray();
+        List<Character> queue = new LinkedList<>();
+        List<Character> temp = new LinkedList<>();
+        for (int i = 0; i < chars.length; i++) {
+            if(!queue.contains(chars[i])) {
+                queue.add(chars[i]);
+            } else {
+                temp.add(chars[i]);
+            }
+        }
+        for(Character c:queue){
+            if(!temp.contains(c)){
+                return c;
+            }
+        }
+        return ' ';
     }
 }
 
