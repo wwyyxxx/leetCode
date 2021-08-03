@@ -1,18 +1,20 @@
 import java.nio.charset.Charset;
-import java.util.ArrayList;
+import java .util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Queue;
 import java.util.Stack;
+import java.util.Map.Entry;
 
 import jdk.nashorn.internal.ir.IfNode;
 
 /*
  * @Author: Tungbo
  * @Date: 2021-07-06 14:44:26
- * @LastEditTime: 2021-08-03 15:48:58
+ * @LastEditTime: 2021-08-03 15:53:42
  * @LastEditors: Tungbo
  * @Description: leecode: leetcode记录
  */
@@ -382,7 +384,7 @@ public class Solution {
                 map.put(nums[i], res);
             }
         }
-        return res;
+        re turn res;
     }
 
     // 从上到下打印二叉树
@@ -400,7 +402,7 @@ public class Solution {
         for(int i =0;i<res.size();i++){
             r[i] = res.get(i);
         }
-        return r;
+         return r;
     }
 
     // 从上到下打印二叉树
@@ -418,7 +420,7 @@ public class Solution {
             }
             res.add(rows);
         }
-        return res;
+        re turn res;
     }
 
      // 从上到下打印二叉树3
@@ -437,11 +439,11 @@ public class Solution {
             if(res.size() % 2 == 1) Collections.reverse(rows);
             res.add(rows);
         }
-        return res;
+        re turn res;
     }
 
     // 二叉树深度
-    public int maxDepth(TreeNode root) {
+    public int maxDepth(TreeNode ro ot) {
         if(root==null) return 0;
         List<TreeNode> queue = new LinkedList<TreeNode>(){{ add(root); }},temp;
         int count =0;
@@ -459,6 +461,9 @@ public class Solution {
 
     // 第一个只出现一次的字符
     public char firstUniqChar(String s) {
+         Map<Character, Boolean> dic = new LinkedHashMap<>();
+        for(Entry<Character,Boolean> entrySet : dic.entrySet()){
+        }
         char[] chars = s.toCharArray();
         List<Character> queue = new LinkedList<>();
         List<Character> temp = new LinkedList<>();
@@ -475,6 +480,18 @@ public class Solution {
             }
         }
         return ' ';
+    }
+
+    // 两个链表的第一个公共节点
+    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+        ListNode fast = headA;
+        ListNode slow = headB;
+        while(fast!=null || slow!=null) {
+            if(fast == slow) return fast;
+            fast = fast == null? headB : fast.next;
+            slow = slow == null ? headA : slow.next;
+        }
+        return null;
     }
 }
 
