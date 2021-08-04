@@ -509,6 +509,33 @@ public class Solution {
         }
         return null;
     }
+
+    // 和为s的两个数字
+    public int[] twoSum(int[] nums, int target) {
+        int i=0,j=nums.length;
+        while(i<j) {
+            if(target - nums[j] < nums[i]) j--;
+            if(target - nums[j] > nums[i]) i++;
+            if(target - nums[j] == nums[i]) break;
+        }
+        return new int[]{nums[i], nums[j]};
+    }
+
+    int resKth,k;
+    // 二叉搜索树的第k大节点
+    public int kthLargest(TreeNode root, int k) {
+        this.k = k;
+        dfs(root);
+        return resKth;
+    }
+    private void dfs(TreeNode root) {
+        if(root == null) return;
+        dfs(root.right);
+        if(k ==0) return;
+        if(--k ==0) resKth = root.val;
+        dfs(root.left);
+    }
+
 }
 
 class TreeNode {
