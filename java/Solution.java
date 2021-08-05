@@ -536,6 +536,29 @@ public class Solution {
         dfs(root.left);
     }
 
+    // 和为s的连续正数序列
+    public int[][] findContinuousSequence(int target) {
+        int i=1,j=2,s=3;
+        List<int[]> res = new ArrayList<>();
+        while(i < j) {
+            if(s == target) {
+                int[] temp = new int[j-i+1];
+                for(int k =i;k<=j;k++) {
+                    temp[k-i] = k;
+                }
+                res.add(temp);
+            }
+            if(s>=target) {
+                s-=i;
+                i++;
+            } else {
+                j++;
+                s +=j;
+            }
+        }
+        return res.toArray(new int[0][]);
+    }
+
 }
 
 class TreeNode {
