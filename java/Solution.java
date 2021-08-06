@@ -572,6 +572,21 @@ public class Solution {
         if(right == -1) return -1;
         return Math.abs(left - right) < 2 ? Math.max(left,right) + 1 : -1;
     }
+
+
+    // 翻转单词顺序
+    public String reverseWords(String s) {
+        String str = s.trim();
+        String[] words = str.split(" ");
+        StringBuffer res = new StringBuffer();
+        for(int i = words.length-1;i>=0;i--) {
+            String st = words[i];
+            if(st.equals("")) continue;
+            res.append(st);
+            if(i!=0) res.append(" ");
+        }
+        return res.toString();
+    }
 }
 
 class TreeNode {
