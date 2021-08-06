@@ -587,6 +587,21 @@ public class Solution {
         }
         return res.toString();
     }
+
+    // 翻转单词顺序
+    public String reverseWords2(String s) {
+        String str = s.trim();
+        int i = s.length() -1, j = i;
+        StringBuffer res = new StringBuffer();
+        while(i>=0) {
+            while(i>=0 && s.charAt(i) != ' ') i--;
+            res.append(s.substring(i+1,j+1));
+            res.append(" ");
+            while(i>=0 && s.charAt(i) == ' ') i--;
+            j = i;
+        }
+        return res.toString().trim();
+    }
 }
 
 class TreeNode {
