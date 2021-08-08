@@ -9,7 +9,6 @@ import java.util.Queue;
 import java.util.Stack;
 import java.util.Map.Entry;
 
-import jdk.nashorn.internal.ir.IfNode;
 
 /*
  * @Author: Tungbo
@@ -384,7 +383,7 @@ public class Solution {
                 map.put(nums[i], res);
             }
         }
-        re turn res;
+        return res;
     }
 
     // 从上到下打印二叉树
@@ -420,7 +419,7 @@ public class Solution {
             }
             res.add(rows);
         }
-        re turn res;
+        return res;
     }
 
      // 从上到下打印二叉树3
@@ -436,14 +435,14 @@ public class Solution {
                 if(node.left!=null) queue.add(node.left);
                 if(node.right!=null) queue.add(node.right);
             }
-            if(res.size() % 2 == 1) Collections.reverse(rows);
+            if(res.size() % 2 == 1) //Collections.reverse(rows);
             res.add(rows);
         }
-        re turn res;
+        return res;
     }
 
     // 二叉树深度
-    public int maxDepth(TreeNode ro ot) {
+    public int maxDepth(TreeNode root) {
         if(root==null) return 0;
         List<TreeNode> queue = new LinkedList<TreeNode>(){{ add(root); }},temp;
         int count =0;
@@ -601,6 +600,29 @@ public class Solution {
             j = i;
         }
         return res.toString().trim();
+    }
+
+    //在排序数组中查找数字 I
+    public int search(int[] nums, int target) {
+        // 搜索右边界 right
+        int i = 0, j = nums.length - 1;
+        while(i <= j) {
+            int m = (i + j) / 2;
+            if(nums[m] <= target) i = m + 1;
+            else j = m - 1;
+        }
+        int right = i;
+        // 若数组中无 target ，则提前返回
+        if(j >= 0 && nums[j] != target) return 0;
+        // 搜索左边界 right
+        i = 0; j = nums.length - 1;
+        while(i <= j) {
+            int m = (i + j) / 2;
+            if(nums[m] < target) i = m + 1;
+            else j = m - 1;
+        }
+        int left = j;
+        return right - left - 1;
     }
 }
 
