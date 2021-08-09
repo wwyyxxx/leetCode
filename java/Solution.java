@@ -1,5 +1,6 @@
 import java.nio.charset.Charset;
 import java .util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
@@ -645,6 +646,25 @@ public class Solution {
             else i = m + 1;
         }
         return i;
+    }
+
+    // 扑克牌中的顺子
+    public boolean isStraight(int[] nums) {
+        Arrays.sort(nums);
+        int count = 0;
+        for(int i = nums.length - 2; i>=0;i--) {
+            if(nums[i]==0) {
+                count--;
+                continue;
+            }
+            int temp = nums[i+1] - nums[i];
+            if(temp > 3 || temp ==0) return false;
+            else if(2==temp||temp == 3) {
+                count+=temp-1;
+            }
+            
+        }
+        return count<=0;
     }
 }
 
