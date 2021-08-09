@@ -602,6 +602,17 @@ public class Solution {
         }
         return res.toString().trim();
     }
+
+    // 左旋转字符串
+    public String reverseLeftWords(String s, int n) {
+        char[] c = s.toCharArray();
+        char[] temp = new char[n];
+        for(int i = 0;i<n;i++) {
+            temp[i] = c[i];
+            c[i] = ' ';
+        }
+        return new String(c).trim()+new String(temp);
+    }
 }
 
 class TreeNode {
