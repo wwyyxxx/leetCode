@@ -677,6 +677,21 @@ public class Solution {
         }
         return a;
     }
+
+    // 圆圈中最后剩下的数字
+    public int lastRemaining(int n, int m) {
+        List<Integer> res = new ArrayList<>(n);
+        for(int i=0;i<n;i++) {
+            res.add(i);
+        }
+        int index = 0;
+        while(n>1) {
+            index = (index + m - 1) % n;
+            res.remove(index);
+            n--;
+        }
+        return res.get(0);
+    }
 }
 
 class TreeNode {
