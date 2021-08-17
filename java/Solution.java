@@ -692,6 +692,25 @@ public class Solution {
         }
         return res.get(0);
     }
+
+    // I. 二叉搜索树的最近公共祖先
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        if(p.val>q.val) {
+            TreeNode temp = p;
+            p = q;
+            q = temp;
+        }
+        while(root!=null) {
+            if(root.val < p.val) {
+                root = root.right;
+            }
+            if(root.val > q.val) {
+                root = root.left;
+            }
+            else break;
+        }
+        return root;
+    }
 }
 
 class TreeNode {
