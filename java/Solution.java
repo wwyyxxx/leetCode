@@ -2,11 +2,13 @@ import java.nio.charset.Charset;
 import java .util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Queue;
+import java.util.Set;
 import java.util.Stack;
 import java.util.Map.Entry;
 
@@ -711,6 +713,47 @@ public class Solution {
         }
         return root;
     }
+
+    //  II. 二叉树的最近公共祖先
+    public TreeNode lowestCommonAncestor2(TreeNode root, TreeNode p, TreeNode q) {
+        if(root == null || root == p || root == q) return root;
+        TreeNode left = lowestCommonAncestor(root.left, p, q);
+        TreeNode right = lowestCommonAncestor(root.right, p, q);
+        if(left == null) return right;
+        if(right == null) return left;
+        return root;
+    }
+
+
+    
+    // 字符串的排列
+    List<String> res = new LinkedList<>();
+        char[] c;
+        public String[] permutation(String s) {
+            c = s.toCharArray();
+            dfs(0);
+            return res.toArray(new String[res.size()]);
+        }
+        void dfs(int x) {
+            if(x == c.length - 1) {
+                res.add(String.valueOf(c));      // 添加排列方案
+                return;
+            }
+            HashSet<Character> set = new HashSet<>();
+            for(int i = x; i < c.length; i++) {
+                if(set.contains(c[i])) continue; // 重复，因此剪枝
+                set.add(c[i]);
+                swap(i, x);                      // 交换，将 c[i] 固定在第 x 位
+                dfs(x + 1);                      // 开启固定第 x + 1 位字符
+                swap(i, x);                      // 恢复交换
+            }
+        }
+        void swap(int a, int b) {
+            char tmp = c[a];
+            c[a] = c[b];
+            c[b] = tmp;
+        }
+
 }
 
 class TreeNode {
