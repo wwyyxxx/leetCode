@@ -1,3 +1,10 @@
+/*
+ * @Author: Tungbo
+ * @Date: 2020-10-19 15:20:08
+ * @LastEditTime: 2021-08-19 14:52:07
+ * @LastEditors: Tungbo
+ * @Description: leecode: 
+ */
 public class Tree {
     public static void main(String[] args) {
 
@@ -24,11 +31,4 @@ public class Tree {
         t1.right=mergeTrees(t1.right,t2.right);
         return t1;
     }
-}
-
-class TreeNode {
-    int val;
-    TreeNode left;
-    TreeNode right;
-    TreeNode(int x) { val = x; }
 }

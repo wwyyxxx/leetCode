@@ -728,31 +728,53 @@ public class Solution {
     
     // 字符串的排列
     List<String> res = new LinkedList<>();
-        char[] c;
-        public String[] permutation(String s) {
-            c = s.toCharArray();
-            dfs(0);
-            return res.toArray(new String[res.size()]);
+    char[] c;
+    public String[] permutation(String s) {
+        c = s.toCharArray();
+        dfsPermutation(0);
+        return res.toArray(new String[res.size()]);
+    }
+    void dfsPermutation(int x) {
+        if(x == c.length - 1) {
+            res.add(String.valueOf(c));      // 添加排列方案
+            return;
         }
-        void dfs(int x) {
-            if(x == c.length - 1) {
-                res.add(String.valueOf(c));      // 添加排列方案
-                return;
-            }
-            HashSet<Character> set = new HashSet<>();
-            for(int i = x; i < c.length; i++) {
-                if(set.contains(c[i])) continue; // 重复，因此剪枝
-                set.add(c[i]);
-                swap(i, x);                      // 交换，将 c[i] 固定在第 x 位
-                dfs(x + 1);                      // 开启固定第 x + 1 位字符
-                swap(i, x);                      // 恢复交换
-            }
+        HashSet<Character> set = new HashSet<>();
+        for(int i = x; i < c.length; i++) {
+            if(set.contains(c[i])) continue; // 重复，因此剪枝
+            set.add(c[i]);
+            swap(i, x);                      // 交换，将 c[i] 固定在第 x 位
+            dfsPermutation(x + 1);                      // 开启固定第 x + 1 位字符
+            swap(i, x);                      // 恢复交换
         }
-        void swap(int a, int b) {
-            char tmp = c[a];
-            c[a] = c[b];
-            c[b] = tmp;
+    }
+    void swap(int a, int b) {
+        char tmp = c[a];
+        c[a] = c[b];
+        c[b] = tmp;
+    }
+
+
+    
+    // 二叉树中和为某一值的路径
+    LinkedList<List<Integer>> result = new LinkedList<List<Integer>>();
+    LinkedList<Integer> temp = new LinkedList<Integer>();
+    public List<List<Integer>> pathSum(TreeNode root, int target) {
+        dfsPathSum(root,target);
+        return result;
+    }
+
+    private void dfsPathSum(TreeNode root, int target) {
+        if(root == null) return;
+        temp.add(root.val);
+        target -= root.val;
+        if(target == 0 && root.left == null && root.right == null) {
+            result.add(new LinkedList(temp));
         }
+        dfsPathSum(root.left, target);
+        dfsPathSum(root.right, target);
+        temp.removeLast();
+    }
 
 }
 
@@ -760,7 +782,13 @@ class TreeNode {
     int val;
     TreeNode left;
     TreeNode right;
+    TreeNode() {}
     TreeNode(int x) { val = x; }
+    TreeNode(int val, TreeNode left, TreeNode right) {
+        this.val = val;
+        this.left = left;
+        this.right = right;
+    }
 }
 class ListNode {
     int val;
