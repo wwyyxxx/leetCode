@@ -9,6 +9,9 @@ import java.util.Queue;
 import java.util.Set;
 import java.util.Stack;
 
+import bean.ListNode;
+import bean.TreeNode;
+
 public class record{
     public static void main(String[] args) {
         MinStack stack = new MinStack();

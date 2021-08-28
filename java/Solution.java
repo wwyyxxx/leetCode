@@ -12,6 +12,10 @@ import java.util.Set;
 import java.util.Stack;
 import java.util.Map.Entry;
 
+import bean.ListNode;
+import bean.Node;
+import bean.TreeNode;
+
 
 /*
  * @Author: Tungbo
@@ -776,33 +780,24 @@ public class Solution {
         temp.removeLast();
     }
 
-}
-
-class TreeNode {
-    int val;
-    TreeNode left;
-    TreeNode right;
-    TreeNode() {}
-    TreeNode(int x) { val = x; }
-    TreeNode(int val, TreeNode left, TreeNode right) {
-        this.val = val;
-        this.left = left;
-        this.right = right;
+    // 二叉搜索树与双向链表
+    Node pre,head;
+    public Node treeToDoublyList(Node root) {
+        if(root == null) return null;
+        dfsTreeToDoublyList(root);
+        head.left = pre;
+        pre.right = head;
+        return head;
     }
-}
-class ListNode {
-    int val;
-    ListNode next;
-    ListNode(int x) { val = x; }
-}
-class Node {
-    int val;
-    Node next;
-    Node random;
 
-    public Node(int val) {
-        this.val = val;
-        this.next = null;
-        this.random = null;
+    private void dfsTreeToDoublyList(Node cur) {
+        if(cur == null) return;
+        dfsTreeToDoublyList(cur.left);
+        if(pre == null) head = cur;
+        else pre.right = cur;
+        cur.left = pre;
+        pre = cur;
+        dfsTreeToDoublyList(cur.right);
     }
+
 }

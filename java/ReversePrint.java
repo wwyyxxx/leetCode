@@ -1,5 +1,7 @@
 import java.util.Stack;
 
+import bean.ListNode;
+
 /*
  * @Author: Tungbo
  * @Date: 2021-06-16 15:56:52
