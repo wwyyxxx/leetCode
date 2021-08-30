@@ -776,6 +776,18 @@ public class Solution {
         temp.removeLast();
     }
 
+    // 二叉搜索树的后序遍历序列
+    public boolean verifyPostorder(int[] postorder) {
+       return cur(postorder,0,postorder.length -1); 
+    }
+
+    private boolean cur(int[] postorder, int i, int j) {
+        int p = i;
+        while(p < postorder[j]) p++;
+        int m = p;
+        while(p > postorder[j]) p++;
+        return j == p && cur(postorder,i,m) && cur(postorder,m+1,j);
+    }
 }
 
 class TreeNode {
