@@ -806,4 +806,22 @@ public class Solution {
          pre = cur;
          dfsTreeToDoublyList(cur.right);
      }
+
+     
+    //数组中数字出现的次数
+    public int[] singleNumbers(int[] nums) {
+        HashSet<Integer> temp = new HashSet<Integer>();
+        for (Integer num : nums) {
+            if(!temp.add(num)) {
+                temp.remove(num);
+            }
+        }
+
+        int[] result = new int[temp.size()];
+        int index = 0;
+        for (Integer i : temp) {
+            result[index++] = i;
+        }
+        return result;
+    }
 }
