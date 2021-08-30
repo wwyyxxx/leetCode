@@ -788,33 +788,24 @@ public class Solution {
         while(p > postorder[j]) p++;
         return j == p && cur(postorder,i,m) && cur(postorder,m+1,j);
     }
-}
 
-class TreeNode {
-    int val;
-    TreeNode left;
-    TreeNode right;
-    TreeNode() {}
-    TreeNode(int x) { val = x; }
-    TreeNode(int val, TreeNode left, TreeNode right) {
-        this.val = val;
-        this.left = left;
-        this.right = right;
-    }
-}
-class ListNode {
-    int val;
-    ListNode next;
-    ListNode(int x) { val = x; }
-}
-class Node {
-    int val;
-    Node next;
-    Node random;
-
-    public Node(int val) {
-        this.val = val;
-        this.next = null;
-        this.random = null;
-    }
+     // 二叉搜索树与双向链表
+     Node pre,head;
+     public Node treeToDoublyList(Node root) {
+         if(root == null) return null;
+         dfsTreeToDoublyList(root);
+         head.left = pre;
+         pre.right = head;
+         return head;
+     }
+ 
+     private void dfsTreeToDoublyList(Node cur) {
+         if(cur == null) return;
+         dfsTreeToDoublyList(cur.left);
+         if(pre == null) head = cur;
+         else pre.right = cur;
+         cur.left = pre;
+         pre = cur;
+         dfsTreeToDoublyList(cur.right);
+     }
 }

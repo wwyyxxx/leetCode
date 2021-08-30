@@ -1,3 +1,5 @@
+import bean.ListNode;
+
 /*
  * @Author: Tungbo
  * @Date: 2021-07-05 11:19:21
