@@ -816,12 +816,26 @@ public class Solution {
                 temp.remove(num);
             }
         }
-
         int[] result = new int[temp.size()];
         int index = 0;
         for (Integer i : temp) {
             result[index++] = i;
         }
         return result;
+    }
+
+    //数组中数字出现的次数2
+    public int singleNumbers2(int[] nums) {
+        HashMap<Integer,Integer> temp = new HashMap<Integer,Integer>();
+        for (Integer num : nums) {
+            if(temp.containsKey(num)) {
+                int count = temp.get(num);
+                if(count == 2) temp.remove(num);
+                else temp.put(num,count+1);
+            } else {
+                temp.put(num,1);
+            }
+        }
+        return temp.keySet().iterator().next();
     }
 }
