@@ -852,4 +852,18 @@ public class Solution {
         }
         return s.toString();
     }
+    
+
+    // 把数字翻译成字符串
+    public int translateNum(int num) {
+        String str = String.valueOf(num);
+        int a = 1, b = 1;
+        for (int i = 2; i < str.length(); i++) {
+            String s = str.substring(i - 2, i);
+            int c = s.compareTo("10") >= 0 && s.compareTo("25") <= 0 ? a + b : a;
+            b = a;
+            a = c;
+        }
+        return a;
+    }
 }
