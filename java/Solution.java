@@ -838,4 +838,18 @@ public class Solution {
         }
         return temp.keySet().iterator().next();
     }
+
+    //把数组排成最小的数
+    public String minNumber(int[] nums) {
+        String[] strs = new String[nums.length];
+        for(int i = 0; i < nums.length; i++) {
+            strs[i] = String.valueOf(nums[i]);
+        }
+        Arrays.sort(strs, (x, y) -> (x + y).compareTo(y + x));
+        StringBuffer s = new StringBuffer();
+        for(int num :nums) {
+            s.append(num);
+        }
+        return s.toString();
+    }
 }
