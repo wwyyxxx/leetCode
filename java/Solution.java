@@ -879,4 +879,17 @@ public class Solution {
         }
         return grid[m-1][n-1];
     }
+
+    // 最长不含重复字符的子字符串
+    public int lengthOfLongestSubstring(String s) {
+        Map<Character,Integer> dic = new HashMap<Character,Integer>();
+        int res = 0, tmp = 0;
+        for (int j = 0; j < s.length(); j++) {
+            int i = dic.getOrDefault(s.charAt(j), -1);
+            dic.put(s.charAt(j), j);
+            tmp = tmp < j - i ? tmp+1 : j -i;
+            res = Math.max(tmp,res);
+        }
+        return res;
+    }
 }
