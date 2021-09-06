@@ -907,4 +907,21 @@ public class Solution {
         }
         return dp[n - 1];
     }
+
+    // 构建乘积数组
+    public int[] constructArr(int[] a) {
+        int len = a.length;
+        int[] b = new int[len];
+        if(len == 0) return b;
+        b[0] = 1;
+        int temp =1;
+        for (int i = 1;i<len;i++) {
+            b[i] = b[i-1] * a[i-1];
+        }
+        for (int i = len - 2; i>=0; i--) {
+            temp *= a[i+1];
+            b[i] = temp * b[i];
+        }
+        return b;
+    }
 }
