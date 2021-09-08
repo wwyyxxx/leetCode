@@ -7,7 +7,7 @@ import bean.ListNode;
  * @LastEditors: Tungbo
  * @Description: leecode: 删除链表的节点
  */
-class Solution {
+class DeleteNode {
     public ListNode deleteNode(ListNode head, int val) {
         ListNode cur = head;
         if(head.val == val) return head.next;

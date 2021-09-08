@@ -900,7 +900,7 @@ public class Solution {
         dp[0] = 1;
         for(int i = 1; i < n; i++) {
             int n2 = dp[a] * 2, n3 = dp[b] * 3, n5 = dp[c] * 5;
-            dp[i] = Math.min(Math.min(n2, n3), n5);
+            dp[i] = Math.min(Math.min(n2, n3), n5);a
             if(dp[i] == n2) a++;
             if(dp[i] == n3) b++;
             if(dp[i] == n5) c++;
@@ -923,5 +923,27 @@ public class Solution {
             b[i] = temp * b[i];
         }
         return b;
+    }
+
+    // 把字符串转换成整数
+    public static int strToInt(String str) {
+        int sign = 1 ,i = 0 ,threshold = Integer.MAX_VALUE / 10;
+        int len = str.length(),res = 0;
+        // Char[] c = str.toCharArray();
+        if(len == 0) return 0;
+        while(str.charAt(i) == ' ') {
+            i++;
+            if(len == i) return 0;
+        }
+            
+        if(str.charAt(i) == '-') sign = -1;
+        if(str.charAt(i) == '-' || str.charAt(i) == '+') i++;
+        for(int j = i; j < len; j++) {
+            if(str.charAt(j) < '0' || str.charAt(j) > '9') break;
+            if(res>threshold || res == threshold && str.charAt(j) > '7')
+                return sign ==1 ? Integer.MAX_VALUE:Integer.MIN_VALUE;
+            res = res*10 + (str.charAt(j) - '0');
+        }
+        return sign * res;
     }
 }
