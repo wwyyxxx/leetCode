@@ -976,4 +976,10 @@ public class Solution {
         }
         return res;
     }
+
+    // 求1+2+…+n
+    public int sumNums(int n) {
+        boolean x = n>1 && (n += sumNums(n-1))>0; 
+        return n;
+    }
 }
