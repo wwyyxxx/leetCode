@@ -962,4 +962,18 @@ public class Solution {
         }
         return dp;
     }
+
+    //股票的最大利润
+    public int maxProfit(int[] prices) {
+        int res = 0,min = Integer.MAX_VALUE;
+        for (int i = 0; i < prices.length; i++) {
+            min = Math.min(min, prices[i]);
+            if(i ==0) continue;
+            if(min > prices[i]) min = prices[i];
+            else {
+                res = Math.max(res,prices[i] - min);
+            }
+        }
+        return res;
+    }
 }
