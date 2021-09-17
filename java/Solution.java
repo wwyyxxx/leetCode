@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.Queue;
 import java.util.Stack;
 import java.util.Map.Entry;
+import java.util.*;
 
 import bean.*;
 /*
@@ -981,5 +982,25 @@ public class Solution {
     public int sumNums(int n) {
         boolean x = n>1 && (n += sumNums(n-1))>0; 
         return n;
+    }
+
+    //滑动窗口的最大值
+    public int[] maxSlidingWindow(int[] nums, int k) {
+        if(nums.length == 0) return new int[0];
+        if(k == 1) return nums;\
+        int[] res = new int[nums.length - k + 1];
+        Deque<Integer> dq = new LinkedList<Integer>();
+        for (int j = 0,i = 1 - k; j < nums.length; i++,j++) {
+            if(i>0 && dq.peekFirst() == nums[i-1]) {
+                dq.removeFirst();
+            }
+            while(!dq.isEmpty() && dq.peekLast() < nums[j]){
+                dq.removeLast();
+            }
+            dq.addLast(nums[j]);
+            if(i>=0) 
+                res[i] = dq.peekFirst();
+        }
+        return res;
     }
 }
