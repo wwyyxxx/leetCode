@@ -1,7 +1,9 @@
+import java.util.*;
+
 /*
  * @Author: Tungbo
  * @Date: 2021-09-03 15:09:15
- * @LastEditTime: 2021-09-08 15:44:29
+ * @LastEditTime: 2021-09-22 15:59:09
  * @LastEditors: Tungbo
  * @Description: leecode: 
  */
@@ -15,8 +17,10 @@ public class TestUtil {
         // System.out.println("2 "+q.pop_front());
         // System.out.println("3 "+q.max_value());
 
-        Solution.strToInt("-91283472332");
-
+        // Solution.strToInt("-91283472332");
+        List<String> s = Arrays.asList("[1,2,3,null,null,4,5]");
+        
+        System.out.println(s);
     }
 }
 /*
