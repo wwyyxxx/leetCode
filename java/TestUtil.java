@@ -3,7 +3,7 @@ import java.util.*;
 /*
  * @Author: Tungbo
  * @Date: 2021-09-03 15:09:15
- * @LastEditTime: 2021-09-22 15:59:09
+ * @LastEditTime: 2021-09-24 14:39:50
  * @LastEditors: Tungbo
  * @Description: leecode: 
  */
@@ -18,9 +18,9 @@ public class TestUtil {
         // System.out.println("3 "+q.max_value());
 
         // Solution.strToInt("-91283472332");
-        List<String> s = Arrays.asList("[1,2,3,null,null,4,5]");
-        
-        System.out.println(s);
+        // List<String> s = Arrays.asList("[1,2,3,null,null,4,5]");
+        // System.out.println(s);
+        System.out.println(Solution.reversePairs(new int[]{7,5,6,4}));
     }
 }
 /*
