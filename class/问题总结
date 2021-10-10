@@ -1,0 +1,50 @@
+Android面试题整理
+
+View：
+MeasureSpec 和LayoutParams关系
+    View在测量的时候,系统会将LayoutParams在父容器的约束下转换成对应的MeasureSpec，,然后根据这个MeasureSpec来确定View测量之后的高和宽
+    DecorView的MeasureSpec是由窗口的尺寸和DecorView其自身的LayoutParams来共同决定的.
+    普通View的MeasureSpec是由父容器的MeasureSpec和普通View自身的LayoutParams来共同决定的.
+
+MeasureSpec是什么？ 
+    MeasureSpec是View中的内部类，基本都是二进制运算。由于int是32位的，用高两位表示mode，低30位表示size，MODE_SHIFT = 30的作用是移位
+        UNSPECIFIED：不对View大小做限制，系统使用
+        EXACTLY：确切的大小
+        AT_MOST：大小不可超过某数值
+
+MeasureSpec创建规则
+    UNSPECIFIED
+        xxdp: EXACTLY
+        match_parent: UNSPECIFIED
+        wrap_content: UNSPECIFIED
+    EXACTLY
+        xxdp: EXACTLY
+        match_parent: EXACTLY
+        wrap_content: AT_MOST
+    AT_MOST
+        xxdp: EXACTLY
+        match_parent: AT_MOST
+        wrap_content: AT_MOST
+
+getMeasureWidth与getWidth的区别
+    getMeasureWidth: 在measure()过程结束后就可以获取到对应的值 通过setMeasuredDimension()方法来进行设置的.
+    getWidth: 在layout()过程结束后才能获取到 通过视图右边的坐标减去左边的坐标计算出来的.
+
+点击事件:
+move--处理事件
+1.先看是否拦截后自己处理（即不分发下去）
+2.分发下去：
+	直接由down事件确定的view处理
+
+recycleView:
+    当我们使用局部刷新，payload 不为空 ，这个时候，如果 ViewHolder 需要更新，它的 更新标识 的确会被加入，但是同时canReuseUpdatedViewHolder() 也会返回 true ，所以，这个时候 ViewHolder 不会被添加到 mChangedScrap 集合中，而是加入 mAttachedScrap 集合中，。
+所以，当你使用局部刷新时，前后都是同一个 ViewHolder ，如果位置没有变化，就不会执行动画效果；而当你不使用局部刷新时，使用的不是同一个 ViewHolder ，不管位置是否变化，都会执行相关动画，所以你看到的 itemView 会闪烁一下。当我们多次调用 notifyItemChange() 方法时，也不会多次触发 requestLayout() 和回调 bindViewHolder()
+
+复用：从集合中去获取
+怎么从集合中去获取：tryGetViewHolderForPositionByDeadline，分几种情况去获取ViewHolder
+
+1. getChangedScrapViewForPosition -- mChangeScrap 与动画相关
+2. getScrapOrHiddenOrCachedHolderForPosition  -- mAttachedScrap 、mCachedViews 
+3. getScrapOrCachedViewForId  -- mAttachedScrap 、mCachedViews (ViewType,itemid)
+4. mViewCacheExtension.getViewForPositionAndType -- 自定义缓存
+5. getRecycledViewPool().getRecycledView -- 从缓冲池里面获取

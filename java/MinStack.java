@@ -3,36 +3,36 @@ import java.util.Stack;
 /*
  * @Author: Tungbo
  * @Date: 2021-07-26 15:03:05
- * @LastEditTime: 2021-07-26 15:13:07
+ * @LastEditTime: 2021-09-02 17:42:39
  * @LastEditors: Tungbo
  * @Description: leecode: 包含min函数的栈
  */
 class MinStack1 {
 
-    Stack<Integer> st;
-    Stack<Integer> minSt;
-
+    Stack<Integer> stack;
+    Stack<Integer> minStack;
     /** initialize your data structure here. */
     public MinStack1() {
-        st = new Stack<Integer>();
-        minSt = new Stack<Integer>();
+        stack = new Stack<Integer>();
+        minStack = new Stack<Integer>();
     }
     
     public void push(int x) {
-        st.push(x);
-        if(minSt.isEmpty() || x<=minSt.peek()) minSt.push(x);
+        if(minStack.isEmpty() || x<minStack.peek()) minStack.add(x);
+        else minStack.add(minStack.peek());
+        stack.add(x);
     }
     
     public void pop() {
-        if(st.peek().equals(minSt.peek())) minSt.pop();
-        st.pop();
+        stack.pop();
+        minStack.pop();
     }
     
     public int top() {
-        return (int) st.peek();
+        return stack.peek();
     }
     
-    public int min() {
-        return minSt.peek();
+    public int getMin() {
+        return minStack.peek();
     }
 }

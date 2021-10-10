@@ -1,4 +1,3 @@
-import java.nio.charset.Charset;
 import java .util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -8,15 +7,11 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Queue;
-import java.util.Set;
 import java.util.Stack;
 import java.util.Map.Entry;
+import java.util.*;
 
-import bean.ListNode;
-import bean.Node;
-import bean.TreeNode;
-
-
+import bean.*;
 /*
  * @Author: Tungbo
  * @Date: 2021-07-06 14:44:26
@@ -780,24 +775,313 @@ public class Solution {
         temp.removeLast();
     }
 
-    // 二叉搜索树与双向链表
-    Node pre,head;
-    public Node treeToDoublyList(Node root) {
-        if(root == null) return null;
-        dfsTreeToDoublyList(root);
-        head.left = pre;
-        pre.right = head;
-        return head;
+    // 二叉搜索树的后序遍历序列
+    public boolean verifyPostorder(int[] postorder) {
+       return cur(postorder,0,postorder.length -1); 
     }
 
-    private void dfsTreeToDoublyList(Node cur) {
-        if(cur == null) return;
-        dfsTreeToDoublyList(cur.left);
-        if(pre == null) head = cur;
-        else pre.right = cur;
-        cur.left = pre;
-        pre = cur;
-        dfsTreeToDoublyList(cur.right);
+    private boolean cur(int[] postorder, int i, int j) {
+        int p = i;
+        while(p < postorder[j]) p++;
+        int m = p;
+        while(p > postorder[j]) p++;
+        return j == p && cur(postorder,i,m) && cur(postorder,m+1,j);
+    }
+
+     // 二叉搜索树与双向链表
+     Node pre,head;
+     public Node treeToDoublyList(Node root) {
+         if(root == null) return null;
+         dfsTreeToDoublyList(root);
+         head.left = pre;
+         pre.right = head;
+         return head;
+     }
+ 
+     private void dfsTreeToDoublyList(Node cur) {
+         if(cur == null) return;
+         dfsTreeToDoublyList(cur.left);
+         if(pre == null) head = cur;
+         else pre.right = cur;
+         cur.left = pre;
+         pre = cur;
+         dfsTreeToDoublyList(cur.right);
+     }
+
+     
+    //数组中数字出现的次数
+    public int[] singleNumbers(int[] nums) {
+        HashSet<Integer> temp = new HashSet<Integer>();
+        for (Integer num : nums) {
+            if(!temp.add(num)) {
+                temp.remove(num);
+            }
+        }
+        int[] result = new int[temp.size()];
+        int index = 0;
+        for (Integer i : temp) {
+            result[index++] = i;
+        }
+        return result;
+    }
+
+    //数组中数字出现的次数2
+    public int singleNumbers2(int[] nums) {
+        HashMap<Integer,Integer> temp = new HashMap<Integer,Integer>();
+        for (Integer num : nums) {
+            if(temp.containsKey(num)) {
+                int count = temp.get(num);
+                if(count == 2) temp.remove(num);
+                else temp.put(num,count+1);
+            } else {
+                temp.put(num,1);
+            }
+        }
+        return temp.keySet().iterator().next();
+    }
+
+    //把数组排成最小的数
+    public String minNumber(int[] nums) {
+        String[] strs = new String[nums.length];
+        for(int i = 0; i < nums.length; i++) {
+            strs[i] = String.valueOf(nums[i]);
+        }
+        Arrays.sort(strs, (x, y) -> (x + y).compareTo(y + x));
+        StringBuffer s = new StringBuffer();
+        for(int num :nums) {
+            s.append(num);
+        }
+        return s.toString();
+    }
+    
+    // 把数字翻译成字符串
+    public int translateNum(int num) {
+        String str = String.valueOf(num);
+        int a = 1, b = 1;
+        for (int i = 2; i < str.length(); i++) {
+            String s = str.substring(i - 2, i);
+            int c = s.compareTo("10") >= 0 && s.compareTo("25") <= 0 ? a + b : a;
+            b = a;
+            a = c;
+        }
+        return a;
+    }
+
+    // 礼物的最大价值
+    public int maxValue(int[][] grid) {
+        int m = grid.length, n = grid[0].length;
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if(i==0&&j==0) continue;
+                if(i==0) grid[i][j] += grid[i][j-1];
+                else if(j==0) grid[i][j] += grid[i-1][j];
+                else grid[i][j] += Math.max(grid[i-1][j],grid[i][j-1]);
+            }
+        }
+        return grid[m-1][n-1];
+    }
+
+    // 最长不含重复字符的子字符串
+    public int lengthOfLongestSubstring(String s) {
+        Map<Character,Integer> dic = new HashMap<Character,Integer>();
+        int res = 0, tmp = 0;
+        for (int j = 0; j < s.length(); j++) {
+            int i = dic.getOrDefault(s.charAt(j), -1);
+            dic.put(s.charAt(j), j);
+            tmp = tmp < j - i ? tmp+1 : j -i;
+            res = Math.max(tmp,res);
+        }
+        return res;
+    }
+
+    // 丑数
+    public int nthUglyNumber(int n) {
+        int a = 0, b = 0, c = 0;
+        int[] dp = new int[n];
+        dp[0] = 1;
+        for(int i = 1; i < n; i++) {
+            int n2 = dp[a] * 2, n3 = dp[b] * 3, n5 = dp[c] * 5;
+            dp[i] = Math.min(Math.min(n2, n3), n5);a
+            if(dp[i] == n2) a++;
+            if(dp[i] == n3) b++;
+            if(dp[i] == n5) c++;
+        }
+        return dp[n - 1];
+    }
+
+    // 构建乘积数组
+    public int[] constructArr(int[] a) {
+        int len = a.length;
+        int[] b = new int[len];
+        if(len == 0) return b;
+        b[0] = 1;
+        int temp =1;
+        for (int i = 1;i<len;i++) {
+            b[i] = b[i-1] * a[i-1];
+        }
+        for (int i = len - 2; i>=0; i--) {
+            temp *= a[i+1];
+            b[i] = temp * b[i];
+        }
+        return b;
+    }
+
+    // 把字符串转换成整数
+    public static int strToInt(String str) {
+        int sign = 1 ,i = 0 ,threshold = Integer.MAX_VALUE / 10;
+        int len = str.length(),res = 0;
+        // Char[] c = str.toCharArray();
+        if(len == 0) return 0;
+        while(str.charAt(i) == ' ') {
+            i++;
+            if(len == i) return 0;
+        }
+            
+        if(str.charAt(i) == '-') sign = -1;
+        if(str.charAt(i) == '-' || str.charAt(i) == '+') i++;
+        for(int j = i; j < len; j++) {
+            if(str.charAt(j) < '0' || str.charAt(j) > '9') break;
+            if(res>threshold || res == threshold && str.charAt(j) > '7')
+                return sign ==1 ? Integer.MAX_VALUE:Integer.MIN_VALUE;
+            res = res*10 + (str.charAt(j) - '0');
+        }
+        return sign * res;
+    }
+
+    // n个骰子的点数
+    public double[] dicesProbability(int n) {
+        double[] dp = new double[6];
+        Arrays.fill(dp, 1.0 / 6.0);
+        for (int i = 2; i <= n; i++) {
+            double[] tmp = new double[5 * i + 1];
+            for (int j = 0; j < dp.length; j++) {
+                for (int k = 0; k < 6; k++) {
+                    tmp[j + k] += dp[j] / 6.0;
+                }
+            }
+            dp = tmp;
+        }
+        return dp;
+    }
+
+    //股票的最大利润
+    public int maxProfit(int[] prices) {
+        int res = 0,min = Integer.MAX_VALUE;
+        for (int i = 0; i < prices.length; i++) {
+            min = Math.min(min, prices[i]);
+            if(i ==0) continue;
+            if(min > prices[i]) min = prices[i];
+            else {
+                res = Math.max(res,prices[i] - min);
+            }
+        }
+        return res;
+    }
+
+    // 求1+2+…+n
+    public int sumNums(int n) {
+        boolean x = n>1 && (n += sumNums(n-1))>0; 
+        return n;
+    }
+
+    //滑动窗口的最大值
+    public int[] maxSlidingWindow(int[] nums, int k) {
+        if(nums.length == 0) return new int[0];
+        if(k == 1) return nums;\
+        int[] res = new int[nums.length - k + 1];
+        Deque<Integer> dq = new LinkedList<Integer>();
+        for (int j = 0,i = 1 - k; j < nums.length; i++,j++) {
+            if(i>0 && dq.peekFirst() == nums[i-1]) {
+                dq.removeFirst();
+            }
+            while(!dq.isEmpty() && dq.peekLast() < nums[j]){
+                dq.removeLast();
+            }
+            dq.addLast(nums[j]);
+            if(i>=0) 
+                res[i] = dq.peekFirst();
+        }
+        return res;
+    }
+
+    // 1～n 整数中 1 出现的次数
+    public int countDigitOne(int n) {
+        int digit = 1, res = 0;
+        int high = n/10, cur = n % 10, low = 0;
+        while(high != 0 || cur != 0) {
+            if(cur == 0) res += digit * high;
+            else if(cur == 1) res += high * digit + low + 1;
+            else res += (high + 1) * digit;
+            low += cur * digit;
+            cur = high % 10;
+            high /= 10;
+            digit *= 10;
+        }
+        return res;
+    }
+
+    // 数组中的逆序对
+    public static int reversePairs(int[] nums) {
+        int count = 0;
+        for (int i = 0; i < nums.length; i++) {
+            for(int j = i+1;j<nums.length; j++) {
+                if(nums[i] > nums[j])count++;
+            }
+        }
+        return count;
+    }
+
+    // 数组中的逆序对
+    public static int reversePairs1(int[] nums) {
+        int len = nums.length;
+        if(len < 2) {
+            return 0;
+        }
+        int[] copy = new int[len];
+        for (int i = 0; i < len; i++) {
+            copy[i] = nums[i];
+        }
+        int[] temp = new int[len];
+        return reversePairs(copy,0,len -1,temp);
+    }
+
+
+    private static int reversePairs(int[] nums, int left, int right, int[] temp) {
+        if (left == right) return 0;
+        int mid = left + (right - left) / 2;
+        int leftPairs = reversePairs(nums,left,mid,temp);
+        int rightPairs = reversePairs(nums,mid+1,right,temp);
+        
+        int crossPairs = mergeAndCount(nums,left,mid,right,temp);
+        return leftPairs + rightPairs + crossPairs;
+    }
+
+
+    private static int mergeAndCount(int[] nums, int left, int mid, int right, int[] temp) {
+        for (int i = left; i <= right; i++) {
+            temp[i] = nums[i];
+        }
+
+        int i = left;
+        int j = mid+1;
+        int count = 0;
+        for (int k = left;k<=right;k++) {
+            if(i==mid+1) {
+                nums[k] = temp[j];
+                j++;
+            } else if(j==right+1) {
+                nums[k] = temp[i];
+                i++;
+            }else if(temp[i] <= temp[j]) {
+                nums[k] = temp[i];
+                i++;
+            } else {
+                nums[k] = temp[j];
+                j++;
+                count += mid - i +1;
+            }
+        }
+        return count;
     }
 
 
