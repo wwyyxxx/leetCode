@@ -42,9 +42,24 @@ recycleView:
 
 复用：从集合中去获取
 怎么从集合中去获取：tryGetViewHolderForPositionByDeadline，分几种情况去获取ViewHolder
+    1. getChangedScrapViewForPosition -- mChangeScrap 与动画相关
+    2. getScrapOrHiddenOrCachedHolderForPosition  -- mAttachedScrap 、mCachedViews 
+    3. getScrapOrCachedViewForId  -- mAttachedScrap 、mCachedViews (ViewType,itemid)
+    4. mViewCacheExtension.getViewForPositionAndType -- 自定义缓存
+    5. getRecycledViewPool().getRecycledView -- 从缓冲池里面获取
 
-1. getChangedScrapViewForPosition -- mChangeScrap 与动画相关
-2. getScrapOrHiddenOrCachedHolderForPosition  -- mAttachedScrap 、mCachedViews 
-3. getScrapOrCachedViewForId  -- mAttachedScrap 、mCachedViews (ViewType,itemid)
-4. mViewCacheExtension.getViewForPositionAndType -- 自定义缓存
-5. getRecycledViewPool().getRecycledView -- 从缓冲池里面获取
+ViewHolder -- 包装View的 --- ItemView
+
+当没有缓存的时候？？--- mAdapter.createViewHolder --》 onCreateViewHolder
+
+多级缓存的目的 -- 为了性能
+
+创建ViewHolder 后 绑定： tryBindViewHolderByDeadline--》 mAdapter.bindViewHolder--》onBindViewHolder
+
+回收（缓存）机制：看这一个情况--- viewHolder
+
+去查找缓存和复用的一种情况:
+    入口：复用：RecyclerView.onLayout --> dispatchLayout --》 dispatchLayoutStep2 --》 onLayoutChildren --》 fill
+    缓存：fill -->recycleByLayoutState-->recycleViewsFromStart --> recycleChildren
+    --> removeAndRecycleViewAt --> recycler.recycleView 
+    --> recycler.recycleViewHolderInternal(viewHolder); -- 处理 CacheView 、RecyclerViewPool 的缓存
