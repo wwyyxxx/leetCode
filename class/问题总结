@@ -63,3 +63,40 @@ ViewHolder -- 包装View的 --- ItemView
     缓存：fill -->recycleByLayoutState-->recycleViewsFromStart --> recycleChildren
     --> removeAndRecycleViewAt --> recycler.recycleView 
     --> recycler.recycleViewHolderInternal(viewHolder); -- 处理 CacheView 、RecyclerViewPool 的缓存
+
+
+Handler:
+Handler通过sendMessage()将Message发送到MessageQueue中，这是存消息的过程；
+Looper通过调用MessageQueue的next()方法取出Message对象，由于这是一个时间优先级的队列，所以会取到队头的Message，然后拿当前时间去跟它的执行时间，也就是when参数去对比，如果时间还没到，就先不会执行；
+
+1：一个线程有几个 Handler？
+    多个
+
+2：一个线程有几个 Looper？如何保证？
+    一个，sThreadLocal.set(new Looper(quitAllowed))
+    ThreadLocal:一个线程内部的数据存储类，通过它可以在指定的线程中存储数据，数据存储之后，只有在指定线程中可以获取到存储的数据，对于其他的线程来说则无法获取到数据
+
+3：Handler内存泄漏原因？ 为什么其他的内部类没有说过有这个问题？
+    内部类持有外部的引用。
+    因此Message持有Handler的引用，Handler又持有Activity的引用，所以在Message处理完之前，如果Activity被销毁了，就会造成内存泄漏。
+4：为何主线程可以new Handler？如果想要在子线程中new Handler 要做些什么准备？
+    因为在ActivityThread中的main()已经对Looper进行了prepar()操作，所以可以直接在主线程new Handler。
+    如果想在子线程中new Handler，则需要先手动调用Looper的prepare()方法初始化Looper，再调用Looper的loop()方法使Looper运转。
+
+5：子线程中维护的Looper，消息队列无消息的时候的处理方案是什么？有什么用？
+    如果不处理的话，会阻塞线程，处理方案是调用Looper的quitSafely()；
+    这个方法会调用MessageQueue的quit()方法，清空所有的Message，并调用nativeWake()方法唤醒之前被阻塞的nativePollOnce()，使得方法next()方法中的for循环继续执行，接下来发现Message为null后就会结束循环，Looper结束。如此便可以释放内存和线程。
+
+6：既然可以存在多个 Handler 往 MessageQueue 中添加数据（发消息时各个Handler可能处于不同线程），那它内部是如何确保线程安全的？
+    添加消息的方法enqueueMessage()中有synchronize修饰，取消息的方法next()中也有synchronize修饰。
+    由于上述的加锁操作，所以时间不能保证完全准确。
+7：我们使用 Message 时应该如何创建它？
+    使用Message的obtain()方法创建，直接new出来容易造成内存抖动。
+    内存抖动是由于频繁new对象，gc频繁回收导致，而且由于可能被别的地方持有导致无法及时回收所以会导致内存占用越来越高。
+    使用obtain()对内存复用，可以避免内存抖动的发生。其内部维护了一个Message池，其是一个链表结构，当调用obtain()的时候会复用表头的Message，然后会指向下一个。如果表头没有可复用的message则会创建一个新的对象，这个对象池的最大长度是50。
+
+8：Looper死循环为什么不会导致应用卡死?
+    卡死就是ANR，产生的原因有2个：
+    1、在5s内没有响应输入的事件(例如按键，触摸等)，2、BroadcastReceiver在10s内没有执行完毕。
+    事实上我们所有的Activity和Service都是运行在loop()函数中，以消息的方式存在，所以在没有消息产生的时候，looper会被block(阻塞)，主线程会进入休眠，一旦有输入事件或者Looper添加消息的操作后主线程就会被唤醒，从而对事件进行响应，所以不会导致ANR
+    简单来说looper的阻塞表明没有事件输入，而ANR是由于有事件没响应导致，所以looper的死循环并不会导致应用卡死。
