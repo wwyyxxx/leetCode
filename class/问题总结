@@ -100,3 +100,28 @@ Looper通过调用MessageQueue的next()方法取出Message对象，由于这是�
     1、在5s内没有响应输入的事件(例如按键，触摸等)，2、BroadcastReceiver在10s内没有执行完毕。
     事实上我们所有的Activity和Service都是运行在loop()函数中，以消息的方式存在，所以在没有消息产生的时候，looper会被block(阻塞)，主线程会进入休眠，一旦有输入事件或者Looper添加消息的操作后主线程就会被唤醒，从而对事件进行响应，所以不会导致ANR
     简单来说looper的阻塞表明没有事件输入，而ANR是由于有事件没响应导致，所以looper的死循环并不会导致应用卡死。
+
+
+Crash监控:
+    JavaCrash:
+        会走UncaughtExceptionHandler.uncaughtException
+        Thread.setDefaultUncaughtExceptionHandler 该方法来设置线程的默认异常处理器.
+    NDK Crash
+        一类crash信号，在程序接收到此类信号时，缺省操作是将崩溃的现场信息记录到核心文件，然后终止进程。
+            SIGSEGV 内存引用无效。
+            SIGBUS 访问内存对象的未定义部分。
+            SIGFPE 算术运算错误，除以零。
+            SIGILL 非法指令，如执行垃圾或特权指令
+            SIGSYS 糟糕的系统调用
+            SIGXCPU 超过CPU时间限制。
+            SIGXFSZ 文件大小限制。 
+
+框架源码：
+Glid: 
+    with: 获取requestManager （onStart/onStop/onDestroy）
+        
+        1.创建一个Fragment,通过ActivityFragmentLifecycle接口监听生命周期做相应的操作。
+        （以确保优先处理前台可见的Activity/Fragment，提高资源利用率，在有必要时释放资源以避免在应用在后台时被杀死，提高稳定性）
+        2.生命周期作用域（application，activity/fragment）
+            application：子线程、serverContent、application
+        
