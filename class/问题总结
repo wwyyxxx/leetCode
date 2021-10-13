@@ -119,7 +119,22 @@ Crash监控:
 框架源码：
 Glid: 
     with: 获取requestManager （onStart/onStop/onDestroy）
-        
+         getRetriever(activity)[Glide.get(context)] .get(activity)[作用域处理]
+            Application:
+            a: Application 域对应的是 applicationManager，它是与RequestManagerRetriever 对象绑定的；
+            b：在子线程调用 get(...) ，或者传入参数是 ApplicationContext & ServiceContext 时，对应的请求是Application域。
+            Fragment/../.:
+            1.supportFragmentGet()->从FragmentManager中获取SupportRequestManagerFragment,获取RequestManager,初次获取实例化，再则从中读取
+                SupportRequestManagerFragment:
+                    a.findFragmentByTag(FRAGMENT_TAG)
+                    b.pendingRequestManagerFragments.get(fm) 临时记录
+                    c.实例化Fragment
+                        1.创建对象
+                        2.pendingRequestManagerFragments.set(fm) 临时记录
+                        3.Fragment提交事务
+                        4.post一个消息（ID_REMOVE_FRAGMENT_MANAGER） 移除pendingRequestManagerFragments临时记录。commitAllowingStateLoss()异步，防止重复创建
+                SupportRequestManagerFragment创建含有一个Lifecycled对象，requestManager实例化时传入。当 Fragment 的生命周期变化时，就是通过这个Lifecycle对象将事件分发到RequestManager
+
         1.创建一个Fragment,通过ActivityFragmentLifecycle接口监听生命周期做相应的操作。
         （以确保优先处理前台可见的Activity/Fragment，提高资源利用率，在有必要时释放资源以避免在应用在后台时被杀死，提高稳定性）
         2.生命周期作用域（application，activity/fragment）
