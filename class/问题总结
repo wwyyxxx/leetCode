@@ -139,4 +139,6 @@ Glid:
         （以确保优先处理前台可见的Activity/Fragment，提高资源利用率，在有必要时释放资源以避免在应用在后台时被杀死，提高稳定性）
         2.生命周期作用域（application，activity/fragment）
             application：子线程、serverContent、application
+    
+    load: RequestBuilder这是一个通用请求构建类，可以处理通用资源类型的设置选项和启动负载
         
