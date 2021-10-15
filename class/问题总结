@@ -141,4 +141,35 @@ Glid:
             application：子线程、serverContent、application
     
     load: RequestBuilder这是一个通用请求构建类，可以处理通用资源类型的设置选项和启动负载
-        
+
+    into: ViewTarget
+        1.获取getScaleType clone配置 克隆（原型设计模式）
+        2.into重载获取ImageViewTarget
+            glideContext.buildImageViewTarget -> imageViewTargetFactory.buildTarget (工厂模式) -> DrawableImageViewTarget/BitmapImageViewTarget
+                DrawableImageViewTarget继承ImageViewTarget重写的setResource函数，显示Drawable图片
+        3.重载的into: 为Target构建request请求 -> RequestManager执行请求
+            构建request: SingleRequest.obtain(...)
+            RequestManager执行(synchronized): requestTracker.runRequest(request)
+        ->request.begin() ->大小准备好 [onSizeReady() -> engine.load()]
+        ->engine.load():
+            1.获取请求key (宽高，类型，配置等)
+            2.检查ActiveResources -> LruResourceCache
+            3.检查job缓存
+            4.否则EngineJob.start开启一个新的请求任务执行
+        ->EngineJob.start: 获取线程池 执行任务
+            a.是否配置资源缓存策略，否则只能从缓存中获取(ResourceCacheGenerator/DataCacheGenerator)
+            b.SourceGenerator()
+                获取loadData   ->buildLoadData(含有HttpUrlFetcher)
+                ->loadData: loadDataWithRedirects()取得InputStream
+                ->loadDataWithRedirects: HttpURLConnection作Glide底层网络请求,返回一个输入流后通过onDataReady回调出去
+            C.decodeFromData(): 先构建LoadPath, 然后创建InputStreamRewinder类型的DataRewinder, 最终将数据解析的操作放到了LoadPath.load方法中
+                1.deResource 将源数据解析成资源（源数据: InputStream， 中间产物:Bitmap）
+                2.调用 DecodeCallback.onResourceDecoded 处理资源
+                    a.对资源进行了转换操作。比如 Fit_Center,CenterCrop, 在请求的时候配置
+                    b.构建磁盘缓存的key
+                3.调用 ResourceTranscoder.transcode 将资源转为目标资源（目标资源类型: Drawable）
+            d.notifyEncodeAndRelease:
+                1.notifyComplete() 通知调用层数据已经装备好了
+                2.deferredEncodeManager.encode 将资源磁盘缓存 (如果配置了)
+                3.onEncodeComplete（） 完成
+        ->EngineJob.onResourceReady:通知上层任务完成,回调ImageViewTarget用于展示数据。
