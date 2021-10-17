@@ -173,3 +173,12 @@ Glid:
                 2.deferredEncodeManager.encode 将资源磁盘缓存 (如果配置了)
                 3.onEncodeComplete（） 完成
         ->EngineJob.onResourceReady:通知上层任务完成,回调ImageViewTarget用于展示数据。
+
+    缓存： 先判断是否使用
+        活动缓存    ->    LRU内存缓存（弱应用）     ->    LRU磁盘缓存
+        1.活动缓存中获取：  （）
+        2.内存缓存获取：添加到活动缓存，清理缓存数据
+        3.网络获取：储存到内存缓存，展示数据
+
+        磁盘缓存：
+            内存缓存获取不到开启线程读取->根据Key去获取磁盘文件，存储
