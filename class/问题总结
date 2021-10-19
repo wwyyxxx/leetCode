@@ -182,3 +182,25 @@ Glid:
 
         磁盘缓存：
             内存缓存获取不到开启线程读取->根据Key去获取磁盘文件，存储
+
+OKHttp：（建造者模式、门面模式）
+    分发器：内部维护队列与线程池，完成请求调配
+    拦截器：五大默认拦截器完成整个请求过程。
+
+    okhttpClient(build):
+    request(build):
+    Call:okhttpClient.new(request)
+        execute(同步):
+            分发器:仅作记录
+        enqueue(异步):
+            分发器（无等待，最大并发）: 正在执行的任务未超过最大限制64，且同一Host的请求不超过5个，则会添加到正在执行队列，同时提交给线程池。否则先加入等待队列。
+                执行完成之后（无任务执行闲置任务），从running移除，再次执行判断移入ready。线程池（核心线程:0,最大线程:Integer.MAX_VALUE,线程等待队列:SynchronousQueue）
+            
+    拦截器： 责任链模式
+        自定义Interceptor (公共参数/鉴权)
+        1.RetryAndFollowUpInterceptor：重试拦截器在交出之前，负责判断用户是否取消了请求；在获得了结果之后，会根据响应码判断是否需要重定向，如果满足条件那么就会重启执行所有拦截器
+        2.BridgeInterceptor：桥接拦截器在交出之前，负责将HTTP协议必备的请求头加入其中(如：Host)并添加一些默认的行为(如：GZIP压缩)；在获得了结果后，调用保存cookie接口并解析GZIP数据
+        3.CacheInterceptor：缓存拦截器顾名思义，交出之前读取并判断是否使用缓存；获得结果后判断是否缓存。
+        4.ConnectInterceptor：连接拦截器在交出之前，负责找到或者新建一个连接，并获得对应的socket流；在获得结果后不进行额外的处理
+        5.CallServerInterceptor：请求服务器拦截器进行真正的与服务器的通信，向服务器发送数据，解析读取的响应数据。
+        自定义netInterceptor (HttpLoggingInterceptor 日志输出)
