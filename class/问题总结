@@ -204,3 +204,21 @@ OKHttp：（建造者模式、门面模式）
         4.ConnectInterceptor：连接拦截器在交出之前，负责找到或者新建一个连接，并获得对应的socket流；在获得结果后不进行额外的处理
         5.CallServerInterceptor：请求服务器拦截器进行真正的与服务器的通信，向服务器发送数据，解析读取的响应数据。
         自定义netInterceptor (HttpLoggingInterceptor 日志输出)
+
+Retrofit: 对网络请求的封装 okhttp
+    create函数内部使用了动态代理来创建接口对象，这样的设计可以让所有的访问请求都被代理
+    设计模式：
+        1）建造者模式：Retrofit实例使用建造者模式通过Builder类构建。当构造函数的参数大于4个，且存在可选参数的时候既可以使用 建造者设计模式
+        2）工厂方法设计：Retrofit创建时的callFactory，使用工厂方法设计模式，但是似乎并不打算支持其他的工厂。
+        3）外观模式：整个retrofit 采用的时外观模式。统一的调用创建网络请求接口实例和网络请求参数配置的方法
+        4）动态代理：retrofit里面使用了动态代理来创建网络请求接口实例，这个是retrofit对用户使用来说最大的复用，其它的代码都是为了支撑这个动态代理给用户带来便捷性的
+        5）策略模式：使用了策略模式对serviceMethod对象进行网络请求参数配置，即通过解析网络请求接口方法的参数、返回值和注解类型，从Retrofit对象中获取对应的网络的url地址、网络请求执行器、网络请求适配器和数据转换器
+        6）装饰者模式：ExecuteCallBack 使用装饰者模式来封装callbackExecutor，用于完成线程的切换
+        7）静态代理(委托)、门面模式：ExecutorCallbackCall 使用静态代理(委托) 代理了Call进行网络请求，真正的网络请求由okhttpCall执行，然而okHttpCall不是自己执行，它是okhttp 提供call给 外界（retrofit）使用的唯一门户，其实这个地方就是门面模式
+        8）适配器模式；ExecutorCallbackCall 的被初始化是在 ExecutorCallAdapterFactory里面通过适配器模式被创建的。CallAdapter采用了适配器模式 为创建访问Call接口提供服务。默认不添加Rxjava则使用默认的ExecutorCallAdapterFactory 将okhttp3.call转变成为 retroift中的call，如果有Rxjava则将okhttp3.call转化为abservable。
+
+性能优化：
+    OOM与内存优化：
+        分 java heapsize 和 native heapsize
+            native层内存申请不受其限制, native 层受 native process 对内存大小的限制
+            
