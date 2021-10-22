@@ -221,4 +221,34 @@ Retrofit: 对网络请求的封装 okhttp
     OOM与内存优化：
         分 java heapsize 和 native heapsize
             native层内存申请不受其限制, native 层受 native process 对内存大小的限制
+
+        回收算法：标记清除算法、复制算法、标记整理算法
+
+        Young Generation(Eden区和两个Survivor区)        Old Generation       Permanent Generation
+        - 1、对象创建后在Eden区。
+        - 2、执行GC后，如果对象仍然存活，则复制到S0区。
+        - 3、当S0区满时，该区域存活对象将复制到S1区，然后S0清空，接下来S0和S1角色互换。
+        - 4、当第3步达到一定次数（系统版本不同会有差异）后，存活对象将被复制到Old Generation。
+        - 5、当这个对象在Old Generation区域停留的时间达到一定程度时，它会被移动到Old Generation，最后累积一定时间再移动到Permanent Generation区域。
+
+        Android低内存杀进程机制:
+            Anroid基于进程中运行的组件及其状态规定了默认的五个回收优先级：
+            - Empty process(空进程)
+            - Background process(后台进程)
+            - Service process(服务进程)
+            - Visible process(可见进程)
+            - Foreground process(前台进程)
+            系统需要进行内存回收时最先回收空进程,然后是后台进程，以此类推最后才会回收前台进程（一般情况下前台进程就是与用户交互的进程了,如果连前台进程都需要回收那么此时系统几乎不可用了）。
+
+        Bitmap: Bitmap内存占用 ≈ 像素数据总大小 = 图片宽 × 图片高× (设备分辨率/资源目录分辨率)^2 × 每个像素的字节大小
+            BitmapFactory.decodeResource 加载的图片可能会经过缩放，该缩放目前是放在 java 层做的，效率比较低，而且需要消耗 java 层的内存。
+            BitmapFactory.decodeStream 不会对所加载的图片进行缩放，相比之下占用内存少，效率更高。
+            如果对性能要求不高，且需要 Android 自带的图片自适应缩放功能，则可以使用decodeResource。
+
+            2.3-       3.0-4.4       5.0-7.1               8.0
+            Bitmap对象 java Heap    java Heap             java Heap
+            像素数据  Native Heap   java Heap              Native Heap
+            迁移原因      -     解决Native Bitmap内存泄露   共享整个系统的内存减少OOM
             
+        ReferenceQueue: 
+            通常我们将其ReferenceQueue翻译为引用队列，换言之就是存放引用的队列，保存的是Reference对象。其作用在于Reference对象所引用的对象被GC回收时，该Reference对象将会被加入引用队列中（ReferenceQueue）的队列末尾。
