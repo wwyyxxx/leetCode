@@ -252,3 +252,33 @@ Retrofit: 对网络请求的封装 okhttp
             
         ReferenceQueue: 
             通常我们将其ReferenceQueue翻译为引用队列，换言之就是存放引用的队列，保存的是Reference对象。其作用在于Reference对象所引用的对象被GC回收时，该Reference对象将会被加入引用队列中（ReferenceQueue）的队列末尾。
+    
+    启动：
+        1.点击桌面App图标，Launcher进程采用Binder IPC向system_server进程发起startActivity请求；
+        2.system_server进程接收到请求后，向zygote进程发送创建进程的请求；
+        3.Zygote进程fork出新的子进程，即App进程；
+        4.App进程，通过Binder IPC向sytem_server进程发起attachApplication请求；
+        5.system_server进程在收到请求后，进行一系列准备工作后，再通过binder IPC向App进程发送scheduleLaunchActivity请求；
+        6.App进程的binder线程（ApplicationThread）在收到请求后，通过handler向主线程发送LAUNCH_ACTIVITY消息；
+        7.主线程在收到Message后，通过反射机制创建目标Activity，并回调Activity.onCreate()等方法。
+        8.到此，App便正式启动，开始进入Activity生命周期，执行完onCreate/onStart/onResume方法，UI渲染结束后便可以看到App的主界面。
+
+        1). 合理的使用异步初始化、延迟初始化、懒加载机制。
+        2). 启动过程避免耗时操作，如数据库 I/O操作不要放在主线程执行。
+        3). 类加载优化：提前异步执行类加载。
+        4). 合理使用IdleHandler进行延迟初始化。
+        5). 简化布局
+
+    布局优化：
+        1.消除层级减少计算次数
+        2.标签使用
+            Include ：为了解决重复定义相同布局的 （findViewById查找不到目标控件）
+            ViewStub：宽高都为0的一个View，默认是不可见，setVisibility/Inflate
+            Merge: 有助于消除视图层次结构中的冗余视图,直接将其中的子元素添加到merge标签parent中
+        3.解决过度绘制问题
+            1.移除布局中不需要的背景
+            2.使视图层次结构扁平化。
+            3.降低透明度
+                对于不透明的view ，只需要渲染一次即可把它显示出来。但是如果这个 view 设置了alpha值，则至少需要渲染两次。
+                这是因为使用了 alpha 的 view 需要先知道混合 view 的下一层元素是什么，然后再结合上层的view进行Blend混色处理。
+                透明动画、淡入淡出和阴影等效果都涉及到某种透明度
