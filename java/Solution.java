@@ -21,7 +21,9 @@ import bean.*;
  */
 public class Solution {
 
-    public static void main(String[] args) {}
+    public static void main(String[] args) {
+        System.out.println(Math.abs(-2147483648));
+    }
 
 
     // 树的子结构
@@ -901,7 +903,7 @@ public class Solution {
         dp[0] = 1;
         for(int i = 1; i < n; i++) {
             int n2 = dp[a] * 2, n3 = dp[b] * 3, n5 = dp[c] * 5;
-            dp[i] = Math.min(Math.min(n2, n3), n5);a
+            dp[i] = Math.min(Math.min(n2, n3), n5);
             if(dp[i] == n2) a++;
             if(dp[i] == n3) b++;
             if(dp[i] == n5) c++;
@@ -987,7 +989,7 @@ public class Solution {
     //滑动窗口的最大值
     public int[] maxSlidingWindow(int[] nums, int k) {
         if(nums.length == 0) return new int[0];
-        if(k == 1) return nums;\
+        if(k == 1) return nums;
         int[] res = new int[nums.length - k + 1];
         Deque<Integer> dq = new LinkedList<Integer>();
         for (int j = 0,i = 1 - k; j < nums.length; i++,j++) {
@@ -1084,7 +1086,6 @@ public class Solution {
         return count;
     }
 
-
     // 数字序列中某一位的数字
     public int findNthDigit(int n) {
         int digit = 1;
@@ -1098,5 +1099,21 @@ public class Solution {
         }
         long num = start + (n - 1) / digit; // 2.
         return Long.toString(num).charAt((n - 1) % digit) - '0'; // 3.
+    }
+
+    // 整数除法
+    public int divide(int a, int b) {
+        if(a==Integer.MIN_VALUE && b == -1) return Integer.MAX_VALUE;
+        boolean sign = (a > 0) ^ (b > 0);
+        a = Math.abs(a);
+        b = Math.abs(b);
+        int res = 0;
+        for (int i = 31; i > 0; i--) {
+            if((a>>>i) -b >=0) {
+                a -= (b<<i);
+                res++;
+            }
+        }
+        return sign ? -res : res;
     }
 }

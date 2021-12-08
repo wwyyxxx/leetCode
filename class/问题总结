@@ -302,3 +302,8 @@ Retrofit: 对网络请求的封装 okhttp
         3.使用Lint分析器（物理删除）
         4.动态库打包配置（so库架构）
         4.图片处理（矢量图/Tinypng）
+
+PB协议接入：
+    1.WireConverterFactory Message
+
+    2.ProtoConverterFactory
