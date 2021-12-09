@@ -1116,4 +1116,30 @@ public class Solution {
         }
         return sign ? -res : res;
     }
+
+    // 有效的井字游戏
+    public boolean validTicTacToe(String[] board) {
+        int xCount=0,oCount=0;
+        for(String s: board) {
+            for(char c:s.toCharArray()) {
+                if(c == 'X') xCount++;
+                if(c == 'O') oCount++;
+            }
+        }
+        if (xCount != oCount && oCount != xCount -1) return false;
+        if (win(board,'X') && oCount != xCount -1) return false;
+        if (win(board,'O') && xCount != oCount) return false;
+        return true;
+    }
+
+    private boolean win(String[] board, char d) {
+        for(int i = 0;i<3;i++ ){
+            if(board[0].charAt(i) == d && board[1].charAt(i) == d && board[2].charAt(i) == d) return true;
+            if(board[i].charAt(0) == d && board[i].charAt(1) == d && board[i].charAt(2) == d) return true;
+        }
+        if(board[0].charAt(0) == d && board[1].charAt(1) == d && board[2].charAt(2) == d) return true;
+        if(board[0].charAt(2) == d && board[1].charAt(1) == d && board[2].charAt(0) == d) return true;
+        return false;
+    }
+
 }
