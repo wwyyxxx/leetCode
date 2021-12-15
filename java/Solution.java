@@ -22,7 +22,7 @@ import bean.*;
 public class Solution {
 
     public static void main(String[] args) {
-        System.out.println(Math.abs(-2147483648));
+        System.out.println(Solution.addBinary("11","10"));
     }
 
 
@@ -1149,8 +1149,6 @@ public class Solution {
         dfs(0,candidates,res,temp,target);
         return res;
     }
-
-
     private void dfs(int i, int[] candidates, List<List<Integer>> res2, List<Integer> temp2, int target) {
         if(target < 0 || i <=candidates.length) {
             return;
@@ -1165,4 +1163,109 @@ public class Solution {
         dfs(i+1,candidates,res2,temp2,target);
     }
 
+    // 二进制加法
+    public static String addBinarymy(String a, String b) {
+        StringBuffer res = new StringBuffer();
+        boolean flag = false;
+        int al = a.length() -1,bl = b.length()-1;
+        while(al>=0 && bl>=0){
+            if(flag) {
+                if(a.charAt(al) == '1' && b.charAt(bl) == '1') {
+                    res.insert(0, "1");
+                    flag = true;
+                } else if(a.charAt(al) == '0' && b.charAt(bl) == '0') {
+                    res.insert(0, "1");
+                    flag = false;
+                } else {
+                    res.insert(0, "0");
+                    flag = true;
+                }
+            } else {
+                if(a.charAt(al) == '1' && b.charAt(bl) == '1') {
+                    res.insert(0, "0");
+                    flag = true;
+                } else if(a.charAt(al) == '0' && b.charAt(bl) == '0') {
+                    res.insert(0, "0");
+                } else {
+                    res.insert(0, "1");
+                }
+            }
+            al--;
+            bl--;
+        }
+        if(al != bl) {
+            String temp = al>bl?a.substring(0,al-bl): b.substring(0,bl-al);
+            int templ = temp.length()-1;
+            if(flag && templ>=0) {
+                while(templ>=0){
+                    if(temp.charAt(templ) == '1' && flag) {
+                        res.insert(0, "0");
+                        flag = true;
+                    } else {
+                        res.insert(0, "1");
+                        flag = false;
+                        break;
+                    }
+                    templ--;
+                }
+            } 
+            if(templ < 0) {
+                if(flag) { if(flag) res.insert(0, "1");}
+            } else {
+                res.insert(0, al > bl ? a.substring(0,templ+1) : b.substring(0,templ+1));
+            }
+        } else {
+            if(flag) res.insert(0, "1");
+        }
+        return res.toString();
+    }
+    
+
+    // 二进制加法
+    public static String addBinary1(String a, String b) {
+        return Integer.toBinaryString(
+            Integer.parseInt(a,2)+Integer.parseInt(b,2)
+        );
+    }
+
+    // 二进制加法
+    public static String addBinary(String a, String b) {
+        StringBuffer res = new StringBuffer();
+        int length = Math.max(a.length(),b.length());
+        int carray = 0;
+        for(int i=0;i< length; i++) {
+            carray += i < a.length() ? (a.charAt(a.length() - 1 - i) - '0') : '0';
+            carray += i < b.length() ? (b.charAt(b.length() - 1 - i) - '0') : '0';
+            res.append((char) (carray % 2 + '0'));
+            carray /= 2;
+        }
+        if(carray>0) res.append('1');
+        res.reverse();
+        return res.toString();
+    }
+
+    // 
+    public List<List<Integer>> combinationSum2my(int[] candidates, int target) {
+        List<List<Integer>> result = new ArrayList<List<Integer>>();
+        Arrays.sort(candidates);
+        dfs2my(candidates, target,new ArrayList<Integer>(),result,0);
+        HashSet<List<Integer>> set = new HashSet<>(result);
+        result.clear();
+        result.addAll(set);
+        return result;
+    }
+    private void dfs2my(int[] candidates, int target, ArrayList<Integer> arrayList, List<List<Integer>> result2, int i) {
+        if(target == 0) {
+            result2.add(new ArrayList<Integer>(arrayList));
+            return;
+        }
+        if(target < 0 || i == candidates.length) {
+            return;
+        }
+        arrayList.add(candidates[i]);
+        dfs2my(candidates, target-candidates[i],arrayList,result2,i+1);
+        arrayList.remove(arrayList.size()-1);
+        dfs2my(candidates, target,arrayList,result2,i+1);
+    }
+    
 }
