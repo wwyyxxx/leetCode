@@ -22,7 +22,7 @@ import bean.*;
 public class Solution {
 
     public static void main(String[] args) {
-        System.out.println(Solution.addBinary("11","10"));
+        System.out.println(singleNumber(new int[]{0,1,0,1,0,1,99}));
     }
 
 
@@ -1268,4 +1268,23 @@ public class Solution {
         dfs2my(candidates, target,arrayList,result2,i+1);
     }
     
+    // 只出现一次的数字 
+    public static int singleNumber(int[] nums) {
+        Arrays.sort(nums);
+        for(int i = 0; i < nums.length - 2;) {
+            if(i>=nums.length) break;
+            if(nums[i] == nums[i+1]) { i+=3; }
+            else { return nums[i]; }
+        }
+        return nums[nums.length-1];
+        // int idx = nums.length / 2;
+        // return dfsSingle(nums, 0, nums.length-1, idx);
+    }
+
+    private int dfsSingle(int[] nums, int l, int r, int half) {
+        if((half==0 && nums[half]!=nums[half+1]) || (half==nums.length-1 && nums[half]!=nums[half-1])) return nums[half];
+        if((nums[half] != nums[half+1]) && (nums[half]!=nums[half-1])) return nums[half];
+        
+        return dfsSingle(nums, l, half-1, (l+half-1)/2)+ dfsSingle(nums, half+1, r, (1+half+r)/2);
+    }
 }
