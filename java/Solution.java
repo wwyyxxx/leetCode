@@ -22,7 +22,7 @@ import bean.*;
 public class Solution {
 
     public static void main(String[] args) {
-        System.out.println(singleNumber(new int[]{0,1,0,1,0,1,99}));
+        System.out.println(new Solution().permute(new int[]{1,2,3}));
     }
 
 
@@ -1269,7 +1269,7 @@ public class Solution {
     }
     
     // 只出现一次的数字 
-    public static int singleNumber(int[] nums) {
+    public static int singleNumber1(int[] nums) {
         Arrays.sort(nums);
         for(int i = 0; i < nums.length - 2;) {
             if(i>=nums.length) break;
@@ -1277,14 +1277,39 @@ public class Solution {
             else { return nums[i]; }
         }
         return nums[nums.length-1];
-        // int idx = nums.length / 2;
-        // return dfsSingle(nums, 0, nums.length-1, idx);
     }
 
-    private int dfsSingle(int[] nums, int l, int r, int half) {
-        if((half==0 && nums[half]!=nums[half+1]) || (half==nums.length-1 && nums[half]!=nums[half-1])) return nums[half];
-        if((nums[half] != nums[half+1]) && (nums[half]!=nums[half-1])) return nums[half];
-        
-        return dfsSingle(nums, l, half-1, (l+half-1)/2)+ dfsSingle(nums, half+1, r, (1+half+r)/2);
+    // 只出现一次的数字 
+    public static int singleNumber(int[] nums) {
+        Map<Integer,Integer> map = new HashMap<>();
+        for (int i : nums) {
+            map.put(i,map.getOrDefault(i, 0) + 1);
+        }
+        for(Map.Entry<Integer,Integer> entry : map.entrySet()) {
+            if(entry.getValue() == 1) return entry.getKey();
+        }
+        return 0;
+    }
+
+    //没有重复元素集合的全排列
+    public List<List<Integer>> permute(int[] nums) {
+        List<List<Integer>> result = new ArrayList<>();
+        dfsPermute(nums,new boolean[nums.length], result,new ArrayList<>());
+        return result;
+    }
+
+    private void dfsPermute(int[] nums, boolean[] perm, List<List<Integer>> result, List<Integer> tempList) {
+        if(tempList.size() == nums.length) {
+            result.add(new ArrayList<>(tempList));
+            return;
+        }
+        for (int j = 0; j < nums.length; j++) {
+            if(perm[j]) continue;
+            tempList.add(nums[j]);
+            perm[j] = true;
+            dfsPermute(nums,perm,result,tempList);
+            tempList.remove(tempList.size() - 1);
+            perm[j] = false;
+        }
     }
 }
