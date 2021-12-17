@@ -1350,7 +1350,7 @@ public class Solution {
             return;
         }
         for (int j = 0; j < nums.length; j++) {
-            if(perm[j] || (j > 0 && nums[j] == nums[j-1])) continue;
+            if(perm[j] || (j > 0 && nums[j] == nums[j-1] && !perm[j-1])) continue;
             perm[j] = true;
             tempList.add(nums[j]);
             dfsPermuteUnique(nums,perm,result,tempList);
@@ -1361,6 +1361,6 @@ public class Solution {
 
     // 单词长度的最大乘积
     public int maxProduct(String[] words) {
-        
+
     }
 }
