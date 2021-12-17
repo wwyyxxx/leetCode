@@ -22,7 +22,7 @@ import bean.*;
 public class Solution {
 
     public static void main(String[] args) {
-        System.out.println(new Solution().permute(new int[]{1,2,3}));
+        System.out.println(new Solution().permuteUnique(new int[]{1,1,2}));
     }
 
 
@@ -1311,5 +1311,56 @@ public class Solution {
             tempList.remove(tempList.size() - 1);
             perm[j] = false;
         }
+    }
+
+    // 含有重复元素集合的全排列 
+    public List<List<Integer>> permuteUnique1(int[] nums) {
+        List<List<Integer>> result = new ArrayList<>();
+        dfsPermuteUnique1(nums,new boolean[nums.length], result,new ArrayList<>());
+        Set<List<Integer>> tempList = new HashSet<>(result);
+        result.clear();
+        result.addAll(tempList);
+        return result;
+    }
+    private void dfsPermuteUnique1(int[] nums, boolean[] perm, List<List<Integer>> result, List<Integer> tempList) {
+        if(tempList.size() == nums.length) {
+            result.add(new ArrayList<>(tempList));
+            return;
+        }
+        for (int j = 0; j < nums.length; j++) {
+            if(perm[j]) continue;
+            tempList.add(nums[j]);
+            perm[j] = true;
+            dfsPermuteUnique1(nums,perm,result,tempList);
+            tempList.remove(tempList.size() - 1);
+            perm[j] = false;
+        }
+    }
+
+    // 含有重复元素集合的全排列 
+    public List<List<Integer>> permuteUnique(int[] nums) {
+        Arrays.sort(nums);
+        List<List<Integer>> result = new ArrayList<>();
+        dfsPermuteUnique(nums,new boolean[nums.length], result,new ArrayList<>());
+        return result;
+    }
+    private void dfsPermuteUnique(int[] nums, boolean[] perm, List<List<Integer>> result, List<Integer> tempList) {
+        if(tempList.size() == nums.length) {
+            result.add(new ArrayList<>(tempList));
+            return;
+        }
+        for (int j = 0; j < nums.length; j++) {
+            if(perm[j] || (j > 0 && nums[j] == nums[j-1])) continue;
+            perm[j] = true;
+            tempList.add(nums[j]);
+            dfsPermuteUnique(nums,perm,result,tempList);
+            tempList.remove(tempList.size() - 1);
+            perm[j] = false;
+        }
+    }
+
+    // 单词长度的最大乘积
+    public int maxProduct(String[] words) {
+        
     }
 }
