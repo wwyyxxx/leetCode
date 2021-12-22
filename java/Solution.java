@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.Queue;
 import java.util.Stack;
 import java.util.Map.Entry;
+import java.nio.charset.Charset;
 import java.util.*;
 
 import bean.*;
@@ -22,7 +23,7 @@ import bean.*;
 public class Solution {
 
     public static void main(String[] args) {
-        System.out.println(new Solution().permuteUnique(new int[]{1,1,2}));
+        System.out.println(new Solution().maxProduct(new String[]{"abcw","bar","abcdef"}));
     }
 
 
@@ -1360,7 +1361,81 @@ public class Solution {
     }
 
     // 单词长度的最大乘积
+    public int maxProduct1(String[] words) {
+        int result = 0;
+        for (int i = 0; i < words.length; i++) {
+            String word1 = words[i];
+            for (int j = i+1; j < words.length; j++) {
+                String word2 = words[j];
+                if(isSame(word1, word2)) {
+                    result = Math.max(result,word2.length()*word2.length());
+                }
+            }
+        }
+        return result;
+    }
     public int maxProduct(String[] words) {
+        int result = 0;
+        String word1 = "";
+        String word2 = "";
+        boolean flag = false;
+        for (int i = 0; i < words.length; i++) {
+            if(word1.equals("")) word1 = words[i];
+            if(word2.equals("")) word2 = words[i];
+            flag = word1.length() > word2.length() ? true : false;
+            if(i>1) {
+                if (flag) word2 = words[i].length() >= word2.length() ? words[i] : word2;
+                else word1 = words[i].length() >= word1.length() ? words[i] : word1;
+            }
+            if(i>0 && !isSame(word1, word2)) {
+                result = Math.max(result, word1.length()*word2.length());
+            }
+            
+        }
+        
+        return result;
+    }
+    private boolean isSame(String word1, String word2) {
+        int[] count = new int[26];
+        for (char w : word1.toCharArray()) {
+            count[w - 'a'] = 1;
+        }
+        for (char w : word2.toCharArray()) {
+            if (count[w - 'a'] == 1) return true;
+        }
+        return false;
+    }
 
+    private boolean isSame1(String word1, String word2) {
+        for (char w : word1.toCharArray()) {
+            if(word2.indexOf(w) != -1) return true;
+        }
+        return false;
+    }
+
+    public int[] twoSum1(int[] numbers, int target) {
+        Map<Integer, Integer> map = new HashMap<Integer, Integer>();
+        int[] res = new int[2];
+        for (int i = 0; i < numbers.length; i++) {
+            if(map.getOrDefault(target - numbers[i], -1) == -1) {
+                map.put(numbers[i],i);
+            } else {
+                res[0] = map.get(target - numbers[i]);
+                res[1] = i;
+                break;
+            }
+        }
+        return res;
+    }
+
+    //排序数组中两个数字之和
+    public int[] twoSum2(int[] numbers, int target) {
+        int i =0,j= numbers.length-1;
+        while(i > j) {
+            if(target - numbers[i] < numbers[j]) j--;
+            if(target - numbers[i] > numbers[j]) i++;
+            if(target - numbers[i] == numbers[j]) break;
+        }
+        return new int[] {i,j};
     }
 }
