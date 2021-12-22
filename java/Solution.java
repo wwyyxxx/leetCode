@@ -9,7 +9,6 @@ import java.util.Map;
 import java.util.Queue;
 import java.util.Stack;
 import java.util.Map.Entry;
-import java.nio.charset.Charset;
 import java.util.*;
 
 import bean.*;
@@ -23,7 +22,7 @@ import bean.*;
 public class Solution {
 
     public static void main(String[] args) {
-        System.out.println(new Solution().maxProduct(new String[]{"abcw","bar","abcdef"}));
+        System.out.println(new Solution().generateParenthesis(3));
     }
 
 
@@ -1437,5 +1436,24 @@ public class Solution {
             if(target - numbers[i] == numbers[j]) break;
         }
         return new int[] {i,j};
+    }
+
+    //
+    public List<String> generateParenthesis(int n) {
+        List<String> res = new ArrayList<>();
+        if (n <= 0) return res;
+        dfsGenerateParenthesis(res,n,"",0,0);
+        return res;
+    }
+
+    private void dfsGenerateParenthesis(List<String> res, int n, String path, int open, int close){
+        if(open > n || close > open) return;
+        if(path.length() == n*2) {
+            res.add(path);
+            return;
+        }
+        
+        dfsGenerateParenthesis(res,n,path+"(",open+1,close);
+        dfsGenerateParenthesis(res,n,path+")",open,close+1);
     }
 }
