@@ -22,7 +22,7 @@ import bean.*;
 public class Solution {
 
     public static void main(String[] args) {
-        System.out.println(new Solution().generateParenthesis(3));
+        System.out.println(new Solution().threeSum(new int[]{-1,0,1,2,-1,-4}));
     }
 
 
@@ -1455,5 +1455,39 @@ public class Solution {
         
         dfsGenerateParenthesis(res,n,path+"(",open+1,close);
         dfsGenerateParenthesis(res,n,path+")",open,close+1);
+    }
+
+    // 三数和为0
+    public List<List<Integer>> threeSum1(int[] nums) {
+        Set<List<Integer>> result = new HashSet<>();
+        if(nums == null || nums.length < 3 ) return new ArrayList<>();
+        Arrays.sort(nums);
+        for (int i = 0; i < nums.length; i++) {
+            for(int j = i+1; j < nums.length; j++) {
+                for (int k = j+1; k < nums.length; k++) {
+                    if (nums[i] + nums[j] + nums[k] == 0) result.add(Arrays.asList(nums[i], nums[j], nums[k]));
+                }
+            }
+        }
+        return new ArrayList<>(result);
+    }
+
+    public List<List<Integer>> threeSum(int[] nums) {
+        Set<List<Integer>> result = new HashSet<>();
+        if(nums == null || nums.length < 3 ) return new ArrayList<>();
+        Arrays.sort(nums);
+        for (int i = 0; i < nums.length; i++) {
+            int j = i + 1, k = nums.length - 1, target = - nums[i];
+            while(j < k) {
+                if (nums[j] + nums[k] == target) { 
+                    result.add(Arrays.asList(nums[i], nums[j], nums[k])); 
+                    j++;
+                    k--;
+                } else if (nums[j] + nums[k] < target) { 
+                    j++;
+                } else k--;
+            }
+        }
+        return new ArrayList<>(result);
     }
 }
