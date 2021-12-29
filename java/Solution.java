@@ -22,7 +22,8 @@ import bean.*;
 public class Solution {
 
     public static void main(String[] args) {
-        System.out.println(new Solution().threeSum(new int[]{-1,0,1,2,-1,-4}));
+        new Solution().partition("fff");
+        System.out.println();
     }
 
 
@@ -1489,5 +1490,75 @@ public class Solution {
             }
         }
         return new ArrayList<>(result);
+    }
+
+
+    // 分割回文子字符串 
+    public String[][] partition(String s) {
+        List<String> temp = new ArrayList<>();
+        Set<List<String>> ans = new HashSet<>();
+        for (int i = 0; i < 2*s.length()-1; i++) {
+            int left = i / 2;
+            int right = left + i % 2;
+            while(left >= 0 && right < s.length() && s.charAt(left) == s.charAt(right)) {
+                addTemp(temp,s,left,right+1);
+                left--;
+                right++;
+                ans.add(new ArrayList<>(temp));
+                temp.clear();
+            }
+        }
+        String[][] res = new String[ans.size()][];
+        int i = 0;
+        for(List<String> list: ans){
+            res[i] = list.toArray(new String[list.size()]);
+            i++; 
+        }
+        System.out.println(res);
+        return res;
+    }
+
+    private void addTemp(List<String> temp2, String s, int left, int right) {
+        String str = s.substring(left, right);
+        String[] st = s.split("|");
+        for (int i = 0; i < st.length; i++) {
+            if(i==left) temp2.add(str);
+            else {
+                if(i>=left && i<right) continue; 
+                temp2.add(st[i]);
+            }
+        }
+    }
+
+
+    //最长回文串
+    public int longestPalindrome(String s) {
+        int[] count = new int[128];
+        int ans = 0;
+        for(char c : s.toCharArray()){
+            count[c]++;
+        }
+        for (int i = 0; i < count.length; i++) {
+            ans += count[i] / 2 * 2;
+            if(count[i] % 2 == 1 && ans%2 != 0) {
+                ans++;
+            }
+        }
+        return ans;
+    }
+
+    // 回文子串 0 0 1 0 1 | 0 0 1 2 0 1 2
+    public int countSubstrings(String s) {
+        int ans = 0;
+        for (int center = 0; center < 2*s.length()-1; center++) {
+            int left = center / 2;
+            int right = left + center % 2;
+            while(left >= 0 && right < s.length() && s.charAt(left) == s.charAt(right)) {
+                ans++;
+                left--;
+                right++;
+            }
+        }
+        return ans;
     }
 }
