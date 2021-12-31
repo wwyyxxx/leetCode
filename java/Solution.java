@@ -22,8 +22,7 @@ import bean.*;
 public class Solution {
 
     public static void main(String[] args) {
-        new Solution().partition("fff");
-        System.out.println();
+        System.out.println(new Solution().restoreIpAddresses("0000"));
     }
 
 
@@ -1561,4 +1560,34 @@ public class Solution {
         }
         return ans;
     }
+
+    // 复原IP
+    public List<String> restoreIpAddresses(String s) {
+        List<String> ans = new ArrayList<>();
+        if(s== null || s.length()<4 || s.length()>12) return ans;
+        for (int i = 1; i < s.length(); i++) {
+            for (int j = i + 1; j < s.length(); j++) {
+                for (int k = j + 1; k < s.length(); k++) {
+                    if(checkIp(s,i,j,k)) {
+                        String str = String.join(".", s.substring(0,i), s.substring(i, j), s.substring(j, k), s.substring(k, s.length()));
+                        ans.add(str);
+                    }
+                }
+            }
+        }
+        return ans;
+    }
+
+    private boolean checkIp(String s, int i, int j, int k) {
+        String str1 = s.substring(0,i);
+        if((str1.charAt(0) == '0' && str1.length() != 1) || Integer.parseInt(str1) > 255) return false;
+        String str2 = s.substring(i, j);
+        if((str2.charAt(0) == '0' && str2.length() != 1) || Integer.parseInt(str2) > 255) return false;
+        String str3 = s.substring(j, k);
+        if((str3.charAt(0) == '0' && str3.length() != 1) || Integer.parseInt(str3) > 255) return false;
+        String str4 = s.substring(k, s.length());
+        if((str4.charAt(0) == '0' && str4.length() != 1) || Integer.parseInt(str4) > 255) return false;
+        return true;
+    }
+
 }
