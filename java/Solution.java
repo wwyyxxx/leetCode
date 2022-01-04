@@ -22,7 +22,7 @@ import bean.*;
 public class Solution {
 
     public static void main(String[] args) {
-        System.out.println(new Solution().restoreIpAddresses("0000"));
+        System.out.println(new Solution().numSubarrayProductLessThanK(new int[]{1,2,3},0));
     }
 
 
@@ -1588,6 +1588,74 @@ public class Solution {
         String str4 = s.substring(k, s.length());
         if((str4.charAt(0) == '0' && str4.length() != 1) || Integer.parseInt(str4) > 255) return false;
         return true;
+    }
+
+    // 和大于等于 target 的最短子数组
+    public int minSubArrayLen(int target, int[] nums) {
+        int ans = Integer.MAX_VALUE;
+        int start=0,end=0;
+        int sum = 0;
+        while(end < nums.length) {
+            sum += nums[end];
+            if(sum >= target) {
+                while(start <= end) {
+                    if(sum < target) break;
+                    ans = Math.min(ans,end-start+1);
+                    sum -= nums[start];
+                    start++;
+                }
+            }
+            end++;
+        }
+        return ans == Integer.MAX_VALUE ? 0 : ans;
+    }
+
+    // 爬楼梯的最少成本
+    public int minCostClimbingStairs(int[] cost) {
+        int[] dp = new int[cost.length+1];
+        dp[0] = dp[1] = 0;
+        for (int i = 2; i < dp.length; i++) {
+            dp[i] = Math.min(dp[i-1]+cost[i-1], dp[i-2]+cost[i-2]);
+        }
+        return dp[dp.length - 1];
+    }
+
+    // 乘积最小数组 10 5 2 6  100
+    public int numSubarrayProductLessThanK(int[] nums, int k) {
+        int ans = 0;
+        int sum = 1;
+        int start = 0;
+        for (int i = 0; i < nums.length; i++) {
+            if(nums[i] < k) {
+                System.out.println(nums[i]);
+                ans++;
+            }
+            sum *= nums[i];
+            if(sum < k && i!=0) {
+                System.out.println(sum);
+                ans++;
+            } else {
+                while(sum >= k && sum != nums[i]) {
+                    sum /= nums[start];
+                    if(sum < k) {
+                        System.out.println(sum);
+                        ans++;
+                    }
+                    start++;
+                }
+            }
+            if(i == nums.length-1) {
+                while(start != i-1) {
+                    sum /= nums[start];
+                    if(sum < k) {
+                        System.out.println(sum);
+                        ans++;
+                    }
+                    start++;
+                }
+            }
+        }
+        return ans;
     }
 
 }
