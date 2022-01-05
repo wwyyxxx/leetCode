@@ -22,7 +22,7 @@ import bean.*;
 public class Solution {
 
     public static void main(String[] args) {
-        System.out.println(new Solution().numSubarrayProductLessThanK(new int[]{1,2,3},0));
+        System.out.println(new Solution().numSubarrayProductLessThanK(new int[]{10,9,10,4,3,8,3,3,6,2,10,10,9,3},19));
     }
 
 
@@ -1624,6 +1624,22 @@ public class Solution {
     public int numSubarrayProductLessThanK(int[] nums, int k) {
         int ans = 0;
         int sum = 1;
+        int left = 0,right = 0;
+
+        for (int i = 0; i < nums.length; i++) {
+            sum *= nums[right];
+            while(left <= right && sum >= k) {
+                sum /= nums[left++];
+            }
+            if(left <= right) ans += right - left + 1;
+            right++;
+        }
+        return ans;
+    }
+
+    public int numSubarrayProductLessThanK1(int[] nums, int k) {
+        int ans = 0;
+        int sum = 1;
         int start = 0;
         for (int i = 0; i < nums.length; i++) {
             if(nums[i] < k) {
@@ -1645,7 +1661,7 @@ public class Solution {
                 }
             }
             if(i == nums.length-1) {
-                while(start != i-1) {
+                while(start < nums.length-2) {
                     sum /= nums[start];
                     if(sum < k) {
                         System.out.println(sum);
@@ -1657,5 +1673,4 @@ public class Solution {
         }
         return ans;
     }
-
 }
