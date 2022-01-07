@@ -22,7 +22,7 @@ import bean.*;
 public class Solution {
 
     public static void main(String[] args) {
-        System.out.println(new Solution().rob(new int[]{2,1,1,2}));
+        System.out.println(new Solution().subarraySum(new int[]{28,54,7,-70,22,65,-6},0));
     }
 
 
@@ -1675,7 +1675,7 @@ public class Solution {
     }
 
     // 房屋偷盗   [2,1,1,2]
-    public int rob(int[] nums) {
+    public int rob1(int[] nums) {
         if(nums.length < 2) return nums[0];
         int[] dp = new int[nums.length];
         dp[0] = nums[0];
@@ -1684,5 +1684,30 @@ public class Solution {
             dp[i] = Math.max(nums[i]+dp[i-2], dp[i-1]);
         }
         return dp.length == 2 ? Math.max(dp[0], dp[1]) : dp[nums.length - 1];
+    }
+
+    // 房屋偷盗   [2,1,1,2]
+    public int rob(int[] nums) {
+        int per = 0, cur = 0, temp;
+        for (int i = 0; i < nums.length; i++) {
+            temp = cur;
+            cur = Math.max(cur, per+nums[i]);
+            per = temp;
+        }
+        return cur;
+    }
+
+    // 和为 k 的子数组 28,54,7,-70,22,65,-6
+    public int subarraySum(int[] nums, int k) {
+        int ans = 0,sum = 0;
+        HashMap<Integer,Integer> map = new HashMap<>();
+        for (int num : nums) {
+            sum += num;
+            if (map.containsKey(sum-k)) {
+                ans += map.get(sum-k);
+            }
+            map.put(sum,map.getOrDefault(sum,0)+1);
+        }
+        return ans;
     }
 }
