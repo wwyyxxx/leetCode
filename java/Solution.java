@@ -1710,4 +1710,32 @@ public class Solution {
         }
         return ans;
     }
+
+    // 0 和 1 个数相同的子数组
+    public int findMaxLength(int[] nums) {
+        int ans = 0, sum = 0;
+        HashMap<Integer,Integer> map = new HashMap<>();
+        map.put(0,-1);
+        for (int i = 0; i < nums.length; i++) {
+            sum += i == 0 ? -1 : 1;
+            if(map.containsKey(sum)) {
+                ans = Math.max(ans,i-map.get(sum));
+            } else {
+                map.put(sum,i);
+            }
+        }
+        return ans;
+    }
+
+    // 左右两边子数组的和相等
+    public int pivotIndex(int[] nums) {
+        int sum = Arrays.stream(nums).sum();
+        int leftSum = 0;
+        for (int i = 0; i < nums.length; i++) {
+            leftSum += nums[i];
+            if((leftSum - nums[i]) == (sum - leftSum)) 
+                return i;
+        }
+        return -1;
+    }
 }
