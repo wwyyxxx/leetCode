@@ -22,7 +22,7 @@ import bean.*;
 public class Solution {
 
     public static void main(String[] args) {
-        System.out.println(new Solution().subarraySum(new int[]{28,54,7,-70,22,65,-6},0));
+        System.out.println(new Solution().checkInclusion("adc","dcda"));
     }
 
 
@@ -1737,5 +1737,23 @@ public class Solution {
                 return i;
         }
         return -1;
+    }
+
+    //字符串中的变位词
+    public boolean checkInclusion(String s1, String s2) {
+        int n = s1.length(),m = s2.length();
+        int[] cnt1 = new int[26], cnt2 = new int[26];
+        if(n>m) return false;
+        for (int i = 0; i < n; i++) {
+            cnt1[s1.charAt(i)-'a']++;
+            cnt2[s2.charAt(i)-'a']++;
+        }
+        if(Arrays.equals(cnt1, cnt2)) return true;
+        for (int i = n; i < m; i++) {
+            cnt2[s2.charAt(i)]++;
+            cnt2[s2.charAt(i-n)]--;
+            if(Arrays.equals(cnt1, cnt2)) return true;
+        }
+        return false;
     }
 }
