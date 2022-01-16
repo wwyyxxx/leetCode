@@ -22,7 +22,7 @@ import bean.*;
 public class Solution {
 
     public static void main(String[] args) {
-        System.out.println(new Solution().findAnagrams("cbaebabacd","abc"));
+        System.out.println(new Solution().lengthOfLongestSubstring1("abba"));
     }
 
 
@@ -1774,5 +1774,18 @@ public class Solution {
             if(Arrays.equals(cnt1, cnt2)) res.add(i-m+1);
         }
         return res;
+    }
+
+    //不含重复字符的最长子字符串 pwwkew
+    public int lengthOfLongestSubstring1(String s) {
+        int ans = 0,temp = 0;
+        Map<Character,Integer> map = new HashMap<>();
+        for (int i = 0; i < s.length(); i++) {
+            int l = map.getOrDefault(s.charAt(i),-1);
+            map.put(s.charAt(i),i);
+            temp = temp < i - l ? temp+1 : i-l;
+            ans = Math.max(ans,temp);
+        }
+        return ans == 0 ? s.length() : ans;
     }
 }
