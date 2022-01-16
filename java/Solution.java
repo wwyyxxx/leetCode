@@ -22,7 +22,7 @@ import bean.*;
 public class Solution {
 
     public static void main(String[] args) {
-        System.out.println(new Solution().checkInclusion("adc","dcda"));
+        System.out.println(new Solution().findAnagrams("cbaebabacd","abc"));
     }
 
 
@@ -1755,5 +1755,24 @@ public class Solution {
             if(Arrays.equals(cnt1, cnt2)) return true;
         }
         return false;
+    }
+
+    //字符串中的所有变位词
+    public List<Integer> findAnagrams(String s, String p) {
+        List<Integer> res = new ArrayList<>();
+        int n = s.length(),m = p.length();
+        int[] cnt1 = new int[26], cnt2 = new int[26];
+        if(n<m) return res;
+        for (int i = 0; i < m; i++) {
+            cnt1[s.charAt(i) - 'a']++;
+            cnt2[p.charAt(i) - 'a']++;
+        }
+        if(Arrays.equals(cnt1, cnt2)) res.add(0);
+        for (int i = m; i < n; i++) {
+            cnt1[s.charAt(i) - 'a']++;
+            cnt1[s.charAt(i-m) - 'a']--;
+            if(Arrays.equals(cnt1, cnt2)) res.add(i-m+1);
+        }
+        return res;
     }
 }
