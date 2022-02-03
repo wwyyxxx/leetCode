@@ -3,7 +3,7 @@ import java.util.*;
 /*
  * @Author: Tungbo
  * @Date: 2021-09-03 15:09:15
- * @LastEditTime: 2021-09-24 14:39:50
+ * @LastEditTime: 2021-12-14 16:18:38
  * @LastEditors: Tungbo
  * @Description: leecode: 
  */
@@ -20,7 +20,7 @@ public class TestUtil {
         // Solution.strToInt("-91283472332");
         // List<String> s = Arrays.asList("[1,2,3,null,null,4,5]");
         // System.out.println(s);
-        System.out.println(Solution.reversePairs(new int[]{7,5,6,4}));
+        System.out.println(Solution.addBinary("11","10"));
     }
 }
 /*
