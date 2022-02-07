@@ -1547,6 +1547,7 @@ public class Solution {
     }
 
     // 回文子串 0 0 1 0 1 | 0 0 1 2 0 1 2
+    // 0 0  0 1  1 1  1 2  2 2  2 3
     public int countSubstrings(String s) {
         int ans = 0;
         for (int center = 0; center < 2*s.length()-1; center++) {
@@ -1821,6 +1822,72 @@ public class Solution {
             if(s.charAt(l)!= s.charAt(r)) return false;
             l++;
             r--;
+        }
+        return true;
+    }
+
+    public int countSubstrings1(String s) {
+        int count = 0;
+        int n = s.length() * 2 -1;
+        for (int i = 0; i < n; i++) {
+            int left = i / 2;
+            int right = left + i % 2;
+            while(left >=0 && right<s.length() && s.charAt(left) == s.charAt(right)) {
+                count++;
+                left--;
+                right++;
+            }
+        }
+        return count;
+    }
+
+    public ListNode getIntersectionNode1(ListNode headA, ListNode headB) {
+        ListNode curA = headA;
+        ListNode curB = headB;
+        while(curA != null) {
+            while (curB != null ) {
+                if(curA == curB) return curA;
+                curB = curB.next;
+            }
+            curA = curA.next;
+            curB = headB;
+        }
+        return null;                                                                                                                                                                                                                                                                                                                                                                                                       
+    }
+
+    public ListNode getIntersectionNode3(ListNode headA, ListNode headB) {
+        ListNode curA = headA;
+        ListNode curB = headB;
+        while(curA != curB) {
+            curA = curA == null ? curB : curA.next;
+            curB = curB == null ? curA : curB.next;
+        }
+        return curA;
+    }
+
+    public ListNode reverseList1(ListNode head) {
+        ListNode cur = head;
+        ListNode per = null;
+        while(cur != null) {
+            ListNode next = cur.next;
+            cur.next = per;
+            per = cur;
+            cur = next;
+        }
+        return per;
+    }
+
+    // 回文链表
+    public boolean isPalindromeListNode(ListNode head) {
+        Stack<Integer> stack = new Stack<>();
+        ListNode temp = head;
+        while(temp!=null) {
+            stack.add(temp.val);
+            temp = temp.next;
+        }
+        while(head!=null){
+            if(head.val != stack.pop()) return false;
+            head = head.next;
         }
         return true;
     }
