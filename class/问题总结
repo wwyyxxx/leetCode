@@ -1,16 +1,16 @@
 Android面试题整理
 
-View：
+View:
 MeasureSpec 和LayoutParams关系
-    View在测量的时候,系统会将LayoutParams在父容器的约束下转换成对应的MeasureSpec，,然后根据这个MeasureSpec来确定View测量之后的高和宽
+    View在测量的时候,系统会将LayoutParams在父容器的约束下转换成对应的MeasureSpec,然后根据这个MeasureSpec来确定View测量之后的高和宽
     DecorView的MeasureSpec是由窗口的尺寸和DecorView其自身的LayoutParams来共同决定的.
     普通View的MeasureSpec是由父容器的MeasureSpec和普通View自身的LayoutParams来共同决定的.
 
-MeasureSpec是什么？ 
-    MeasureSpec是View中的内部类，基本都是二进制运算。由于int是32位的，用高两位表示mode，低30位表示size，MODE_SHIFT = 30的作用是移位
-        UNSPECIFIED：不对View大小做限制，系统使用
-        EXACTLY：确切的大小
-        AT_MOST：大小不可超过某数值
+MeasureSpec是什么? 
+    MeasureSpec是View中的内部类,基本都是二进制运算。由于int是32位的,用高两位表示mode,低30位表示size,MODE_SHIFT = 30的作用是移位
+        UNSPECIFIED:不对View大小做限制,系统使用
+        EXACTLY:确切的大小
+        AT_MOST:大小不可超过某数值
 
 MeasureSpec创建规则
     UNSPECIFIED
@@ -32,16 +32,16 @@ getMeasureWidth与getWidth的区别
 
 点击事件:
 move--处理事件
-1.先看是否拦截后自己处理（即不分发下去）
-2.分发下去：
+1.先看是否拦截后自己处理(即不分发下去)
+2.分发下去:
 	直接由down事件确定的view处理
 
 recycleView:
-    当我们使用局部刷新，payload 不为空 ，这个时候，如果 ViewHolder 需要更新，它的 更新标识 的确会被加入，但是同时canReuseUpdatedViewHolder() 也会返回 true ，所以，这个时候 ViewHolder 不会被添加到 mChangedScrap 集合中，而是加入 mAttachedScrap 集合中，。
-所以，当你使用局部刷新时，前后都是同一个 ViewHolder ，如果位置没有变化，就不会执行动画效果；而当你不使用局部刷新时，使用的不是同一个 ViewHolder ，不管位置是否变化，都会执行相关动画，所以你看到的 itemView 会闪烁一下。当我们多次调用 notifyItemChange() 方法时，也不会多次触发 requestLayout() 和回调 bindViewHolder()
+    当我们使用局部刷新,payload 不为空 ,这个时候,如果 ViewHolder 需要更新,它的 更新标识 的确会被加入,但是同时canReuseUpdatedViewHolder() 也会返回 true ,所以,这个时候 ViewHolder 不会被添加到 mChangedScrap 集合中,而是加入 mAttachedScrap 集合中,。
+所以,当你使用局部刷新时,前后都是同一个 ViewHolder ,如果位置没有变化,就不会执行动画效果;而当你不使用局部刷新时,使用的不是同一个 ViewHolder ,不管位置是否变化,都会执行相关动画,所以你看到的 itemView 会闪烁一下。当我们多次调用 notifyItemChange() 方法时,也不会多次触发 requestLayout() 和回调 bindViewHolder()
 
-复用：从集合中去获取
-怎么从集合中去获取：tryGetViewHolderForPositionByDeadline，分几种情况去获取ViewHolder
+复用:从集合中去获取
+怎么从集合中去获取:tryGetViewHolderForPositionByDeadline,分几种情况去获取ViewHolder
     1. getChangedScrapViewForPosition -- mChangeScrap 与动画相关
     2. getScrapOrHiddenOrCachedHolderForPosition  -- mAttachedScrap 、mCachedViews 
     3. getScrapOrCachedViewForId  -- mAttachedScrap 、mCachedViews (ViewType,itemid)
@@ -50,56 +50,56 @@ recycleView:
 
 ViewHolder -- 包装View的 --- ItemView
 
-当没有缓存的时候？？--- mAdapter.createViewHolder --》 onCreateViewHolder
+当没有缓存的时候??--- mAdapter.createViewHolder --》 onCreateViewHolder
 
 多级缓存的目的 -- 为了性能
 
-创建ViewHolder 后 绑定： tryBindViewHolderByDeadline--》 mAdapter.bindViewHolder--》onBindViewHolder
+创建ViewHolder 后 绑定: tryBindViewHolderByDeadline--》 mAdapter.bindViewHolder--》onBindViewHolder
 
-回收（缓存）机制：看这一个情况--- viewHolder
+回收(缓存)机制:看这一个情况--- viewHolder
 
 去查找缓存和复用的一种情况:
-    入口：复用：RecyclerView.onLayout --> dispatchLayout --》 dispatchLayoutStep2 --》 onLayoutChildren --》 fill
-    缓存：fill -->recycleByLayoutState-->recycleViewsFromStart --> recycleChildren
+    入口:复用:RecyclerView.onLayout --> dispatchLayout --》 dispatchLayoutStep2 --》 onLayoutChildren --》 fill
+    缓存:fill -->recycleByLayoutState-->recycleViewsFromStart --> recycleChildren
     --> removeAndRecycleViewAt --> recycler.recycleView 
     --> recycler.recycleViewHolderInternal(viewHolder); -- 处理 CacheView 、RecyclerViewPool 的缓存
 
 
 Handler:
-Handler通过sendMessage()将Message发送到MessageQueue中，这是存消息的过程；
-Looper通过调用MessageQueue的next()方法取出Message对象，由于这是一个时间优先级的队列，所以会取到队头的Message，然后拿当前时间去跟它的执行时间，也就是when参数去对比，如果时间还没到，就先不会执行；
+Handler通过sendMessage()将Message发送到MessageQueue中,这是存消息的过程;
+Looper通过调用MessageQueue的next()方法取出Message对象,由于这是一个时间优先级的队列,所以会取到队头的Message,然后拿当前时间去跟它的执行时间,也就是when参数去对比,如果时间还没到,就先不会执行;
 
-1：一个线程有几个 Handler？
+1:一个线程有几个 Handler?
     多个
 
-2：一个线程有几个 Looper？如何保证？
-    一个，sThreadLocal.set(new Looper(quitAllowed))
-    ThreadLocal:一个线程内部的数据存储类，通过它可以在指定的线程中存储数据，数据存储之后，只有在指定线程中可以获取到存储的数据，对于其他的线程来说则无法获取到数据
+2:一个线程有几个 Looper?如何保证?
+    一个,sThreadLocal.set(new Looper(quitAllowed))
+    ThreadLocal:一个线程内部的数据存储类,通过它可以在指定的线程中存储数据,数据存储之后,只有在指定线程中可以获取到存储的数据,对于其他的线程来说则无法获取到数据
 
-3：Handler内存泄漏原因？ 为什么其他的内部类没有说过有这个问题？
+3:Handler内存泄漏原因? 为什么其他的内部类没有说过有这个问题?
     内部类持有外部的引用。
-    因此Message持有Handler的引用，Handler又持有Activity的引用，所以在Message处理完之前，如果Activity被销毁了，就会造成内存泄漏。
-4：为何主线程可以new Handler？如果想要在子线程中new Handler 要做些什么准备？
-    因为在ActivityThread中的main()已经对Looper进行了prepar()操作，所以可以直接在主线程new Handler。
-    如果想在子线程中new Handler，则需要先手动调用Looper的prepare()方法初始化Looper，再调用Looper的loop()方法使Looper运转。
+    因此Message持有Handler的引用,Handler又持有Activity的引用,所以在Message处理完之前,如果Activity被销毁了,就会造成内存泄漏。
+4:为何主线程可以new Handler?如果想要在子线程中new Handler 要做些什么准备?
+    因为在ActivityThread中的main()已经对Looper进行了prepar()操作,所以可以直接在主线程new Handler。
+    如果想在子线程中new Handler,则需要先手动调用Looper的prepare()方法初始化Looper,再调用Looper的loop()方法使Looper运转。
 
-5：子线程中维护的Looper，消息队列无消息的时候的处理方案是什么？有什么用？
-    如果不处理的话，会阻塞线程，处理方案是调用Looper的quitSafely()；
-    这个方法会调用MessageQueue的quit()方法，清空所有的Message，并调用nativeWake()方法唤醒之前被阻塞的nativePollOnce()，使得方法next()方法中的for循环继续执行，接下来发现Message为null后就会结束循环，Looper结束。如此便可以释放内存和线程。
+5:子线程中维护的Looper,消息队列无消息的时候的处理方案是什么?有什么用?
+    如果不处理的话,会阻塞线程,处理方案是调用Looper的quitSafely();
+    这个方法会调用MessageQueue的quit()方法,清空所有的Message,并调用nativeWake()方法唤醒之前被阻塞的nativePollOnce(),使得方法next()方法中的for循环继续执行,接下来发现Message为null后就会结束循环,Looper结束。如此便可以释放内存和线程。
 
-6：既然可以存在多个 Handler 往 MessageQueue 中添加数据（发消息时各个Handler可能处于不同线程），那它内部是如何确保线程安全的？
-    添加消息的方法enqueueMessage()中有synchronize修饰，取消息的方法next()中也有synchronize修饰。
-    由于上述的加锁操作，所以时间不能保证完全准确。
-7：我们使用 Message 时应该如何创建它？
-    使用Message的obtain()方法创建，直接new出来容易造成内存抖动。
-    内存抖动是由于频繁new对象，gc频繁回收导致，而且由于可能被别的地方持有导致无法及时回收所以会导致内存占用越来越高。
-    使用obtain()对内存复用，可以避免内存抖动的发生。其内部维护了一个Message池，其是一个链表结构，当调用obtain()的时候会复用表头的Message，然后会指向下一个。如果表头没有可复用的message则会创建一个新的对象，这个对象池的最大长度是50。
+6:既然可以存在多个 Handler 往 MessageQueue 中添加数据(发消息时各个Handler可能处于不同线程),那它内部是如何确保线程安全的?
+    添加消息的方法enqueueMessage()中有synchronize修饰,取消息的方法next()中也有synchronize修饰。
+    由于上述的加锁操作,所以时间不能保证完全准确。
+7:我们使用 Message 时应该如何创建它?
+    使用Message的obtain()方法创建,直接new出来容易造成内存抖动。
+    内存抖动是由于频繁new对象,gc频繁回收导致,而且由于可能被别的地方持有导致无法及时回收所以会导致内存占用越来越高。
+    使用obtain()对内存复用,可以避免内存抖动的发生。其内部维护了一个Message池,其是一个链表结构,当调用obtain()的时候会复用表头的Message,然后会指向下一个。如果表头没有可复用的message则会创建一个新的对象,这个对象池的最大长度是50。
 
-8：Looper死循环为什么不会导致应用卡死?
-    卡死就是ANR，产生的原因有2个：
-    1、在5s内没有响应输入的事件(例如按键，触摸等)，2、BroadcastReceiver在10s内没有执行完毕。
-    事实上我们所有的Activity和Service都是运行在loop()函数中，以消息的方式存在，所以在没有消息产生的时候，looper会被block(阻塞)，主线程会进入休眠，一旦有输入事件或者Looper添加消息的操作后主线程就会被唤醒，从而对事件进行响应，所以不会导致ANR
-    简单来说looper的阻塞表明没有事件输入，而ANR是由于有事件没响应导致，所以looper的死循环并不会导致应用卡死。
+8:Looper死循环为什么不会导致应用卡死?
+    卡死就是ANR,产生的原因有2个:
+    1、在5s内没有响应输入的事件(例如按键,触摸等),2、BroadcastReceiver在10s内没有执行完毕。
+    事实上我们所有的Activity和Service都是运行在loop()函数中,以消息的方式存在,所以在没有消息产生的时候,looper会被block(阻塞),主线程会进入休眠,一旦有输入事件或者Looper添加消息的操作后主线程就会被唤醒,从而对事件进行响应,所以不会导致ANR
+    简单来说looper的阻塞表明没有事件输入,而ANR是由于有事件没响应导致,所以looper的死循环并不会导致应用卡死。
 
 
 Crash监控:
@@ -107,24 +107,24 @@ Crash监控:
         会走UncaughtExceptionHandler.uncaughtException
         Thread.setDefaultUncaughtExceptionHandler 该方法来设置线程的默认异常处理器.
     NDK Crash
-        一类crash信号，在程序接收到此类信号时，缺省操作是将崩溃的现场信息记录到核心文件，然后终止进程。
+        一类crash信号,在程序接收到此类信号时,缺省操作是将崩溃的现场信息记录到核心文件,然后终止进程。
             SIGSEGV 内存引用无效。
             SIGBUS 访问内存对象的未定义部分。
-            SIGFPE 算术运算错误，除以零。
-            SIGILL 非法指令，如执行垃圾或特权指令
+            SIGFPE 算术运算错误,除以零。
+            SIGILL 非法指令,如执行垃圾或特权指令
             SIGSYS 糟糕的系统调用
             SIGXCPU 超过CPU时间限制。
             SIGXFSZ 文件大小限制。 
 
-框架源码：
+框架源码:
 Glid: 
-    with: 获取requestManager （onStart/onStop/onDestroy）
+    with: 获取requestManager (onStart/onStop/onDestroy)
          getRetriever(activity)[Glide.get(context)] .get(activity)[作用域处理]
             Application:
-            a: Application 域对应的是 applicationManager，它是与RequestManagerRetriever 对象绑定的；
-            b：在子线程调用 get(...) ，或者传入参数是 ApplicationContext & ServiceContext 时，对应的请求是Application域。
+            a: Application 域对应的是 applicationManager,它是与RequestManagerRetriever 对象绑定的;
+            b:在子线程调用 get(...) ,或者传入参数是 ApplicationContext & ServiceContext 时,对应的请求是Application域。
             Fragment/../.:
-            1.supportFragmentGet()->从FragmentManager中获取SupportRequestManagerFragment,获取RequestManager,初次获取实例化，再则从中读取
+            1.supportFragmentGet()->从FragmentManager中获取SupportRequestManagerFragment,获取RequestManager,初次获取实例化,再则从中读取
                 SupportRequestManagerFragment:
                     a.findFragmentByTag(FRAGMENT_TAG)
                     b.pendingRequestManagerFragments.get(fm) 临时记录
@@ -132,60 +132,60 @@ Glid:
                         1.创建对象
                         2.pendingRequestManagerFragments.set(fm) 临时记录
                         3.Fragment提交事务
-                        4.post一个消息（ID_REMOVE_FRAGMENT_MANAGER） 移除pendingRequestManagerFragments临时记录。commitAllowingStateLoss()异步，防止重复创建
-                SupportRequestManagerFragment创建含有一个Lifecycled对象，requestManager实例化时传入。当 Fragment 的生命周期变化时，就是通过这个Lifecycle对象将事件分发到RequestManager
+                        4.post一个消息(ID_REMOVE_FRAGMENT_MANAGER) 移除pendingRequestManagerFragments临时记录。commitAllowingStateLoss()异步,防止重复创建
+                SupportRequestManagerFragment创建含有一个Lifecycled对象,requestManager实例化时传入。当 Fragment 的生命周期变化时,就是通过这个Lifecycle对象将事件分发到RequestManager
 
         1.创建一个Fragment,通过ActivityFragmentLifecycle接口监听生命周期做相应的操作。
-        （以确保优先处理前台可见的Activity/Fragment，提高资源利用率，在有必要时释放资源以避免在应用在后台时被杀死，提高稳定性）
-        2.生命周期作用域（application，activity/fragment）
-            application：子线程、serverContent、application
+        (以确保优先处理前台可见的Activity/Fragment,提高资源利用率,在有必要时释放资源以避免在应用在后台时被杀死,提高稳定性)
+        2.生命周期作用域(application,activity/fragment)
+            application:子线程、serverContent、application
     
-    load: RequestBuilder这是一个通用请求构建类，可以处理通用资源类型的设置选项和启动负载
+    load: RequestBuilder这是一个通用请求构建类,可以处理通用资源类型的设置选项和启动负载
 
     into: ViewTarget
-        1.获取getScaleType clone配置 克隆（原型设计模式）
+        1.获取getScaleType clone配置 克隆(原型设计模式)
         2.into重载获取ImageViewTarget
             glideContext.buildImageViewTarget -> imageViewTargetFactory.buildTarget (工厂模式) -> DrawableImageViewTarget/BitmapImageViewTarget
-                DrawableImageViewTarget继承ImageViewTarget重写的setResource函数，显示Drawable图片
+                DrawableImageViewTarget继承ImageViewTarget重写的setResource函数,显示Drawable图片
         3.重载的into: 为Target构建request请求 -> RequestManager执行请求
             构建request: SingleRequest.obtain(...)
             RequestManager执行(synchronized): requestTracker.runRequest(request)
         ->request.begin() ->大小准备好 [onSizeReady() -> engine.load()]
         ->engine.load():
-            1.获取请求key (宽高，类型，配置等)
+            1.获取请求key (宽高,类型,配置等)
             2.检查ActiveResources -> LruResourceCache
             3.检查job缓存
             4.否则EngineJob.start开启一个新的请求任务执行
         ->EngineJob.start: 获取线程池 执行任务
-            a.是否配置资源缓存策略，否则只能从缓存中获取(ResourceCacheGenerator/DataCacheGenerator)
+            a.是否配置资源缓存策略,否则只能从缓存中获取(ResourceCacheGenerator/DataCacheGenerator)
             b.SourceGenerator()
                 获取loadData   ->buildLoadData(含有HttpUrlFetcher)
                 ->loadData: loadDataWithRedirects()取得InputStream
                 ->loadDataWithRedirects: HttpURLConnection作Glide底层网络请求,返回一个输入流后通过onDataReady回调出去
             C.decodeFromData(): 先构建LoadPath, 然后创建InputStreamRewinder类型的DataRewinder, 最终将数据解析的操作放到了LoadPath.load方法中
-                1.deResource 将源数据解析成资源（源数据: InputStream， 中间产物:Bitmap）
+                1.deResource 将源数据解析成资源(源数据: InputStream, 中间产物:Bitmap)
                 2.调用 DecodeCallback.onResourceDecoded 处理资源
                     a.对资源进行了转换操作。比如 Fit_Center,CenterCrop, 在请求的时候配置
                     b.构建磁盘缓存的key
-                3.调用 ResourceTranscoder.transcode 将资源转为目标资源（目标资源类型: Drawable）
+                3.调用 ResourceTranscoder.transcode 将资源转为目标资源(目标资源类型: Drawable)
             d.notifyEncodeAndRelease:
                 1.notifyComplete() 通知调用层数据已经装备好了
                 2.deferredEncodeManager.encode 将资源磁盘缓存 (如果配置了)
-                3.onEncodeComplete（） 完成
+                3.onEncodeComplete() 完成
         ->EngineJob.onResourceReady:通知上层任务完成,回调ImageViewTarget用于展示数据。
 
-    缓存： 先判断是否使用
-        活动缓存    ->    LRU内存缓存（弱应用）     ->    LRU磁盘缓存
-        1.活动缓存中获取：  （）
-        2.内存缓存获取：添加到活动缓存，清理缓存数据
-        3.网络获取：储存到内存缓存，展示数据
+    缓存: 先判断是否使用
+        活动缓存    ->    LRU内存缓存(弱应用)     ->    LRU磁盘缓存
+        1.活动缓存中获取:  ()
+        2.内存缓存获取:添加到活动缓存,清理缓存数据
+        3.网络获取:储存到内存缓存,展示数据
 
-        磁盘缓存：
-            内存缓存获取不到开启线程读取->根据Key去获取磁盘文件，存储
+        磁盘缓存:
+            内存缓存获取不到开启线程读取->根据Key去获取磁盘文件,存储
 
-OKHttp：（建造者模式、门面模式）
-    分发器：内部维护队列与线程池，完成请求调配
-    拦截器：五大默认拦截器完成整个请求过程。
+OKHttp:(建造者模式、门面模式)
+    分发器:内部维护队列与线程池,完成请求调配
+    拦截器:五大默认拦截器完成整个请求过程。
 
     okhttpClient(build):
     request(build):
@@ -193,57 +193,61 @@ OKHttp：（建造者模式、门面模式）
         execute(同步):
             分发器:仅作记录
         enqueue(异步):
-            分发器（无等待，最大并发）: 正在执行的任务未超过最大限制64，且同一Host的请求不超过5个，则会添加到正在执行队列，同时提交给线程池。否则先加入等待队列。
-                执行完成之后（无任务执行闲置任务），从running移除，再次执行判断移入ready。线程池（核心线程:0,最大线程:Integer.MAX_VALUE,线程等待队列:SynchronousQueue）
+            分发器(无等待,最大并发): 正在执行的任务未超过最大限制64,且同一Host的请求不超过5个,则会添加到正在执行队列,同时提交给线程池。否则先加入等待队列。
+                执行完成之后(无任务执行闲置任务),从running移除,再次执行判断移入ready。线程池(核心线程:0,最大线程:Integer.MAX_VALUE,线程等待队列:SynchronousQueue)
             
-    拦截器： 责任链模式
+    拦截器: 责任链模式
         自定义Interceptor (公共参数/鉴权)
-        1.RetryAndFollowUpInterceptor：重试拦截器在交出之前，负责判断用户是否取消了请求；在获得了结果之后，会根据响应码判断是否需要重定向，如果满足条件那么就会重启执行所有拦截器
-        2.BridgeInterceptor：桥接拦截器在交出之前，负责将HTTP协议必备的请求头加入其中(如：Host)并添加一些默认的行为(如：GZIP压缩)；在获得了结果后，调用保存cookie接口并解析GZIP数据
-        3.CacheInterceptor：缓存拦截器顾名思义，交出之前读取并判断是否使用缓存；获得结果后判断是否缓存。
-        4.ConnectInterceptor：连接拦截器在交出之前，负责找到或者新建一个连接，并获得对应的socket流；在获得结果后不进行额外的处理
-        5.CallServerInterceptor：请求服务器拦截器进行真正的与服务器的通信，向服务器发送数据，解析读取的响应数据。
+        1.RetryAndFollowUpInterceptor:重试拦截器在交出之前,负责判断用户是否取消了请求;在获得了结果之后,会根据响应码判断是否需要重定向,如果满足条件那么就会重启执行所有拦截器
+        2.BridgeInterceptor:桥接拦截器在交出之前,负责将HTTP协议必备的请求头加入其中(如:Host)并添加一些默认的行为(如:GZIP压缩);在获得了结果后,调用保存cookie接口并解析GZIP数据
+        3.CacheInterceptor:缓存拦截器顾名思义,交出之前读取并判断是否使用缓存;获得结果后判断是否缓存。
+        4.ConnectInterceptor:连接拦截器在交出之前,负责找到或者新建一个连接,并获得对应的socket流;在获得结果后不进行额外的处理
+        5.CallServerInterceptor:请求服务器拦截器进行真正的与服务器的通信,向服务器发送数据,解析读取的响应数据。
         自定义netInterceptor (HttpLoggingInterceptor 日志输出)
 
 Retrofit: 对网络请求的封装 okhttp
-    create函数内部使用了动态代理来创建接口对象，这样的设计可以让所有的访问请求都被代理
-    设计模式：
-        1）建造者模式：Retrofit实例使用建造者模式通过Builder类构建。当构造函数的参数大于4个，且存在可选参数的时候既可以使用 建造者设计模式
-        2）工厂方法设计：Retrofit创建时的callFactory，使用工厂方法设计模式，但是似乎并不打算支持其他的工厂。
-        3）外观模式：整个retrofit 采用的时外观模式。统一的调用创建网络请求接口实例和网络请求参数配置的方法
-        4）动态代理：retrofit里面使用了动态代理来创建网络请求接口实例，这个是retrofit对用户使用来说最大的复用，其它的代码都是为了支撑这个动态代理给用户带来便捷性的
-        5）策略模式：使用了策略模式对serviceMethod对象进行网络请求参数配置，即通过解析网络请求接口方法的参数、返回值和注解类型，从Retrofit对象中获取对应的网络的url地址、网络请求执行器、网络请求适配器和数据转换器
-        6）装饰者模式：ExecuteCallBack 使用装饰者模式来封装callbackExecutor，用于完成线程的切换
-        7）静态代理(委托)、门面模式：ExecutorCallbackCall 使用静态代理(委托) 代理了Call进行网络请求，真正的网络请求由okhttpCall执行，然而okHttpCall不是自己执行，它是okhttp 提供call给 外界（retrofit）使用的唯一门户，其实这个地方就是门面模式
-        8）适配器模式；ExecutorCallbackCall 的被初始化是在 ExecutorCallAdapterFactory里面通过适配器模式被创建的。CallAdapter采用了适配器模式 为创建访问Call接口提供服务。默认不添加Rxjava则使用默认的ExecutorCallAdapterFactory 将okhttp3.call转变成为 retroift中的call，如果有Rxjava则将okhttp3.call转化为abservable。
+    create函数内部使用了动态代理来创建接口对象,这样的设计可以让所有的访问请求都被代理
+    设计模式:
+        1)建造者模式:Retrofit实例使用建造者模式通过Builder类构建。当构造函数的参数大于4个,且存在可选参数的时候既可以使用 建造者设计模式
+        2)工厂方法设计:Retrofit创建时的callFactory,使用工厂方法设计模式,但是似乎并不打算支持其他的工厂。
+        3)外观模式:整个retrofit 采用的时外观模式。统一的调用创建网络请求接口实例和网络请求参数配置的方法
+        4)动态代理:retrofit里面使用了动态代理来创建网络请求接口实例,这个是retrofit对用户使用来说最大的复用,其它的代码都是为了支撑这个动态代理给用户带来便捷性的
+        5)策略模式:使用了策略模式对serviceMethod对象进行网络请求参数配置,即通过解析网络请求接口方法的参数、返回值和注解类型,从Retrofit对象中获取对应的网络的url地址、网络请求执行器、网络请求适配器和数据转换器
+        6)装饰者模式:ExecuteCallBack 使用装饰者模式来封装callbackExecutor,用于完成线程的切换
+        7)静态代理(委托)、门面模式:ExecutorCallbackCall 使用静态代理(委托) 代理了Call进行网络请求,真正的网络请求由okhttpCall执行,然而okHttpCall不是自己执行,它是okhttp 提供call给 外界(retrofit)使用的唯一门户,其实这个地方就是门面模式
+        8)适配器模式;ExecutorCallbackCall 的被初始化是在 ExecutorCallAdapterFactory里面通过适配器模式被创建的。CallAdapter采用了适配器模式 为创建访问Call接口提供服务。默认不添加Rxjava则使用默认的ExecutorCallAdapterFactory 将okhttp3.call转变成为 retroift中的call,如果有Rxjava则将okhttp3.call转化为abservable。
 
-性能优化：
-    OOM与内存优化：
+性能优化:
+    OOM与内存优化:
         分 java heapsize 和 native heapsize
             native层内存申请不受其限制, native 层受 native process 对内存大小的限制
 
-        回收算法：标记清除算法、复制算法、标记整理算法
+        回收算法:标记清除算法、复制算法、标记整理算法
 
         Young Generation(Eden区和两个Survivor区)        Old Generation       Permanent Generation
         - 1、对象创建后在Eden区。
-        - 2、执行GC后，如果对象仍然存活，则复制到S0区。
-        - 3、当S0区满时，该区域存活对象将复制到S1区，然后S0清空，接下来S0和S1角色互换。
-        - 4、当第3步达到一定次数（系统版本不同会有差异）后，存活对象将被复制到Old Generation。
-        - 5、当这个对象在Old Generation区域停留的时间达到一定程度时，它会被移动到Old Generation，最后累积一定时间再移动到Permanent Generation区域。
+        - 2、执行GC后,如果对象仍然存活,则复制到S0区。
+        - 3、当S0区满时,该区域存活对象将复制到S1区,然后S0清空,接下来S0和S1角色互换。
+        - 4、当第3步达到一定次数(系统版本不同会有差异)后,存活对象将被复制到Old Generation。
+        - 5、当这个对象在Old Generation区域停留的时间达到一定程度时,它会被移动到Old Generation,最后累积一定时间再移动到Permanent Generation区域。
 
         Android低内存杀进程机制:
-            Anroid基于进程中运行的组件及其状态规定了默认的五个回收优先级：
+            Anroid基于进程中运行的组件及其状态规定了默认的五个回收优先级:
             - Empty process(空进程)
             - Background process(后台进程)
             - Service process(服务进程)
             - Visible process(可见进程)
             - Foreground process(前台进程)
-            系统需要进行内存回收时最先回收空进程,然后是后台进程，以此类推最后才会回收前台进程（一般情况下前台进程就是与用户交互的进程了,如果连前台进程都需要回收那么此时系统几乎不可用了）。
+            系统需要进行内存回收时最先回收空进程,然后是后台进程,以此类推最后才会回收前台进程(一般情况下前台进程就是与用户交互的进程了,如果连前台进程都需要回收那么此时系统几乎不可用了)。
 
         Bitmap: Bitmap内存占用 ≈ 像素数据总大小 = 图片宽 × 图片高× (设备分辨率/资源目录分辨率)^2 × 每个像素的字节大小
-            BitmapFactory.decodeResource 加载的图片可能会经过缩放，该缩放目前是放在 java 层做的，效率比较低，而且需要消耗 java 层的内存。
-            BitmapFactory.decodeStream 不会对所加载的图片进行缩放，相比之下占用内存少，效率更高。
-            如果对性能要求不高，且需要 Android 自带的图片自适应缩放功能，则可以使用decodeResource。
+            BitmapFactory.decodeResource 加载的图片可能会经过缩放,该缩放目前是放在 java 层做的,效率比较低,而且需要消耗 java 层的内存。
+            BitmapFactory.decodeStream 不会对所加载的图片进行缩放,相比之下占用内存少,效率更高。
+            如果对性能要求不高,且需要 Android 自带的图片自适应缩放功能,则可以使用decodeResource。
+            
+            bitmap.compress压缩
+            bitmap.inSplenSize尺寸
+            option.injustBund 获取大小,占小内存
 
             2.3-       3.0-4.4       5.0-7.1               8.0
             Bitmap对象 java Heap    java Heap             java Heap
@@ -251,63 +255,63 @@ Retrofit: 对网络请求的封装 okhttp
             迁移原因      -     解决Native Bitmap内存泄露   共享整个系统的内存减少OOM
             
         ReferenceQueue: 
-            通常我们将其ReferenceQueue翻译为引用队列，换言之就是存放引用的队列，保存的是Reference对象。其作用在于Reference对象所引用的对象被GC回收时，该Reference对象将会被加入引用队列中（ReferenceQueue）的队列末尾。
+            通常我们将其ReferenceQueue翻译为引用队列,换言之就是存放引用的队列,保存的是Reference对象。其作用在于Reference对象所引用的对象被GC回收时,该Reference对象将会被加入引用队列中(ReferenceQueue)的队列末尾。
     
-    启动：
-        1.点击桌面App图标，Launcher进程采用Binder IPC向system_server进程发起startActivity请求；
-        2.system_server进程接收到请求后，向zygote进程发送创建进程的请求；
-        3.Zygote进程fork出新的子进程，即App进程；
-        4.App进程，通过Binder IPC向sytem_server进程发起attachApplication请求；
-        5.system_server进程在收到请求后，进行一系列准备工作后，再通过binder IPC向App进程发送scheduleLaunchActivity请求；
-        6.App进程的binder线程（ApplicationThread）在收到请求后，通过handler向主线程发送LAUNCH_ACTIVITY消息；
-        7.主线程在收到Message后，通过反射机制创建目标Activity，并回调Activity.onCreate()等方法。
-        8.到此，App便正式启动，开始进入Activity生命周期，执行完onCreate/onStart/onResume方法，UI渲染结束后便可以看到App的主界面。
+    启动:
+        1.点击桌面App图标,Launcher进程采用Binder IPC向system_server进程发起startActivity请求;
+        2.system_server进程接收到请求后,向zygote进程发送创建进程的请求;
+        3.Zygote进程fork出新的子进程,即App进程;
+        4.App进程,通过Binder IPC向sytem_server进程发起attachApplication请求;
+        5.system_server进程在收到请求后,进行一系列准备工作后,再通过binder IPC向App进程发送scheduleLaunchActivity请求;
+        6.App进程的binder线程(ApplicationThread)在收到请求后,通过handler向主线程发送LAUNCH_ACTIVITY消息;
+        7.主线程在收到Message后,通过反射机制创建目标Activity,并回调Activity.onCreate()等方法。
+        8.到此,App便正式启动,开始进入Activity生命周期,执行完onCreate/onStart/onResume方法,UI渲染结束后便可以看到App的主界面。
 
         1). 合理的使用异步初始化、延迟初始化、懒加载机制。
-        2). 启动过程避免耗时操作，如数据库 I/O操作不要放在主线程执行。
-        3). 类加载优化：提前异步执行类加载。
+        2). 启动过程避免耗时操作,如数据库 I/O操作不要放在主线程执行。
+        3). 类加载优化:提前异步执行类加载。
         4). 合理使用IdleHandler进行延迟初始化。
         5). 简化布局
 
-    布局优化：
+    布局优化:
         1.消除层级减少计算次数
         2.标签使用
-            Include ：为了解决重复定义相同布局的 （findViewById查找不到目标控件）
-            ViewStub：宽高都为0的一个View，默认是不可见，setVisibility/Inflate
+            Include :为了解决重复定义相同布局的 (findViewById查找不到目标控件)
+            ViewStub:宽高都为0的一个View,默认是不可见,setVisibility/Inflate
             Merge: 有助于消除视图层次结构中的冗余视图,直接将其中的子元素添加到merge标签parent中
         3.解决过度绘制问题
             1.移除布局中不需要的背景
             2.使视图层次结构扁平化。
             3.降低透明度
-                对于不透明的view ，只需要渲染一次即可把它显示出来。但是如果这个 view 设置了alpha值，则至少需要渲染两次。
-                这是因为使用了 alpha 的 view 需要先知道混合 view 的下一层元素是什么，然后再结合上层的view进行Blend混色处理。
+                对于不透明的view ,只需要渲染一次即可把它显示出来。但是如果这个 view 设置了alpha值,则至少需要渲染两次。
+                这是因为使用了 alpha 的 view 需要先知道混合 view 的下一层元素是什么,然后再结合上层的view进行Blend混色处理。
                 透明动画、淡入淡出和阴影等效果都涉及到某种透明度
 
-    电量优化：
-        网络优化：
-            直接使用 IP 地址，去除 DNS 解析步骤；
-            不要每次请求都重新建立连接，复用连接或一直使用同一条连接(长连接)；
-            压缩数据，减小传输的数据大小。（protobuf）
-        其他：
+    电量优化:
+        网络优化:
+            直接使用 IP 地址,去除 DNS 解析步骤;
+            不要每次请求都重新建立连接,复用连接或一直使用同一条连接(长连接);
+            压缩数据,减小传输的数据大小。(protobuf)
+        其他:
             1、使用webp代替png/jpg
-            2、不同网络的不同图片下发，如（对于原图是300x300的图片）：
-                2/3G使用低清晰度图片：使用100X100的图片;
-                4G再判断信号强度为强则使用使用300X300的图片，为中等则使用200x200，信号弱则使用100x100图片;
-                WiFi网络：直接下发300X300的图片
+            2、不同网络的不同图片下发,如(对于原图是300x300的图片):
+                2/3G使用低清晰度图片:使用100X100的图片;
+                4G再判断信号强度为强则使用使用300X300的图片,为中等则使用200x200,信号弱则使用100x100图片;
+                WiFi网络:直接下发300X300的图片
             3、http开启缓存 / 首页数据加入缓存
     
-    体积优化：
+    体积优化:
         1.移除未使用资源
-        2.启用资源缩减（开启shrinkResources/minifyEnabled 打包不会携带未使用资源/代码） 定义规则
-        3.使用Lint分析器（物理删除）
-        4.动态库打包配置（so库架构）
-        4.图片处理（矢量图/Tinypng）
+        2.启用资源缩减(开启shrinkResources/minifyEnabled 打包不会携带未使用资源/代码) 定义规则
+        3.使用Lint分析器(物理删除)
+        4.动态库打包配置(so库架构)
+        4.图片处理(矢量图/Tinypng)
 
-PB协议接入：
+PB协议接入:
     1.WireConverterFactory Message
 
     2.ProtoConverterFactory
 
 
-算法：
-    1.Brian Kernighan 算法的原理是：对于任意整数 xx，令 x=x~\&~(x-1)x=x & (x−1)，该运算将 xx 的二进制表示的最后一个 11 变成 00。因此，对 xx 重复该操作，直到 xx 变成 00，则操作次数即为 xx 的「一比特数」。
+算法:
+    1.Brian Kernighan 算法的原理是:对于任意整数 xx,令 x=x~\&~(x-1)x=x & (x−1),该运算将 xx 的二进制表示的最后一个 11 变成 00。因此,对 xx 重复该操作,直到 xx 变成 00,则操作次数即为 xx 的「一比特数」。
