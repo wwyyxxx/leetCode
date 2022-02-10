@@ -2,13 +2,21 @@
 参与和平营地电视台,广告sdk,全民秒开赛等项目开发
 支援和平精英,王者荣耀等电视台项目开发
 
-VES全民秒开赛
+VES全民秒开赛  2021-03-24——2021-05-14
     基于Androidx,采用mvvm架构,使用Retort、okhttp作为网络请求,Glide作为图片加载
     参与开发并上线v1.0版本。
     本人职责: 
-        游戏角色绑定业务,版本升级等需求开发 (自定义View进度条绘制,滑动冲突处理,安装)
+        QQ/微信登录、实名验证、密钥验证、游戏角色绑定业务,版本升级等需求开发
         整理Activity,Fragment等页面基类,完成各页面停留上报
         通过LeakCanary分析并处理内存泄漏问题.
+    下载安装:
+        DownloadManager系统下载,广播监听下载完成,Intent调起安装(dataType). 注意文件路径的读取(fileProvider)
+    onDraw死循环:
+        setTextColor特定情况会调用invalidate
+    Banner滑动冲突(RecyclerView):
+        getParent().requestDisallowInterceptTouchEvent(true)
+    自定义进度条:
+        重写onDraw,使用PorterDuffXfermode设置混合模式绘制覆盖文字变色
 
 
 腾讯广告——优量汇sdk  2021-01-11——2021-03-04
