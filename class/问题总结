@@ -247,7 +247,7 @@ Retrofit: 对网络请求的封装 okhttp
             
             bitmap.compress压缩
             bitmap.inSplenSize尺寸
-            option.injustBund 获取大小,占小内存
+            option.injustBund 获取大小在进行缩放,占小内存
 
             2.3-       3.0-4.4       5.0-7.1               8.0
             Bitmap对象 java Heap    java Heap             java Heap
