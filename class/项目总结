@@ -1,5 +1,5 @@
 负责云顶之弈电视台,暗区突围,使命召唤电视台版本开发。
-参与和平营地电视台,广告sdk,全民秒开赛等项目开发
+参与和平营地电视台,优量汇sdk,全民秒开赛等项目开发
 支援和平精英,王者荣耀等电视台项目开发
 
 VES全民秒开赛  2021-03-24——2021-05-14
@@ -47,14 +47,45 @@ VES全民秒开赛  2021-03-24——2021-05-14
         RenderScript处理图片模糊(图像处理、计算摄影或计算机视觉的应用)
 
 
+
 电视台sdk
     提供直播模块功能给王者荣耀,使命召唤,和平营地等项目接入。
     基于mvp架构,使用kotlin开发。
     负责云顶之弈电视台1.0版本,暗区突围电视台1.0版本,使命召唤5.0版本的需求开发及后续维护
-    使用自定义View支援和平精英,王者荣耀v62等电视台项目的UI改造;
+    使用自定义View支援和平精英,王者荣耀v62等电视台项目的UI改造
 
-和平营地电视台sdk:
+    和平精英:       勋章升级优化
+    王者荣耀:       UI3.0更新
+    QQ飞车():       bug修复
+    TK(暗夜突围): 2021/5/18 —— 2021/8/19
+        v1.0 UI调整、手势控制、全面屏适配、反馈需求、深色模式
+    JK(云顶之弈): bug处理、UI还原
+    CODM(使命召唤): 2021/6/3 —— 2021/9/16
+        v5.0、v6.0版本开发
+        拍脸浮层功能、、QQ/微信分享功能开发
+        枪匠功能:
+            自定义view:
+                included标签使用.
+                自定义描边TextView:内部初始化一个TextView,只绘制边框
+                    重写onMeasure(给予宽高)、onLayout(布局)、onDraw(绘制)、setLayoutParams()
+        //全面屏适配: setNotchHeight(NotchStatusBarUtils.getStatusBarHeight(this));
+        点播原生化:
+            手势滑动控制亮度音量:
+            弹幕库:
+        QQ/微信分享:
+            MSDK接入
+        进房引导条功能:
+            TranslateAnimation、AlphaAnimation
 
+和平营地电视台sdk: 2021-09-15
+    基于Androidx,采用mvvm架构,使用Retort、okhttp作为网络请求,Glide作为图片加载
+    v17.5 v17.8
+    功能中心、每日任务
+    内存泄露:
+        1.webView.destory()
+        2.Handler.removeCallbacksAndMessages
+        3.array.clear()
+        4.Fragment中ViewModel用viewLifecycleOwner监听 onDestroyView
 
 熟悉直播和即时通讯等业务开发,参与多个腾讯系项目。
 熟练使用Java以及kotlin,H5拥有Cordova+ionic经验;
