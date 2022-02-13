@@ -70,7 +70,8 @@ VES全民秒开赛  2021-03-24——2021-05-14
                     重写onMeasure(给予宽高)、onLayout(布局)、onDraw(绘制)、setLayoutParams()
         //全面屏适配: setNotchHeight(NotchStatusBarUtils.getStatusBarHeight(this));
         点播原生化:
-            手势滑动控制亮度音量:
+            手势滑动控制亮度音量(GestureDetector):
+                重写View的onTuch函数,给GestureDetector处理,return true. (如果是Activity dispatchTouchEvent)
             弹幕库:
         QQ/微信分享:
             MSDK接入
@@ -79,13 +80,19 @@ VES全民秒开赛  2021-03-24——2021-05-14
 
 和平营地电视台sdk: 2021-09-15
     基于Androidx,采用mvvm架构,使用Retort、okhttp作为网络请求,Glide作为图片加载
-    v17.5 v17.8
-    功能中心、每日任务
+    v17.5 v17.8 v18
+    功能中心、每日任务、红包、横屏场景
     内存泄露:
         1.webView.destory()
         2.Handler.removeCallbacksAndMessages
         3.array.clear()
         4.Fragment中ViewModel用viewLifecycleOwner监听 onDestroyView
+    Lifecycle:空白Fragment 状态机
+    LiveData:
+        post(子线程)->setValue(主线程)
+        遍历observer...判断状态机active、version
+        不停的循环遍历直到有监听绑定
+    ViewModel:
 
 熟悉直播和即时通讯等业务开发,参与多个腾讯系项目。
 熟练使用Java以及kotlin,H5拥有Cordova+ionic经验;
