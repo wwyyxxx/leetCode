@@ -22,7 +22,7 @@ import bean.*;
 public class Solution {
 
     public static void main(String[] args) {
-        System.out.println(new Solution().isAnagram("a","a"));
+        System.out.println(new Solution().groupAnagrams(new String[]{"eat","tea","tan","ate","nat","bat"}));
     }
 
 
@@ -1918,5 +1918,19 @@ public class Solution {
             }
         }
         return dp[m+1][n+1];
+    }
+
+    // 变位词组
+    public List<List<String>> groupAnagrams(String[] strs) {
+        HashMap<String,ArrayList<String>> map = new HashMap<>();
+        for(String s:strs) {
+            char[] c = s.toCharArray();
+            Arrays.sort(c);
+            String key = new String(c);
+            ArrayList<String> list = map.getOrDefault(key,new ArrayList<>());
+            list.add(s);
+            map.put(key, list);
+        }
+        return  new ArrayList<List<String>>(map.values());
     }
 }
