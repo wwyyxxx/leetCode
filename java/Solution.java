@@ -22,7 +22,11 @@ import bean.*;
 public class Solution {
 
     public static void main(String[] args) {
+<<<<<<< HEAD
         System.out.println(new Solution().fullArray("abc"));
+=======
+        System.out.println(new Solution().lengthOfLIS(new int[]{10,9,2,5,3,7,101,18}));
+>>>>>>> 91487d1f59819e8ab2eb99adb3e53529df99beef
     }
 
 
@@ -718,13 +722,24 @@ public class Solution {
     //  II. 二叉树的最近公共祖先
     public TreeNode lowestCommonAncestor2(TreeNode root, TreeNode p, TreeNode q) {
         if(root == null || root == p || root == q) return root;
-        TreeNode left = lowestCommonAncestor(root.left, p, q);
-        TreeNode right = lowestCommonAncestor(root.right, p, q);
+        TreeNode left = lowestCommonAncestor2(root.left, p, q);
+        TreeNode right = lowestCommonAncestor2(root.right, p, q);
         if(left == null) return right;
         if(right == null) return left;
         return root;
     }
 
+
+    //  II. 二叉树的最近公共祖先
+    public TreeNode lowestCommonAncestor3(TreeNode root, TreeNode p, TreeNode q) {
+        if(root == null || root == p || root == q) return root;
+        TreeNode left = lowestCommonAncestor3(root.left, p, q);
+        TreeNode right = lowestCommonAncestor3(root.right, p, q);
+        if(right == null && left == null) return null;
+        if(left == null) return right;
+        if(right == null) return left;
+        return root;
+    }
 
     
     // 字符串的排列
@@ -1981,5 +1996,31 @@ public class Solution {
             pre.next = next;
         }
         return dummyNode.next;
+    // 变位词组
+    public List<List<String>> groupAnagrams(String[] strs) {
+        HashMap<String,ArrayList<String>> map = new HashMap<>();
+        for(String s:strs) {
+            char[] c = s.toCharArray();
+            Arrays.sort(c);
+            String key = new String(c);
+            ArrayList<String> list = map.getOrDefault(key,new ArrayList<>());
+            list.add(s);
+            map.put(key, list);
+        }
+        return  new ArrayList<List<String>>(map.values());
+    }
+
+    // 最长递增子序列
+    public int lengthOfLIS(int[] nums) {
+        int ans = 0;
+        int[] dp = new int[nums.length];
+
+        for (int i = 0; i < nums.length; i++) {
+            for (int j = 0; j < i; j++) {
+                if(nums[j] < nums[i]) dp[i] = Math.max(dp[j]+1, dp[i]);
+            }
+            
+        }
+        return dp[nums.length-1];
     }
 }
