@@ -22,7 +22,7 @@ import bean.*;
 public class Solution {
 
     public static void main(String[] args) {
-        System.out.println(new Solution().isAnagram("a","a"));
+        System.out.println(new Solution().fullArray("abc"));
     }
 
 
@@ -1918,5 +1918,68 @@ public class Solution {
             }
         }
         return dp[m+1][n+1];
+    }
+
+
+    char[] c1;
+    // 字符串全排列
+    public List<String> fullArray(String s){
+        c1 = s.toCharArray();
+        dfs(0);
+        return res;
+    }
+
+    private void dfs(int x) { 
+        if (x == c1.length -1) {
+            res.add(String.valueOf(c1));
+            return;
+        }
+        Set<Character> set = new HashSet<>();
+        for(int i = x; i < c1.length; i++) {
+            if (set.contains(c1[i])) continue;
+            set.add(c1[i]);
+            swap1(i, x);
+            dfs(x+1);
+            swap1(i,x);
+        }
+    }
+
+    private void swap1(int i, int x) {
+        char temp = c1[i];
+        c1[i] = c1[x];
+        c1[x] = temp;
+    }
+
+
+    public ListNode reverseList2(ListNode head) {
+        ListNode prev = null;
+        ListNode cur = head;
+        while(cur != null) {
+            ListNode temp = cur.next;
+            cur.next = prev;
+            prev = cur;
+            cur = temp;
+        }
+        return prev;
+    }
+
+
+    public ListNode reverseBetween(ListNode head, int left, int right) {
+        if(left == right) return head;
+        ListNode dummyNode = new ListNode(0);
+        dummyNode.next = head;
+        ListNode pre = dummyNode;
+        for (int index = 0; index < left - 1; index++) {
+            pre = pre.next;
+        }
+        ListNode cur = pre.next;
+        ListNode next;
+        for (int i = 0; i < right - left; i++) {
+            next = cur.next;
+            cur.next = next.next;
+            next.next = pre.next;
+            pre.next = next;
+        }
+        return dummyNode.next;
     }
 }
