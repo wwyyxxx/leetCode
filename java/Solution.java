@@ -22,11 +22,16 @@ import bean.*;
 public class Solution {
 
     public static void main(String[] args) {
-<<<<<<< HEAD
-        System.out.println(new Solution().fullArray("abc"));
-=======
-        System.out.println(new Solution().lengthOfLIS(new int[]{10,9,2,5,3,7,101,18}));
->>>>>>> 91487d1f59819e8ab2eb99adb3e53529df99beef
+        ListNode l1 = new ListNode(9);
+        l1.next = new ListNode(9);
+        l1.next.next = new ListNode(9);
+        l1.next.next.next = new ListNode(9);
+        l1.next.next.next.next = new ListNode(9);
+        ListNode l2 = new ListNode(9);
+        l2.next = new ListNode(9);
+        l2.next.next = new ListNode(9);
+
+        System.out.println(new Solution().addTwoNumbers(l1,l2));
     }
 
 
@@ -1996,6 +2001,7 @@ public class Solution {
             pre.next = next;
         }
         return dummyNode.next;
+    }
     // 变位词组
     public List<List<String>> groupAnagrams(String[] strs) {
         HashMap<String,ArrayList<String>> map = new HashMap<>();
@@ -2023,4 +2029,23 @@ public class Solution {
         }
         return dp[nums.length-1];
     }
+
+
+    //[9,9,9,9,9,9,9] [9,9,9,9]
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        ListNode l = new ListNode(-1);
+        ListNode cur = l;
+        int flag = 0;
+        while(l1 != null || l2 != null){
+            int n1 = l1 == null ? 0 : l1.val;
+            int n2 = l2 == null ? 0 : l2.val;
+            int sum  = n1 + n2 + flag;
+            flag = sum / 10;
+            cur.next = new ListNode(sum%10);
+            cur = cur.next;
+        }
+        if(flag!=0) cur.next = new ListNode(flag);
+        return l.next;
+    }
+
 }
