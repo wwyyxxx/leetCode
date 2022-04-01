@@ -31,7 +31,7 @@ View:
         getWidth: 在layout()过程结束后才能获取到 通过视图右边的坐标减去左边的坐标计算出来的.
     动画(xml、代码)、插值器:
         View动画(Translate、Scale、Rotate、Alpha): 按钮仍在原先位置. 控制出场效果
-        补间动画&属性动画(如翻转、偏移、缩放、透明度): 监听动画,多组执行
+        属性动画(如翻转、偏移、缩放、透明度): 监听动画,多组执行
             原理:不停调用Invalidate(),直至属性值一致
         帧动画: 系统一帧一帧的播放图片.一次性加载图片 容易OOM
         Transition: 页面过度
@@ -47,8 +47,7 @@ View:
 	直接由down事件确定的view处理
 
 recycleView:
-    当我们使用局部刷新,payload 不为空 ,这个时候,如果 ViewHolder 需要更新,它的 更新标识 的确会被加入,但是同时canReuseUpdatedViewHolder() 也会返回 true ,所以,这个时候 ViewHolder 不会被添加到 mChangedScrap 集合中,而是加入 mAttachedScrap 集合中,。
-    所以,当你使用局部刷新时,前后都是同一个 ViewHolder ,如果位置没有变化,就不会执行动画效果;而当你不使用局部刷新时,使用的不是同一个 ViewHolder ,不管位置是否变化,都会执行相关动画,所以你看到的 itemView 会闪烁一下。当我们多次调用 notifyItemChange() 方法时,也不会多次触发 requestLayout() 和回调 bindViewHolder()
+    //当我们多次调用notifyItemChange()方法时,也不会多次触发requestLayout()和回调bindViewHolder()  
 
     复用:从集合中去获取
     怎么从集合中去获取:tryGetViewHolderForPositionByDeadline,分几种情况去获取ViewHolder

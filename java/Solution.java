@@ -22,7 +22,19 @@ import bean.*;
 public class Solution {
 
     public static void main(String[] args) {
-        System.out.println(new Solution().lengthOfLIS(new int[]{10,9,2,5,3,7,101,18}));
+        ListNode l1 = new ListNode(9);
+        l1.next = new ListNode(9);
+        l1.next.next = new ListNode(9);
+        l1.next.next.next = new ListNode(9);
+        l1.next.next.next.next = new ListNode(9);
+        ListNode l2 = new ListNode(9);
+        l2.next = new ListNode(9);
+        l2.next.next = new ListNode(9);
+        List<String> list = new ArrayList<>();
+        list.add("23:59");
+        list.add("00:00");
+
+        System.out.println(new Solution().pruneTree(null));
     }
 
 
@@ -1992,6 +2004,7 @@ public class Solution {
             pre.next = next;
         }
         return dummyNode.next;
+    }
     // 变位词组
     public List<List<String>> groupAnagrams(String[] strs) {
         HashMap<String,ArrayList<String>> map = new HashMap<>();
@@ -2019,4 +2032,305 @@ public class Solution {
         }
         return dp[nums.length-1];
     }
+
+
+    //[9,9,9,9,9,9,9] [9,9,9,9]
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        ListNode l = new ListNode(-1);
+        ListNode cur = l;
+        int flag = 0;
+        while(l1 != null || l2 != null){
+            int n1 = l1 == null ? 0 : l1.val;
+            int n2 = l2 == null ? 0 : l2.val;
+            int sum  = n1 + n2 + flag;
+            flag = sum / 10;
+            cur.next = new ListNode(sum%10);
+            cur = cur.next;
+        }
+        if(flag!=0) cur.next = new ListNode(flag);
+        return l.next;
+    }
+
+
+    public int test1(int n) {
+        int ans = 0;
+        int res = n / 3;
+        int temp = n % 3 + res;
+        ans = res;
+        if(temp<2) return ans;
+        while(temp > 2) {
+            res = temp / 3;
+            ans += res;
+            temp = res + temp % 3;
+        }
+         
+        return temp == 2 ? ans+1 : ans ;
+    }
+
+    public List<Integer> test2(List<Integer> list) {
+        List<Integer> ans = new ArrayList<>();
+        for (int i = 0; i < list.size();) {
+            int count = list.get(i);
+            List<Integer> temp = new ArrayList<>();
+            for(int j = i+1; j < i + count;j++) {
+                if(j >= list.size()) break;
+                if(temp.contains(list.get(j))) continue;
+                temp.add(list.get(j));
+            }
+            Collections.sort(temp);
+            ans.addAll(temp);
+            i+=count;
+        }
+        return ans;
+    }
+
+    public List<Integer> test22(List<Integer> list) {
+        TreeSet<Integer> ans = new TreeSet<>();
+        for (int i = 0; i < list.size();) {
+            int count = list.get(i);
+            List<Integer> temp = new ArrayList<>();
+            for(int j = i+1; j < i + count;j++) {
+                if(j >= list.size()) break;
+                if(temp.contains(list.get(j))) continue;
+                temp.add(list.get(j));
+            }
+            Collections.sort(temp);
+            ans.addAll(temp);
+            i+=count;
+        }
+        return null;
+    }
+
+    public int test3(String n) {
+        return Integer.parseInt(n, 16);
+    }
+
+    public int hexToDecimal(String hexnum){
+        String hstring = "012345678ABCDEF";
+        hexnum = hexnum.toUpperCase();
+        int num = 0;
+        for (int i = 0; i < hexnum.length(); i++) {
+            char ch =hexnum.charAt(i);
+            int n = hstring.indexOf(ch);
+            num = 16*num + n;
+        }
+        return num;
+    }
+
+    private static int del(int num){
+        Queue<Integer> queue = new LinkedList<>();
+        for(int i=0; i<num; i++) {
+            queue.add(i);
+        }
+        int count = 0;
+        while(!queue.isEmpty() && queue.size()>1) {
+            if(count != 2) {
+                queue.add(queue.poll());
+                count++;
+            } else {
+                count = 0;
+                queue.poll();
+            }
+        }
+        return queue.poll();
+    }
+    
+    private String wyx(String s){
+        StringBuilder str = new StringBuilder();
+        char[] ch = s.toCharArray();
+        for (int i = 0; i < ch.length; i++) {
+            char c = ch[i];
+            if(str.indexOf(String.valueOf(c))==-1) {
+                str.append(c);
+            }
+        }
+        return str.toString();
+    }
+
+    private static String handleString(String s) {
+        char[] cs = s.toCharArray();
+        int head = 0,end =0;
+        boolean flag = false;
+        for(int i=0;i<cs.length;i++) {
+            head = i;
+            end = i;
+            for(int j = i+1;j<cs.length;j++) {
+                if(cs[i] > cs[j]) {
+                    if(cs[end] > cs[j]) {
+                        end =j;
+                    }
+                    flag = true;
+                }
+            }
+            if(flag) break;
+        }
+        char temp = cs[end];
+        cs[end] = cs[head];
+        cs[head] = temp;
+        return new String(cs);
+    }
+
+    private int handle(int count,List<Integer> list){
+        count = 3;
+        list.add(10);
+        list.add(20);
+        list.add(30);
+        list.add(15);
+        list.add(23);
+        list.add(12);
+        int res = 0;
+        int[] dp = new int[list.size()];
+        for (int i = 0; i < list.size(); i++) {
+            if(i>=count) {
+                res = res + list.get(i) - list.get(i-count);
+                dp[i] = Math.max(dp[i-1], res);
+            } else {
+                res += list.get(i);
+                dp[i] =res;
+            }
+        }
+        return dp[dp.length-1];
+    }
+
+    // private int handle3(){
+    //     String s = "abC124ACb";
+    //     char[] ch = s.toCharArray();
+    //     int res = 0;
+    //     int[] dp = new int[ch.length];
+    //     int count = 0;
+    //     Map<Integer,Integer> map = new HashMap<>();
+    //     int idx = 0;
+    //     for (int i = 0; i < ch.length; i++) {
+    //         if('a' <= ch[i] && ch[i] <= 'Z') {
+    //             count++;
+    //             map.put(i, map.getOrDefault(idx, idx));
+    //             idx=i;
+    //         }
+    //         if(count<2) {
+    //             res++;
+    //             dp[i] = res;
+    //         }
+    //         // if(i>=count) {
+    //         //     res = res + list.get(i) - list.get(i-count);
+    //         //     dp[i] = Math.max(dp[i-1], res);
+    //         // } else {
+    //         //     res += list.get(i);
+    //         //     dp[i] =res;
+    //         // }
+    //     }
+    //     return dp[dp.length-1];
+    // }
+
+
+    private int handle3(){
+        String s = "123455".toLowerCase();
+        
+        char[] ch = s.toCharArray();
+        int ans = -1;
+        List<Integer> list = new ArrayList<>();
+
+        for (int i = 0; i < ch.length; i++) {
+            if('a' <= ch[i] && ch[i] <= 'z') {
+                list.add(i);
+            }
+        }
+        if(list.size()==1) return s.length();
+        if(list.isEmpty() || list.size() == s.length()) return -1;
+        ans = list.get(1);
+        for (int i = 1; i < list.size()-1; i++) {
+            ans = Math.max(ans, list.get(i+1) -  list.get(i));
+        }
+        ans = Math.max(ans, s.length() -  list.get(list.size()-2)-1);
+        return ans;
+    }
+
+    //3. 无重复字符的最长子串
+    public int lengthOfLongestSubstring2(String s) {
+        s = "pwwkew";
+        char[] ch = s.toCharArray();
+        int res=0,temp=0;
+        Map<Character,Integer> map = new HashMap<>();
+        for (int i = 0; i < ch.length; i++) {
+            int idx = map.getOrDefault(ch[i], -1);
+            map.put(ch[i], i);
+            if(temp < i-idx) {
+                temp = i-idx;
+            } else {
+            }
+            temp = i-idx;
+            res = Math.max(res, temp);
+        }
+        return res;
+    }
+
+    List<String> list = new ArrayList<>();
+    char[] ch;
+    public List<String> permutation1(String s) {
+        s = "abc";
+        ch = s.toCharArray();
+        dfsPerTest(0);
+        String[] ans = new String[list.size()];
+        for (int i = 0; i < ans.length; i++) {
+            ans[i] = list.get(i);
+        }
+        return list;
+    }
+
+
+    private void dfsPerTest(int i) {
+        if(i==ch.length-1) {
+            list.add(String.valueOf(ch));
+            return;
+        }
+        Set<Character> set = new HashSet<>();
+        for (int j = i; j < ch.length; j++) {
+            if(set.contains(ch[j])) continue;
+            set.add(ch[j]);
+            swapPerText(i, j);
+            dfsPerTest(i+1);
+            swapPerText(i, j);
+        }
+    }
+
+    private void swapPerText(int i, int x) {
+        char temp = ch[i];
+        ch[i] = ch[x];
+        ch[x] = temp;
+    }
+
+
+    public int findMinDifference(List<String> timePoints) {
+        if(timePoints.size() > 24*60) return 0;
+        List<Integer> list = new ArrayList<>();
+        for (int i = 0; i < timePoints.size(); i++) {
+            String[] temp = timePoints.get(i).split(":");
+            list.add(Integer.parseInt(temp[0]) *60 + Integer.parseInt(temp[1]));
+        }
+        Collections.sort(list);
+        list.add(list.get(0)+24*60);
+        int ans = Integer.MAX_VALUE;
+        for (int i = 1; i < list.size(); i++) {
+            ans = Math.min(list.get(i) - list.get(i-1), ans);
+        }
+        return ans;
+    }
+
+    public TreeNode pruneTree(TreeNode root) {
+        TreeNode rNode = new TreeNode(0, new TreeNode(0), new TreeNode(1));
+        root = dfsPruneTree(rNode);
+        return root;
+    }
+
+
+    private TreeNode dfsPruneTree(TreeNode root) {
+        if(root == null) return root;
+        root.left = dfsPruneTree(root.left);
+        root.right =  dfsPruneTree(root.right);
+        if(root.right == null && root.left == null && root.val == 0) {
+            return null;
+        }
+        return root;
+    }
+
+
 }
