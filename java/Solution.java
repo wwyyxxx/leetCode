@@ -22,11 +22,7 @@ import bean.*;
 public class Solution {
 
     public static void main(String[] args) {
-<<<<<<< HEAD
-        System.out.println(new Solution().fullArray("abc"));
-=======
         System.out.println(new Solution().lengthOfLIS(new int[]{10,9,2,5,3,7,101,18}));
->>>>>>> 91487d1f59819e8ab2eb99adb3e53529df99beef
     }
 
 
