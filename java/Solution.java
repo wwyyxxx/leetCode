@@ -33,8 +33,9 @@ public class Solution {
         List<String> list = new ArrayList<>();
         list.add("23:59");
         list.add("00:00");
-
-        System.out.println(new Solution().pruneTree(null));
+        String parts = "123456".substring(0,5);
+        System.out.println(new Codec1().deserialize("data"));
+        // System.out.println(new Solution().pruneTree(null));
     }
 
 
