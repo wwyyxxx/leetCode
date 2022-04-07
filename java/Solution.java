@@ -34,7 +34,7 @@ public class Solution {
         list.add("23:59");
         list.add("00:00");
 
-        System.out.println(new Solution().pruneTree(null));
+        System.out.println(new Solution().validateStackSequences1(null,null));
     }
 
 
@@ -2332,5 +2332,81 @@ public class Solution {
         return root;
     }
 
+    
+    int n;
+    int k1;
+    List<List<Integer>> resCombine = new ArrayList<>();
+    public List<List<Integer>> combine(int n, int k) {
+        k1 = k; this.n = n;
+        dfs(1,new ArrayList<>());
+        
+        return resCombine;
+    }
 
+    private void dfs(int i, List<Integer> res2) {
+        if(res2.size() == k1) {
+            resCombine.add(new ArrayList<>(res2));
+            return;
+        }
+        
+        for (int j = i; j <= n; j++) {
+            res2.add(j);
+            dfs(j+1,res2);
+            res2.remove(res2.size()-1);
+        }
+        
+    }
+
+    //栈的压入、弹出序列
+    public boolean validateStackSequences1(int[] pushed, int[] popped) {
+        pushed = new int[]{2,1,0};
+        popped = new int[]{1,2,0};
+        Stack<Integer> stack = new Stack<>();
+        int j=0;
+        for (int i = 0; i < pushed.length; i++) {
+            stack.push(pushed[i]);
+            while(!stack.isEmpty() && popped[j] == stack.peek()) {
+                j++;
+                stack.pop();
+            }
+        }
+        
+        for (; j < popped.length; j++) {
+            if(popped[j] == stack.peek()) {
+                stack.pop();
+            }
+        }
+        return stack.isEmpty();
+    }
+
+    public int findBottomLeftValue(TreeNode root) {
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
+        int res = 0;
+        while(!queue.isEmpty()) {
+            TreeNode temp = queue.poll();
+            res = temp.val;
+            if(temp.right != null ) queue.add(temp.right);
+            if(temp.left != null ) queue.add(temp.left);
+        }
+        return res;
+    }
+
+    public List<Integer> rightSideView(TreeNode root) {
+        List<Integer> list = new ArrayList<>();
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
+        while(!queue.isEmpty()) {
+            int l = queue.size();
+            for (int i = 0; i < l; i++) {
+                TreeNode temp = queue.poll();
+                if(i == l - 1) {
+                    list.add(temp.val);
+                }
+                if(temp.left != null ) queue.add(temp.left);
+                if(temp.right != null ) queue.add(temp.right);
+            }
+        }
+        return list;
+    }
 }
