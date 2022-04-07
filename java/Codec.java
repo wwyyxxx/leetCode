@@ -3,7 +3,7 @@ import bean.TreeNode;
 /*
  * @Author: Tungbo
  * @Date: 2021-09-22 11:12:38
- * @LastEditTime: 2021-09-22 16:35:36
+ * @LastEditTime: 2022-04-01 15:45:35
  * @LastEditors: Tungbo
  * @Description: leecode: 序列化二叉树
  */
@@ -39,6 +39,7 @@ public class Codec {
 
     // Decodes your encoded data to tree.
     public TreeNode deserialize(String data) {
+        
         if(data.equals("[]")) return null;
         String[] v = data.substring(1, data.length() - 1).split(",");
         TreeNode node = new TreeNode(Integer.parseInt(v[0]));

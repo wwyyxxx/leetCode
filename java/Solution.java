@@ -35,6 +35,9 @@ public class Solution {
         list.add("00:00");
 
         System.out.println(new Solution().validateStackSequences1(null,null));
+        String parts = "123456".substring(0,5);
+        System.out.println(new Codec1().deserialize("data"));
+        // System.out.println(new Solution().pruneTree(null));
     }
 
 
