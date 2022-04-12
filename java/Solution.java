@@ -34,7 +34,7 @@ public class Solution {
         list.add("23:59");
         list.add("00:00");
         String parts = "123456".substring(0,5);
-        System.out.println(new Codec1().deserialize("data"));
+        System.out.println(new Solution().integerBreak(2));
         // System.out.println(new Solution().pruneTree(null));
     }
 
@@ -2333,5 +2333,56 @@ public class Solution {
         return root;
     }
 
+    // 整数拆分
+    public int integerBreak(int n) {
+        if(n<=3) return n -1;
+        int a = n / 3, b = n % 3;
+        if(b==1) return (int)Math.pow(3, a-1) * 4;
+        if(b==2) return (int)Math.pow(3, a) * 2;
+        return (int)Math.pow(3, a);
+    }
 
+    // N皇后
+    public List<List<String>> solveNQueens(int n) {
+        List<List<String>> resList = new ArrayList<>();
+        List<Integer> coms = new ArrayList<>();
+        List<Integer> r2l = new ArrayList<>();
+        List<Integer> l2r = new ArrayList<>();
+        backtrackSolveNQueens(0,n,resList,coms,r2l,l2r);
+        return resList;
+    }
+
+
+    private void backtrackSolveNQueens(int row, int n, List<List<String>> resList, List<Integer> coms, List<Integer> r2l,
+            List<Integer> l2r) {
+        if(row == n) {
+            resList.add(generateList(coms,n));
+        }
+
+        for(int i =0; i < n; i++){
+            if(coms.contains(i)) continue;
+            if(l2r.contains(i-row)) continue;
+            if(r2l.contains(i+row)) continue;
+            coms.add(i);
+            l2r.add(i-row);
+            r2l.add(i+row);
+            backtrackSolveNQueens(row+1,n,resList,coms,r2l,l2r);
+            coms.remove(coms.size() - 1);
+            l2r.remove(l2r.size() - 1);
+            r2l.remove(r2l.size() - 1);
+        }
+
+    }
+
+
+    private List<String> generateList(List<Integer> coms, int n) {
+        List<String> temp = new ArrayList<String>();
+        for (int i = 0; i < n; i++) {
+            char[] c = new char[n];
+            Arrays.fill(c, '.');
+            c[coms.get(i)] = 'Q';
+            temp.add(new String(c));
+        }
+        return temp;
+    }
 }
