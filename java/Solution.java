@@ -2523,4 +2523,22 @@ public class Solution {
             temp.remove(temp.size() - 1);
         }
     }
+
+    // 滑动窗口最大值
+    public int[] maxSlidingWindow1(int[] nums, int k) {
+        int[] res = new int[nums.length - k + 1];
+        int temp = Integer.MIN_VALUE;
+        LinkedList<Integer> queue = new LinkedList<Integer>();
+        for (int i = 0; i < nums.length; i++) {
+            while(!queue.isEmpty() && nums[queue.peekLast()] <= nums[i]) {
+                queue.pollLast();
+            }
+            queue.add(i);
+            if(queue.peek() <= i - k) queue.poll();
+            if(i >= k - 1) {
+                res[i-k+1] = nums[queue.peek()];
+            }
+        }
+        return res;
+    }
 }
