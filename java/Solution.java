@@ -2484,5 +2484,23 @@ public class Solution {
         return ans;
     }
 
-    
+    // 三数之和
+    public List<List<Integer>> threeSum2(int[] nums) {
+        // a + b + c =0
+        Set<List<Integer>> ans = new HashSet<>();
+        Arrays.sort(nums);
+        for (int i = 0; i < nums.length; i++) {
+            int j = i+1, k = nums.length -1, target = -nums[i];
+            while(j < k) {
+                if(nums[j] + nums[k] == target) {
+                    ans.add(Arrays.asList(nums[i],nums[j],nums[k]));
+                    j++;
+                    k--;
+                } else if(nums[j] + nums[k] < target){
+                    j++;
+                } else k--;
+            }
+        }
+        return new ArrayList<>(ans);
+    }
 }
