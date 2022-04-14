@@ -2503,4 +2503,24 @@ public class Solution {
         }
         return new ArrayList<>(ans);
     }
+
+    // 全排列
+    public List<List<Integer>> permute1(int[] nums) {
+        List<List<Integer>> ans = new ArrayList<>();
+        backtrack(nums, ans, new ArrayList<>());
+        return ans;
+    }
+
+
+    private void backtrack(int[] nums, List<List<Integer>> ans, List<Integer> temp) {
+        if(temp.size() == nums.length) {
+            ans.add(new ArrayList<>(temp));
+        }
+        for (int j = 0; j < nums.length; j++) {
+            if(temp.contains(j)) continue;
+            temp.add(j);
+            backtrack(nums,ans,temp);
+            temp.remove(temp.size() - 1);
+        }
+    }
 }
