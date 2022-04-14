@@ -34,9 +34,9 @@ public class Solution {
         list.add("23:59");
         list.add("00:00");
 
-        System.out.println(new Solution().validateStackSequences1(null,null));
+        // System.out.println(new Solution().validateStackSequences1(null,null));
         String parts = "123456".substring(0,5);
-        System.out.println(new Solution().integerBreak(2));
+        System.out.println(new Solution().longestPalindrome1("babad"));
         // System.out.println(new Solution().pruneTree(null));
     }
 
@@ -2464,4 +2464,25 @@ public class Solution {
         }
         return list;
     }
+
+    // 最长回文子串
+    public String longestPalindrome1(String s) {
+        char[] c = s.toCharArray();
+        int n = (2 * c.length) - 1;
+        String ans = "";
+        for (int i = 0; i < n; i++) {
+            int left = i/2, right = left + i%2;
+            while (left >= 0 && right < c.length && c[left] == c[right]) {
+                left--;
+                right++;
+            }
+            if(ans.length() < right - left - 1) {
+                ans = s.substring(left+1,right);
+                System.out.println(ans);
+            }
+        }
+        return ans;
+    }
+
+    
 }
