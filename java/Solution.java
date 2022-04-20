@@ -2595,7 +2595,6 @@ public class Solution {
     public List<Integer> inorderTraversal(TreeNode root) {
         List<Integer> res = new ArrayList<>();
         Stack<TreeNode> stck = new Stack<>();
-       
         while (root != null || !stck.isEmpty()) {
             while(root != null) {
                 stck.push(root);
@@ -2604,6 +2603,27 @@ public class Solution {
             root = stck.pop();
             res.add(root.val);
             root = root.right;
+        }
+        return res;
+    }
+
+    // 层次遍历
+    public List<List<Integer>> levelOrder1(TreeNode root) {
+        List<List<Integer>> res = new ArrayList<>();
+        if(root == null) return res;
+        Queue<TreeNode> q = new LinkedList<>();
+        q.add(root);
+        while(!q.isEmpty()) {
+            int n = q.size();
+            
+            List<Integer> list = new ArrayList<>();
+            for(int i = 0; i<n;i++) {
+                TreeNode node = q.poll();
+                list.add(node.val);
+                if(node.left!=null) q.add(node.left);
+                if(node.right!=null) q.add(node.right);
+            }
+            res.add(list);
         }
         return res;
     }
