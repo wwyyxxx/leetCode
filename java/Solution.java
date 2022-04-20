@@ -1464,7 +1464,7 @@ public class Solution {
         return new int[] {i,j};
     }
 
-    //
+    // 括号生成
     public List<String> generateParenthesis(int n) {
         List<String> res = new ArrayList<>();
         if (n <= 0) return res;
@@ -2546,5 +2546,30 @@ public class Solution {
     public int findKthLargest(int[] nums, int k) {
         Arrays.sort(nums);
         return nums[nums.length - k];
+    }
+
+    // 括号生成
+    public List<String> generateParenthesis1(int n) {
+        List<String> res = new ArrayList<>();
+        if(n <= 0) return res;
+        getParenthesis("",n,n,res);
+        return res;
+    }
+
+
+    private void getParenthesis(String s, int l, int r, List<String> res) {
+        if(l==0 && r==0) {
+            res.add(s);
+            return;
+        }
+
+        if(l>=r) {
+            getParenthesis(s+"(",l-1,r,res);
+        } else if(l<r){
+            if(l>0) {
+                getParenthesis(s+"(",l-1,r,res);
+            }
+            getParenthesis(s+")",l,r-1,res);
+        }
     }
 }
