@@ -2572,4 +2572,39 @@ public class Solution {
             getParenthesis(s+")",l,r-1,res);
         }
     }
+
+    //最小覆盖子串
+    public String minWindow(String s, String t) {
+        String res = "";
+        
+        if(s.length() < t.length()) return res;
+        char[] source = s.toCharArray();
+        char[] target = t.toCharArray();
+        int n = source.length, m = target.length;
+        int start = s.indexOf(target[0]);
+        int count = 0;
+        for (int i = start; i < n; i++) {
+            if(source[i] == target[count]) {
+                count++;
+            }
+        }
+        return res;
+    }
+
+    // 中序遍历
+    public List<Integer> inorderTraversal(TreeNode root) {
+        List<Integer> res = new ArrayList<>();
+        Stack<TreeNode> stck = new Stack<>();
+       
+        while (root != null || !stck.isEmpty()) {
+            while(root != null) {
+                stck.push(root);
+                root = root.left;
+            }
+            root = stck.pop();
+            res.add(root.val);
+            root = root.right;
+        }
+        return res;
+    }
 }
