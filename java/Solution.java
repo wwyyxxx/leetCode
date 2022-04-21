@@ -2659,4 +2659,45 @@ public class Solution {
         }
         return null;
     }
+
+    // 链表中的两数相加
+    public ListNode addTwoNumbers1(ListNode l1, ListNode l2) {
+        Stack<ListNode> s1 = new Stack<>();
+        Stack<ListNode> s2 = new Stack<>();
+        while(l1!=null || l2 !=null) {
+            if(l1!=null) {
+                s1.add(l1);
+                l1 = l1.next;
+            }
+            if(l2!=null) {
+                s2.add(l2);
+                l2 = l2.next;
+            }
+        }
+        int carry = 0;
+        List<Integer> list = new ArrayList<>();
+        while (!s1.isEmpty() || !s2.isEmpty()) {
+            int temp = carry;
+            if(!s1.isEmpty()) {
+                temp += s1.pop().val;
+            }
+            if(!s2.isEmpty()) {
+                temp += s2.pop().val;
+            }
+            carry = temp/10;
+            list.add(temp%10);
+        }
+        ListNode dummy = new ListNode(0);
+        ListNode head = dummy;
+        if(carry!=0) {
+            head.next = new ListNode(carry);
+            head = head.next;
+        }
+        for(int i = list.size()-1; i>=0; i--) {
+            head.next = new ListNode(list.get(i));
+            head = head.next;
+        }
+        
+        return dummy.next;
+    }
 }
