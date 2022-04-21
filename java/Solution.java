@@ -2627,4 +2627,22 @@ public class Solution {
         }
         return res;
     }
+
+    // 删除链表的倒数第 n 个结点
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        ListNode dummy = new ListNode(0);
+        dummy.next = head;
+        ListNode frist = head;
+        ListNode sencons = dummy;
+        for(int i=0;i<n;i++) {
+            frist = frist.next;
+        }
+        while(frist!=null) {
+            frist = frist.next;
+            sencons = sencons.next;
+        }
+        sencons.next = sencons.next.next;
+
+        return dummy.next;
+    }
 }
