@@ -36,7 +36,7 @@ public class Solution {
 
         // System.out.println(new Solution().validateStackSequences1(null,null));
         String parts = "123456".substring(0,5);
-        System.out.println(new Solution().longestPalindrome1("babad"));
+        System.out.println(new Solution().minWindow("ADOBECODEBANC","ABC"));
         // System.out.println(new Solution().pruneTree(null));
     }
 
@@ -2574,21 +2574,41 @@ public class Solution {
     }
 
     //最小覆盖子串
+    //s = "ADOBECODEBANC", t = "ABC" BANC"
     public String minWindow(String s, String t) {
         String res = "";
-        
-        if(s.length() < t.length()) return res;
-        char[] source = s.toCharArray();
-        char[] target = t.toCharArray();
-        int n = source.length, m = target.length;
-        int start = s.indexOf(target[0]);
-        int count = 0;
-        for (int i = start; i < n; i++) {
-            if(source[i] == target[count]) {
-                count++;
+        int[] charmap = new int[58];
+        // Arrays.fill(charmap,0);
+        for(char c : t.toCharArray()) {
+            charmap[c-'A']++;
+        }
+        int diff = t.length();
+        int left = 0, right = 0, ans = Integer.MAX_VALUE;
+        int dfssIdx = 26;
+        while (right < s.length()) {
+            charmap[s.charAt(right) - 'A']--;
+            if(right - left + 1 >= diff && charmap[dfssIdx] <= 0) {
+                dfssIdx = checkIndex(charmap);
+                if(dfssIdx == 26) {
+                    while(left < right && charmap[s.charAt(left) - 'A'] < 0) {
+                        charmap[s.charAt(left++) - 'A']++;
+                    }
+                    if (right - left + 1 < ans) {
+                        ans = right - left + 1;
+                        res = s.substring(left, right+1);
+                    } 
+                }
             }
+            right++;
         }
         return res;
+    }
+
+    private int checkIndex(int[] charmap) {
+        for(int i = 0; i < charmap.length; i++) {
+            if(charmap[i] > 0 ) return i;
+        }
+        return 26;
     }
 
     // 中序遍历
