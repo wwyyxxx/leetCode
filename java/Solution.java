@@ -2625,6 +2625,7 @@ public class Solution {
             }
             res.add(list);
         }
+
         return res;
     }
 
@@ -2644,5 +2645,18 @@ public class Solution {
         sencons.next = sencons.next.next;
 
         return dummy.next;
+    }
+
+    //链表中环的入口节点
+    public ListNode detectCycle(ListNode head) {
+        Set<ListNode> s = new HashSet<ListNode>();
+        while(head!=null) {
+            if(s.contains(head)) {
+                return head;
+            }
+            s.add(head);
+            head = head.next;
+        }
+        return null;
     }
 }
