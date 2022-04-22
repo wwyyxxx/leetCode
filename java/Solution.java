@@ -2720,4 +2720,24 @@ public class Solution {
         
         return dummy.next;
     }
+
+    // 二叉树每层的最大值
+    public List<Integer> largestValues(TreeNode root) {
+        List<Integer> res = new ArrayList<Integer>();
+        Queue<TreeNode> q = new LinkedList<TreeNode>();
+        if(root == null) return res;
+        q.add(root);
+        while(!q.isEmpty()) {
+            int temp = Integer.MIN_VALUE;
+            int n = q.size();
+            for(int i = 0;i<n;i++) {
+                TreeNode node = q.poll();
+                if(node.left!=null) q.add(node.left);
+                if(node.right!=null) q.add(node.right);
+                temp = Math.max(temp,node.val);
+            }
+            res.add(temp);
+        }
+        return res;
+    }
 }
