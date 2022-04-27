@@ -2755,4 +2755,38 @@ public class Solution {
         }
         return res;
     }
+
+    // 电话号码字母组合
+    public List<String> letterCombinations(String digits) {
+        List<String> res = new ArrayList<>();
+        if(digits.length() == 0) return res;
+        Map<Character, String> phoneMap = new HashMap<Character, String>() {{
+            put('2', "abc");
+            put('3', "def");
+            put('4', "ghi");
+            put('5', "jkl");
+            put('6', "mno");
+            put('7', "pqrs");
+            put('8', "tuv");
+            put('9', "wxyz");
+        }};
+
+        backtrackCombinations(res,0,phoneMap,digits,new StringBuffer());
+        return res;
+        
+    }
+
+    private void backtrackCombinations(List<String> res, int i, Map<Character, String> phoneMap, String digits, StringBuffer s) {
+        if (i == digits.length()) {
+            res.add(new String(s));
+            return;
+        }
+        String str = phoneMap.get(digits.charAt(i));
+        int n = str.length();
+        for (int j = 0; j < n; j++) {
+            s.append(str.charAt(j));
+            backtrackCombinations(res,i+1,phoneMap,digits,s);
+            s.deleteCharAt(j);
+        }
+    }
 }
