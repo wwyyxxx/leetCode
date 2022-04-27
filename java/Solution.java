@@ -2740,4 +2740,19 @@ public class Solution {
         }
         return res;
     }
+
+    //每组都出现的数字
+    public List<Integer> intersection(int[][] nums) {
+        List<Integer> res = new ArrayList<>();
+        int[] map = new int[1000];
+        for(int i = 0; i < nums.length; i++) {
+            for (int j = 0; i<nums[i].length; j++) {
+                map[nums[i][j]]++;
+            }
+        }
+        for(int i = 0; i < map.length; i++) {
+            if(map[i]>=nums.length) res.add(map[i]);
+        }
+        return res;
+    }
 }
