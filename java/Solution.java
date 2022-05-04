@@ -2762,4 +2762,95 @@ public class Solution {
     }
 
     
+    //每组都出现的数字
+    public List<Integer> intersection(int[][] nums) {
+        List<Integer> res = new ArrayList<>();
+        int[] map = new int[1000];
+        for(int i = 0; i < nums.length; i++) {
+            for (int j = 0; i<nums[i].length; j++) {
+                map[nums[i][j]]++;
+            }
+        }
+        for(int i = 0; i < map.length; i++) {
+            if(map[i]>=nums.length) res.add(map[i]);
+        }
+        return res;
+    }
+
+    // 电话号码字母组合
+    public List<String> letterCombinations(String digits) {
+        List<String> res = new ArrayList<>();
+        if(digits.length() == 0) return res;
+        Map<Character, String> phoneMap = new HashMap<Character, String>() {{
+            put('2', "abc");
+            put('3', "def");
+            put('4', "ghi");
+            put('5', "jkl");
+            put('6', "mno");
+            put('7', "pqrs");
+            put('8', "tuv");
+            put('9', "wxyz");
+        }};
+
+        backtrackCombinations(res,0,phoneMap,digits,new StringBuffer());
+        return res;
+        
+    }
+
+    private void backtrackCombinations(List<String> res, int i, Map<Character, String> phoneMap, String digits, StringBuffer s) {
+        if (i == digits.length()) {
+            res.add(new String(s));
+            return;
+        }
+        String str = phoneMap.get(digits.charAt(i));
+        int n = str.length();
+        for (int j = 0; j < n; j++) {
+            s.append(str.charAt(j));
+            backtrackCombinations(res,i+1,phoneMap,digits,s);
+            s.deleteCharAt(j);
+        }
+    }
+
+    // 盛最多水的容器
+    public int maxArea(int[] height) {
+        int ans = Integer.MIN_VALUE;
+        int l = 0, r = height.length - 1;
+        while(l < r) {
+            ans = height[l] < height[r] ? 
+            Math.max(ans, (r-l) * height[l++]) : 
+            Math.max(ans, (r-l) * height[r--]);
+        }
+        return ans;
+    }
+
+    // 最长有效括号
+    public int longestValidParentheses(String s) {
+        int left = 0, right = 0, ans = 0;
+        for (int i = 0; i < s.length(); i++) {
+            if(s.charAt(i) == '(') {
+                left++;
+            } else {
+                right++;
+            }
+            if (left == right) ans = Math.max(ans,right *2);
+            else if (left < right) left = right = 0;
+        }
+        for (int i = s.length() -1; i >= 0; i--) {
+            if(s.charAt(i) == '(') {
+                left++;
+            } else {
+                right++;
+            }
+            if (left == right) ans = Math.max(ans, left *2);
+            else if (left > right) left = right = 0;
+        }
+        return ans;
+    }
+
+    
+    // public ListNode mergeKLists(ListNode[] lists) {
+
+    // }
+
+
 }
