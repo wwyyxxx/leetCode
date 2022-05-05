@@ -2826,9 +2826,36 @@ public class Solution {
         return ans;
     }
 
-    
-    public ListNode mergeKLists(ListNode[] lists) {
 
+    public ListNode mergeKLists(ListNode[] lists) {
+        ListNode dummy = new ListNode(Integer.MIN_VALUE);
+        if(lists.length <= 0 ) return dummy.next;
+        ListNode ans = null;
+        for(int i = 0; i < lists.length; i++) {
+            ListNode node = lists[i];
+            ans = mergeTwoListNode(ans,lists[i]);
+        }
+        return ans;
+    }
+
+
+    private ListNode mergeTwoListNode(ListNode a, ListNode b) {
+        if (a==null || b==null) {
+            return a==null? b:a;
+        }
+        ListNode dummy = new ListNode(0);
+        ListNode temp = dummy, aPart = a,bPart=b;
+        while(aPart != null && bPart != null){
+            if (aPart.val < bPart.val) {
+                temp.next = aPart;
+                aPart = aPart.next;
+            } else {
+                temp.next = bPart;
+                bPart = bPart.next;
+            }
+
+        }
+        return dummy.next;
     }
 
 
