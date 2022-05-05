@@ -2853,4 +2853,40 @@ public class Solution {
     // }
 
 
+    // 重排链表
+    public void reorderList(ListNode head) {
+        ListNode pre = new ListNode();
+        ListNode slow = pre;
+        ListNode fast = pre;
+        pre.next = head;
+        while(fast!=null && fast.next!=null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        ListNode half = slow.next;
+        slow.next = null;
+        ListNode rec_half = reverseListNode(half);
+        ListNode cur = pre.next;
+        while(rec_half!=null) {
+            ListNode temp = cur.next;
+            cur.next = rec_half;
+            cur = cur.next;
+            cur.next = temp;
+            cur = cur.next;
+            
+        }
+    }
+
+
+    private ListNode reverseListNode(ListNode half) {
+        ListNode pre = null;
+        ListNode cur = half;
+        while(cur!=null) {
+            ListNode temp = cur.next;
+            cur.next = pre;
+            pre = cur;
+            cur = temp;
+        }
+        return pre;
+    }
 }
