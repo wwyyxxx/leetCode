@@ -2942,13 +2942,21 @@ public class Solution {
         return dp[m-1][n-1];
     }
 
+    // 子集
+    public List<List<Integer>> subsets(int[] nums) {
+        List<List<Integer>> ans = new ArrayList<>();
+        ans.add(new ArrayList<>());
+        if(nums.length <=0) return ans;
+        backtrackSubsets(ans,nums,0,new ArrayList<>());
+        return ans;
+    }
 
-    private void backtrackUniquePaths(int i, int j, int ans, int m, int n) {
-        if(i==m && j==n) ans++;
-        for (int k = i; k < m; k++) {
-            for (int z = j; z < n; z++) {
-                backtrackUniquePaths(k,z,ans,m,n);
-            }
+    private void backtrackSubsets(List<List<Integer>> ans, int[] nums, int i, List<Integer> arrayList) {
+        ans.add(new ArrayList<>(arrayList));
+        for (int j = i; j < nums.length; j++) {
+            arrayList.add(nums[j]);
+            backtrackSubsets(ans, nums,j+1,arrayList);
+            arrayList.remove(arrayList.size() - 1);
         }
     }
 }
