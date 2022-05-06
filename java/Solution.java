@@ -2847,13 +2847,12 @@ public class Solution {
         return ans;
     }
 
-
+    // 合并K个链表
     public ListNode mergeKLists(ListNode[] lists) {
         ListNode dummy = new ListNode(Integer.MIN_VALUE);
         if(lists.length <= 0 ) return dummy.next;
         ListNode ans = null;
         for(int i = 0; i < lists.length; i++) {
-            ListNode node = lists[i];
             ans = mergeTwoListNode(ans,lists[i]);
         }
         return ans;
@@ -2874,16 +2873,12 @@ public class Solution {
                 temp.next = bPart;
                 bPart = bPart.next;
             }
-
+            temp = temp.next;
         }
+        temp.next = aPart ==null? bPart : aPart;
         return dummy.next;
     }
     
-    // public ListNode mergeKLists(ListNode[] lists) {
-
-    // }
-
-
     // 重排链表
     public void reorderList(ListNode head) {
         ListNode pre = new ListNode();
@@ -2907,8 +2902,6 @@ public class Solution {
             
         }
     }
-
-
     private ListNode reverseListNode(ListNode half) {
         ListNode pre = null;
         ListNode cur = half;
