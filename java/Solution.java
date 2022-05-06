@@ -2926,4 +2926,29 @@ public class Solution {
         }
         return grid[grid.length-1][grid[0].length-1];
     }
+
+    // 不同路径
+    public int uniquePaths(int m, int n) {
+        int[][] dp = new int[m][n];
+        Arrays.fill(dp[0], 1);
+        for (int i = 0; i < m; i++) {
+            dp[i][0] = 1;
+        }
+        for (int k = 1; k < m; k++) {
+            for (int z = 1; z < n; z++) {
+                dp[k][z] = dp[k-1][z] + dp[k][z-1];
+            }
+        }
+        return dp[m-1][n-1];
+    }
+
+
+    private void backtrackUniquePaths(int i, int j, int ans, int m, int n) {
+        if(i==m && j==n) ans++;
+        for (int k = i; k < m; k++) {
+            for (int z = j; z < n; z++) {
+                backtrackUniquePaths(k,z,ans,m,n);
+            }
+        }
+    }
 }
