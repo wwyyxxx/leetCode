@@ -2857,8 +2857,6 @@ public class Solution {
         }
         return ans;
     }
-
-
     private ListNode mergeTwoListNode(ListNode a, ListNode b) {
         if (a==null || b==null) {
             return a==null? b:a;
@@ -2912,5 +2910,20 @@ public class Solution {
             cur = temp;
         }
         return pre;
+    }
+
+    // 最小路径和
+    public int minPathSum(int[][] grid) {
+        int[][] dp = new int[grid.length][grid[0].length];
+        for (int i = 0; i < dp.length; i++) {
+            int n = grid[i].length;
+            for (int j = 0; j < n; j++) {
+                // if(i==0 && j==0) dp[i][j] = grid[i][j];
+                if(i==0) grid[i][j] += grid[i][j-1];
+                else if(j==0) grid[i][j] += grid[i-1][j];
+                else grid[i][j] += Math.min(grid[i-1][j],grid[i][j-1]);
+            }
+        }
+        return grid[grid.length-1][grid[0].length-1];
     }
 }
