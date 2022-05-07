@@ -2995,4 +2995,28 @@ public class Solution {
                     temp.remove(temp.size()-1);
                 }
     }
+
+
+
+    // 打家劫舍 III
+    public int rob3(TreeNode root) {
+        Map<TreeNode, Integer> f = new HashMap<>();
+        Map<TreeNode, Integer> g = new HashMap<>();
+        dfsRob(f,g,root);
+        return Math.max(f.getOrDefault(root,0), g.getOrDefault(root, 0));
+    }
+
+
+    private void dfsRob(Map<TreeNode, Integer> f, Map<TreeNode, Integer> g, TreeNode root) {
+        if(root == null) return;
+        dfsRob(f,g,root.left);
+        dfsRob(f,g,root.right);
+        f.put(root, root.val + g.getOrDefault(root.left, 0) + g.getOrDefault(root.right, 0));
+        g.put(root, Math.max(g.getOrDefault(root.left, 0), f.getOrDefault(root.left, 0)) + Math.max(g.getOrDefault(root.right, 0), f.getOrDefault(root.right, 0)));
+    }
+
+    // 打家劫舍 II
+    public int rob2(int[] nums) {
+
+    }
 }
