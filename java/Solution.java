@@ -36,7 +36,7 @@ public class Solution {
 
         // System.out.println(new Solution().validateStackSequences1(null,null));
         String parts = "123456".substring(0,5);
-        System.out.println(new Solution().minWindow("ADOBECODEBANC","ABC"));
+        System.out.println(new Solution().rob2(new int[]{1,3,1,3,100}));
         // System.out.println(new Solution().pruneTree(null));
     }
 
@@ -3017,6 +3017,17 @@ public class Solution {
 
     // 打家劫舍 II
     public int rob2(int[] nums) {
+        
+        return Math.max(getRob2(Arrays.copyOfRange(nums, 0, nums.length-1)),getRob2(Arrays.copyOfRange(nums, 1, nums.length)));
+    }
 
+    private int getRob2(int[] is){
+        int[] dp = new int[is.length];
+        dp[0] = is[0];
+        dp[1] = Math.max(is[1],is[0]);
+        for (int i = 2; i < is.length; i++) {
+            dp[i] = Math.max(is[i]+dp[i-2],dp[i-1]);
+        }
+        return dp[dp.length-1];
     }
 }
