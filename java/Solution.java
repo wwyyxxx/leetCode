@@ -2975,4 +2975,24 @@ public class Solution {
         
         return res;
     }
+
+    // 组合总和
+    public List<List<Integer>> combinationSum1(int[] candidates, int target) {
+        List<List<Integer>> ans = new ArrayList<>();
+        backtrackCombinationSum(0,candidates,target,new ArrayList<Integer>(),ans);
+        return ans;
+    }
+
+    private void backtrackCombinationSum(int i, int[] candidates, int target, ArrayList<Integer> temp,
+            List<List<Integer>> ans) {
+                if(target < 0 ) return;
+                if(target == 0) {
+                    ans.add(new ArrayList<>(temp));
+                }
+                for (int j = i; j < candidates.length; j++) {
+                    temp.add(candidates[j]);
+                    backtrackCombinationSum(j, candidates, target - candidates[j], temp, ans);
+                    temp.remove(temp.size()-1);
+                }
+    }
 }
