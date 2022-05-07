@@ -36,7 +36,7 @@ public class Solution {
 
         // System.out.println(new Solution().validateStackSequences1(null,null));
         String parts = "123456".substring(0,5);
-        System.out.println(new Solution().rob2(new int[]{1,3,1,3,100}));
+        System.out.println(new Solution().dailyTemperatures2(new int[]{73,74,75,71,69,72,76,73}));
         // System.out.println(new Solution().pruneTree(null));
     }
 
@@ -2996,8 +2996,6 @@ public class Solution {
                 }
     }
 
-
-
     // 打家劫舍 III
     public int rob3(TreeNode root) {
         Map<TreeNode, Integer> f = new HashMap<>();
@@ -3005,8 +3003,6 @@ public class Solution {
         dfsRob(f,g,root);
         return Math.max(f.getOrDefault(root,0), g.getOrDefault(root, 0));
     }
-
-
     private void dfsRob(Map<TreeNode, Integer> f, Map<TreeNode, Integer> g, TreeNode root) {
         if(root == null) return;
         dfsRob(f,g,root.left);
@@ -3020,7 +3016,6 @@ public class Solution {
         
         return Math.max(getRob2(Arrays.copyOfRange(nums, 0, nums.length-1)),getRob2(Arrays.copyOfRange(nums, 1, nums.length)));
     }
-
     private int getRob2(int[] is){
         int[] dp = new int[is.length];
         dp[0] = is[0];
@@ -3029,5 +3024,19 @@ public class Solution {
             dp[i] = Math.max(is[i]+dp[i-2],dp[i-1]);
         }
         return dp[dp.length-1];
+    }
+
+    //每日温度2 73,74,75,71,69,72,76,73
+    public int[] dailyTemperatures2(int[] temperatures) {
+        int[] res = new int[temperatures.length];
+        Stack<Integer> stack = new Stack<>();
+        for (int i = 0; i < temperatures.length; i++) {
+            while(!stack.isEmpty() && temperatures[i] > temperatures[stack.peek()]) {
+                int idx = stack.pop();
+                res[idx] = i - idx;
+            }
+            stack.push(i);
+        }
+        return res;
     }
 }
