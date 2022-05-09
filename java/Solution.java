@@ -3039,4 +3039,25 @@ public class Solution {
         }
         return res;
     }
+
+    // 合并区间
+    public int[][] merge(int[][] intervals) {
+        if(intervals.length <= 1) return intervals;
+        List<int[]> res = new ArrayList<>();
+        Arrays.sort(intervals, new Comparator<int[]>() {
+            @Override
+            public int compare(int[] arg0, int[] arg1) {
+                return arg0[0] - arg1[0];
+            }
+        });
+        for (int i = 0; i < intervals.length; i++) {
+            int l = intervals[i][0], r = intervals[i][1];
+            if(res.isEmpty() || res.get(res.size()-1)[1] < l) {
+                res.add(new int[]{l,r});
+            } else {
+                res.get(res.size()-1)[1] = Math.max(r, res.get(res.size()-1)[1]);
+            }
+        }
+        return res.toArray(new int[res.size()][]);
+    }
 }
