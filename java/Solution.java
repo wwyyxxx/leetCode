@@ -3060,4 +3060,43 @@ public class Solution {
         }
         return res.toArray(new int[res.size()][]);
     }
+
+    //单词搜索
+    public boolean exist(char[][] board, String word) {
+        int m = board.length;
+        int n = board[0].length;
+        boolean[][] visted = new boolean[m][n];
+        for(int i = 0; i < m; i++) {
+            for(int j = 0; j < n ; j++) {
+                boolean flag = check(i,j,board,visted,word,0);
+                if(flag) {
+                    return true;  
+                }
+            }
+        }
+        return false;
+    }
+
+    private boolean check(int i, int j, char[][] board, boolean[][] visted, String word, int idx) {
+        if(board[i][j] != word.charAt(i)) return false;
+        if(word.length() - 1 == i) return true;
+        int[][] dic = new int[][]{{0,1},{0,-1},{1,0},{-1,0}};
+        boolean res = false;
+        visted[i][j] = true;
+        for (int[] ks : dic) {
+            int w = i + ks[0];
+            int h = j + ks[1];
+            if(w >= 0 && h >= 0 && w < board.length && h < board[0].length) {
+                if(!visted[w][h]) {
+                    boolean flag = check(w, h, board, visted, word, idx+1);
+                    if(flag) {
+                        res = true;
+                        break;
+                    }
+                }
+            }
+        }
+        visted[i][j] = false;
+        return res;
+    }
 }
