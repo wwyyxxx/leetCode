@@ -3078,8 +3078,8 @@ public class Solution {
     }
 
     private boolean check(int i, int j, char[][] board, boolean[][] visted, String word, int idx) {
-        if(board[i][j] != word.charAt(i)) return false;
-        if(word.length() - 1 == i) return true;
+        if(board[i][j] != word.charAt(idx)) return false;
+        if(word.length() - 1 == idx) return true;
         int[][] dic = new int[][]{{0,1},{0,-1},{1,0},{-1,0}};
         boolean res = false;
         visted[i][j] = true;
