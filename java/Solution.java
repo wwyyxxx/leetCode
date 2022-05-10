@@ -3055,4 +3055,64 @@ public class Solution {
         }
         return dp[n];
     }
+    
+    // 合并区间
+    public int[][] merge(int[][] intervals) {
+        if(intervals.length <= 1) return intervals;
+        List<int[]> res = new ArrayList<>();
+        Arrays.sort(intervals, new Comparator<int[]>() {
+            @Override
+            public int compare(int[] arg0, int[] arg1) {
+                return arg0[0] - arg1[0];
+            }
+        });
+        for (int i = 0; i < intervals.length; i++) {
+            int l = intervals[i][0], r = intervals[i][1];
+            if(res.isEmpty() || res.get(res.size()-1)[1] < l) {
+                res.add(new int[]{l,r});
+            } else {
+                res.get(res.size()-1)[1] = Math.max(r, res.get(res.size()-1)[1]);
+            }
+        }
+        return res.toArray(new int[res.size()][]);
+    }
+
+    //单词搜索
+    public boolean exist(char[][] board, String word) {
+        int m = board.length;
+        int n = board[0].length;
+        boolean[][] visted = new boolean[m][n];
+        for(int i = 0; i < m; i++) {
+            for(int j = 0; j < n ; j++) {
+                boolean flag = check(i,j,board,visted,word,0);
+                if(flag) {
+                    return true;  
+                }
+            }
+        }
+        return false;
+    }
+
+    private boolean check(int i, int j, char[][] board, boolean[][] visted, String word, int idx) {
+        if(board[i][j] != word.charAt(idx)) return false;
+        if(word.length() - 1 == idx) return true;
+        int[][] dic = new int[][]{{0,1},{0,-1},{1,0},{-1,0}};
+        boolean res = false;
+        visted[i][j] = true;
+        for (int[] ks : dic) {
+            int w = i + ks[0];
+            int h = j + ks[1];
+            if(w >= 0 && h >= 0 && w < board.length && h < board[0].length) {
+                if(!visted[w][h]) {
+                    boolean flag = check(w, h, board, visted, word, idx+1);
+                    if(flag) {
+                        res = true;
+                        break;
+                    }
+                }
+            }
+        }
+        visted[i][j] = false;
+        return res;
+    }
 }
