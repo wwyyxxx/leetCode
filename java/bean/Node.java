@@ -5,6 +5,8 @@ public class Node {
     public Node left;
     public Node right;
     public Node next;
+    public Node prev;
+    public Node child;
     public Object random;
 
     public Node() {}
