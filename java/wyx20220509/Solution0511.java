@@ -1,9 +1,9 @@
-import bean.Node;
+import bean.*;
 
 /*
  * @Author: Tungbo
  * @Date: 2021-07-06 14:44:26
- * @LastEditTime: 2022-05-11 19:14:08
+ * @LastEditTime: 2022-05-12 15:21:19
  * @LastEditors: Tungbo
  * @Description: leecode: 展平多级双向链表
  * 多级双向链表中，除了指向下一个节点和前一个节点指针之外，它还有一个子链表指针，可能指向单独的双向链表。这些子列表也可能会有一个或多个自己的子项，依此类推，生成多级数据结构，如下面的示例所示。
