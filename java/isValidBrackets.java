@@ -1,14 +1,7 @@
-/**
- * @Author WYX
- * @Description TODO
- * @Date 2019/10/26 2:20
- */
-public class isValidBrackets {
+package java;
 
-    public static void main(String[] args) {
-
-    }
-
+class IsValidBrackets {
+    
     public boolean isValid(String s) {
         if(s.length() % 2 != 0 ){
             return false;
@@ -29,7 +22,6 @@ public class isValidBrackets {
         checkChar(s,"(");
         return false;
     }
-
 
     private boolean checkChar(String s,String cha){
         int index = s.indexOf(cha);

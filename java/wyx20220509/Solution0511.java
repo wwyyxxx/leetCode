@@ -1,4 +1,6 @@
-import bean.*;
+package java.wyx20220509;
+
+import java.bean.Node;
 
 /*
  * @Author: Tungbo
@@ -11,7 +13,7 @@ import bean.*;
  * 给定位于列表第一级的头节点，请扁平化列表，即将这样的多级双向链表展平成普通的双向链表，使所有结点出现在单级双链表中。
  *
  */
-public class Solution {
+public class Solution0511 {
 
     public static void main(String[] args) {
     }

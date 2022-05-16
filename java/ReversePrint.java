@@ -1,6 +1,7 @@
-import java.util.Stack;
+package java;
 
-import bean.ListNode;
+import java.bean.ListNode;
+import java.util.Stack;
 
 /*
  * @Author: Tungbo

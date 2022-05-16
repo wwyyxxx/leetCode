@@ -1,3 +1,6 @@
+package java;
+
+import java.bean.ListNode;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -7,8 +10,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.Stack;
 
-import bean.ListNode;
-import bean.TreeNode;
+import java.bean.*;
 
 public class record{
     public static void main(String[] args) {

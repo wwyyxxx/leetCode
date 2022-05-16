@@ -1,6 +1,7 @@
-import java.util.HashMap;
+package java;
 
-import bean.TreeNode;
+import java.bean.TreeNode;
+import java.util.HashMap;
 
 /*
  * @Author: Tungbo

@@ -1,3 +1,5 @@
+package java;
+
 public class moveZeroes {
 
     public void moveZeroes1(int[] nums) {

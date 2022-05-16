@@ -1,4 +1,4 @@
-package bean;
+package java.bean;
 
 public class Node {
     public int val;

@@ -1,5 +1,9 @@
-import java.util.*;
-import bean.TreeNode;
+package java;
+import java.bean.TreeNode;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
 /*
  * @Author: Tungbo
  * @Date: 2022-04-01 15:07:46

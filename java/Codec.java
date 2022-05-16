@@ -1,5 +1,7 @@
+package java;
+
+import java.bean.TreeNode;
 import java.util.*;
-import bean.TreeNode;
 /*
  * @Author: Tungbo
  * @Date: 2021-09-22 11:12:38

@@ -1,4 +1,6 @@
-import bean.TreeNode;
+package java;
+
+import java.bean.TreeNode;
 
 /*
  * @Author: Tungbo

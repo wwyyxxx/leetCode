@@ -1,3 +1,7 @@
+package java.wyx20220509;
+
+import java.bean.ListNode;
+
 /*
  * @Author: Tungbo
  * @Date: 2022-05-12 15:23:04

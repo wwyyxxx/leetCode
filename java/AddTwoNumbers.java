@@ -1,4 +1,6 @@
-import bean.*;
+package java;
+
+import java.bean.ListNode;
 
 /*
  * @Author: Tungbo

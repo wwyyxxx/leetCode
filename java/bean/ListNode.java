@@ -5,7 +5,7 @@
  * @LastEditors: Tungbo
  * @Description: leecode: 
  */
-package bean;
+package java.bean;
 
 public class ListNode {
     public int val;
