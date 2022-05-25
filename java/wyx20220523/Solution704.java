@@ -1,7 +1,7 @@
 /*
  * @Author: Tungbo
  * @Date: 2022-05-25 16:59:14
- * @LastEditTime: 2022-05-25 17:07:06
+ * @LastEditTime: 2022-05-25 18:19:11
  * @LastEditors: Tungbo
  * @Description: leecode: 704. 二分查找
  * 
@@ -19,6 +19,26 @@ public class Solution704 {
             // (right - left) / 2 + left = (right + left) / 2
             // right - left + 2left = right + left
             int mid = (right - left) / 2 + left;
+            if(target < nums[mid]) {
+                right = mid-1;
+            } else if (target > nums[mid]) {
+                left = mid + 1;
+            } else {
+                return mid;
+            }
+        }
+        return ans;
+    }
+
+    //插值查找
+    public int insterSearch(int[] nums, int target) {
+        int ans = -1;
+        if(nums.length == 1){
+            return nums[0] == target ?  0 : -1;
+        }
+        int left = 0, right = nums.length-1;
+        while(left < right){
+            int mid = left + (right - left) * (target - nums[left]) / (nums[right] - nums[left]);
             if(target < nums[mid]) {
                 right = mid-1;
             } else if (target > nums[mid]) {
