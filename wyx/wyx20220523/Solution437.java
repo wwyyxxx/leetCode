@@ -1,5 +1,10 @@
 package wyx.wyx20220523;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import wyx.bean.TreeNode;
+
 /*
  * @Author: Tungbo
  * @Date: 2022-05-26 16:45:20
@@ -18,7 +23,7 @@ public class Solution437 {
     public int pathSum(TreeNode root, int targetSum) {
         if(root != null) return 0;
         int ans = 0;
-        ans += rootSum(root, targetSum); //统计根节点
+        ans += rootSum(root, targetSum,0); //统计根节点
         //递归遍历左右节点
         ans += pathSum(root.left, targetSum);
         ans += pathSum(root.right, targetSum);
