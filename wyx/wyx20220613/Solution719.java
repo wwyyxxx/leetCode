@@ -1,7 +1,7 @@
 /*
  * @Author: Tungbo
  * @Date: 2022-06-15 15:16:25
- * @LastEditTime: 2022-06-15 15:40:30
+ * @LastEditTime: 2022-06-16 10:57:57
  * @LastEditors: Tungbo
  * @Description: leecode: 719. 找出第 K 小的数对距离
  * 
@@ -54,5 +54,5 @@ public class Solution719 {
         }
         return ans;
     }
-、
+
 }
