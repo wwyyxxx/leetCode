@@ -1,7 +1,7 @@
 /*
  * @Author: Tungbo
  * @Date: 2022-06-15 15:16:25
- * @LastEditTime: 2022-06-16 10:57:57
+ * @LastEditTime: 2022-06-16 15:52:15
  * @LastEditors: Tungbo
  * @Description: leecode: 719. 找出第 K 小的数对距离
  * 
@@ -15,7 +15,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.TreeMap;
 
 public class Solution719 {
 
