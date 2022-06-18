@@ -1,13 +1,18 @@
 package wyx.wyx20220606;
 
+import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Locale;
 
 /*
  * @Author: Tungbo
  * @Date: 2022-06-07 13:00:13
- * @LastEditTime: 2022-06-07 14:36:35
+ * @LastEditTime: 2022-06-14 23:59:54
  * @LastEditors: Tungbo
  * @Description: leecode: 890. 查找和替换模式
  * 
@@ -40,6 +45,12 @@ public class Solution890 {
             }
             if(ok) ans.add(word);
         }
+
+        Comparator comparator = Collator.getInstance(Locale.CHINESE);
+        Collections.sort(ans,(p1,p2) -> {
+            return comparator.compare(p1, p2);
+        });
+        Collections.sort(ans);
         return ans;
     }
 
