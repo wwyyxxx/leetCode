@@ -5,7 +5,7 @@ import java.util.Arrays;
 /*
  * @Author: Tungbo
  * @Date: 2022-05-12 18:55:12
- * @LastEditTime: 2022-05-26 21:58:17
+ * @LastEditTime: 2022-06-22 14:46:29
  * @LastEditors: Tungbo
  * @Description: leecode:  排序数组
  * 
@@ -18,7 +18,7 @@ public class Solution912 {
         return headSort(nums);
     }
 
-    //冒泡  两层遍历
+    //冒泡  两层遍历，每次把最大的冒泡到最后
     public int[] BubbleSort(int[] nums){
         for(int i = 0;i < nums.length; i++) {
             //每一次把最大的值交换到最后
@@ -31,7 +31,17 @@ public class Solution912 {
         return nums;
     }
 
-    //选择 两层遍历
+    public void BubbleSort1(int[] nums){
+        for (int i = 0; i < nums.length; i++) {
+            for (int j = 0; j < nums.length - 1 - i; j++) {
+                if(nums[j]>nums[j+1]) {
+                    swap(nums,j,j+1);
+                }
+            }
+        }
+    }
+    
+    //选择 两层遍历,每次找出最小的一个
     public int[] SelectorSort(int[] nums){
         for(int i = 0;i < nums.length-1; i++) {
             int min = i;
@@ -46,6 +56,18 @@ public class Solution912 {
             }
         }
         return nums;
+    }
+
+    public void SelectorSort1(int[] nums){
+        for (int i = 0; i < nums.length-1; i++) {
+            int min = i;
+            for (int j = i+1; j < nums.length; j++) {
+                if(nums[j] < nums[i]) min = j;
+            }
+            if(i != min) {
+                swap(nums,i,min);
+            }
+        }
     }
 
     //插入 
@@ -65,6 +87,18 @@ public class Solution912 {
         return nums;
     }
 
+    //插入 逐渐往前比较 并插入到比它小的前面
+    public void InsertSort1(int[] nums){
+        for (int i = 1; i < nums.length; i++) {
+            int j = i;
+            while(j>0 && nums[j] < nums[j-1]) {
+                nums[j] = nums[j-1];
+                j--;
+            }
+            if(j != i) nums[j] = nums[i];
+        }
+    }
+    
     // 快排 选出基点,大小部分递归
     public int[] QuickSort(int[] nums, int left, int right){
         if(left < right) {
@@ -74,7 +108,6 @@ public class Solution912 {
         }
         return nums;
     }
-
     //选出基点
     private int handleP(int[] nums, int left, int right){
         int p = left;
@@ -90,6 +123,29 @@ public class Solution912 {
         return index-1;
     }
 
+    // 快排 选出基点,大小部分递归
+    public void QuickSort1(int[] nums, int left, int right){
+        if(left < right) {
+            int p = selectPoint(nums, left, right);
+            QuickSort(nums, left, p-1);
+            QuickSort(nums,p,right);
+        }
+    }
+    //选出基点
+    private int selectPoint(int[] nums, int left, int right){
+        int p = left;
+        int index = left + 1;
+        for (int i = index; i < nums.length; i++) {
+            if(nums[p] > nums[i]) {
+                swap(nums,index,i);
+                index++;
+            }
+        }
+        swap(nums,index-1,p);
+        return index - 1;
+    }
+
+    
     //归并排序
     public int[] sort(int[] nums){
         if(nums.length < 2) return nums;

@@ -1,7 +1,7 @@
 /*
  * @Author: Tungbo
  * @Date: 2022-06-22 11:20:30
- * @LastEditTime: 2022-06-22 11:20:32
+ * @LastEditTime: 2022-06-22 11:21:34
  * @LastEditors: Tungbo
  * @Description: leecode: 513. 找树左下角的值
  * 
@@ -11,7 +11,7 @@
  */
 package wyx.wyx20220620;
 
-import javax.swing.tree.TreeNode;
+import wyx.bean.TreeNode;
 
 public class Solution513 {
 
