@@ -1,7 +1,7 @@
 /*
  * @Author: Tungbo
  * @Date: 2022-07-01 15:16:54
- * @LastEditTime: 2022-07-01 16:09:19
+ * @LastEditTime: 2022-07-04 19:00:27
  * @LastEditors: Tungbo
  * @Description: leecode: 241. 为运算表达式设计优先级
  * 
@@ -30,15 +30,7 @@ public class Solution241 {
     public List<Integer> diffWaysToCompute(String expression) {
         for (int i = 0; i < expression.length();) {
             if (!Character.isDigit(expression.charAt(i))) {
-                if (expression.charAt(i) == '+') {
-                    ops.add(ADDITION);
-                }
-                if (expression.charAt(i) == '-') {
-                    ops.add(SUBTRACTION);
-                }
-                if (expression.charAt(i) == '*') {
-                    ops.add(MULTIPLICATION);
-                }
+                ops.add(expression.charAt(i));
                 i++;
             } else {
                 int t = 0;
