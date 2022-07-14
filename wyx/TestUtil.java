@@ -5,11 +5,12 @@ import java.util.*;
 
 import wyx.other.Solution;
 import wyx.wyx20220711.MagicDictionary;
+import wyx.wyx20220711.WordFilter;
 
 /*
  * @Author: Tungbo
  * @Date: 2021-09-03 15:09:15
- * @LastEditTime: 2022-07-11 17:12:19
+ * @LastEditTime: 2022-07-14 18:12:05
  * @LastEditors: Tungbo
  * @Description: leecode: 
  */
@@ -18,7 +19,10 @@ public class TestUtil {
 
         MagicDictionary m = new MagicDictionary();
         m.buildDict(new String[]{"hello","hallo","leetcode","judge"});
+
+        WordFilter wf = new WordFilter(new String[]{"apple"});
+        
         // System.out.println(m.search("juage"));
-        System.out.println(Integer.valueOf("001"));
+        System.out.println(wf.f("a","le"));
     }
 }
