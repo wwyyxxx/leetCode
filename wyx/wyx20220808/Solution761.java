@@ -1,11 +1,11 @@
 /*
  * @Author: Tungbo
  * @Date: 2022-08-08 16:00:40
- * @LastEditTime: 2022-08-08 16:16:34
+ * @LastEditTime: 2022-08-09 11:02:40
  * @LastEditors: Tungbo
  * @Description: leecode: 761. 特殊的二进制序列
  */
-package wyx.wyx20220801;
+package wyx.wyx20220808;
 
 import java.util.ArrayList;
 import java.util.Collections;
