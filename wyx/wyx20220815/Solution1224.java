@@ -1,7 +1,7 @@
 /*
  * @Author: Tungbo
  * @Date: 2022-08-18 21:13:55
- * @LastEditTime: 2022-08-18 22:16:49
+ * @LastEditTime: 2022-08-18 22:22:42
  * @LastEditors: Tungbo
  * @Description: leecode: 1224. 最大相等频率
  * 
@@ -19,8 +19,8 @@ public class Solution1224 {
     //sum 次数为某个值的数有多少个
     int[] cnt = new int[100005], sum = new int[100005];
     public int maxEqualFreq(int[] nums) {
-        Arrays.fill(cnt, 1);
-        Arrays.fill(sum, 1);
+        Arrays.fill(cnt, 0);
+        Arrays.fill(sum, 0);
         int n = nums.length, max = 0, ans = 0;
         for (int i = 0; i < n; i++) {
             int t = nums[i], cur = ++cnt[t], len = i + 1;
