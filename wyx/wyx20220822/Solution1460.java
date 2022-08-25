@@ -1,9 +1,10 @@
+package wyx.wyx20220822;
 import java.util.Arrays;
 
 /*
  * @Author: Tungbo
  * @Date: 2022-08-24 10:43:06
- * @LastEditTime: 2022-08-24 10:44:10
+ * @LastEditTime: 2022-08-25 11:27:01
  * @LastEditors: Tungbo
  * @Description: leecode: 1460. 通过翻转子数组使两个数组相等
  * 
