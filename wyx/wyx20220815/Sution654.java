@@ -1,7 +1,7 @@
 /*
  * @Author: Tungbo
  * @Date: 2022-08-20 16:07:10
- * @LastEditTime: 2022-08-20 16:21:16
+ * @LastEditTime: 2022-08-30 11:45:20
  * @LastEditors: Tungbo
  * @Description: leecode: 654. 最大二叉树
  * 
@@ -15,7 +15,6 @@
 package wyx.wyx20220815;
 
 import wyx.bean.TreeNode;
-import wyx.other.Tree;
 
 public class Sution654 {
     
