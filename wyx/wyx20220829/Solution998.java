@@ -1,7 +1,7 @@
 /*
  * @Author: Tungbo
  * @Date: 2022-08-30 10:55:54
- * @LastEditTime: 2022-08-30 13:51:40
+ * @LastEditTime: 2022-08-30 14:32:54
  * @LastEditors: Tungbo
  * @Description: leecode: 998. 最大二叉树 II
  * 
@@ -14,9 +14,6 @@
  * 
  */
 package wyx.wyx20220829;
-
-import java.util.LinkedList;
-
 import wyx.bean.TreeNode;
 
 public class Solution998 {
