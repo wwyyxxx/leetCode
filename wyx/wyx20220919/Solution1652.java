@@ -1,7 +1,7 @@
 /*
  * @Author: Tungbo
  * @Date: 2022-09-24 19:17:45
- * @LastEditTime: 2022-09-24 19:42:31
+ * @LastEditTime: 2022-09-24 19:43:39
  * @LastEditors: Tungbo
  * @Description: leecode: 1652. 拆炸弹
  * 
@@ -10,7 +10,7 @@
  * 如果 k == 0 ，将第 i 个数字用 0 替换。
  * 
  */
-package wyx.wyx20220912;
+package wyx.wyx20220919;
 
 public class Solution1652 {
 
