@@ -7,11 +7,12 @@ import wyx.wyx20220711.MagicDictionary;
 import wyx.wyx20220711.WordFilter;
 import wyx.wyx20220829.Solution646;
 import wyx.wyx20220905.Solution1592;
+import wyx.wyx20221010.Solution940;
 
 /*
  * @Author: Tungbo
  * @Date: 2021-09-03 15:09:15
- * @LastEditTime: 2022-09-07 14:47:18
+ * @LastEditTime: 2022-10-14 15:47:22
  * @LastEditors: Tungbo
  * @Description: leecode: 
  */
@@ -27,7 +28,7 @@ public class TestUtil {
         // List<int[]> list = Arrays.asList(temp);
         // Collections.shuffle(list);
         // System.out.println(list);
-        System.out.println(new Solution1592().reorderSpaces("  this   is  a sentence "));
+        System.out.println(new Solution940().distinctSubseqII("abc"));
     }
 
     public int trap(int[] height) {
