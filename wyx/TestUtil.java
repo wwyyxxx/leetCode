@@ -8,6 +8,7 @@ import wyx.wyx20220711.WordFilter;
 import wyx.wyx20220829.Solution646;
 import wyx.wyx20220905.Solution1592;
 import wyx.wyx20221010.Solution940;
+import wyx.wyx20221024.Solution934;
 
 /*
  * @Author: Tungbo
@@ -28,7 +29,7 @@ public class TestUtil {
         // List<int[]> list = Arrays.asList(temp);
         // Collections.shuffle(list);
         // System.out.println(list);
-        System.out.println(new Solution940().distinctSubseqII("abc"));
+        System.out.println(new Solution934().shortestBridge(new int[][]{{0,1},{1,0}}));
     }
 
     public int trap(int[] height) {
