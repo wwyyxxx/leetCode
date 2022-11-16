@@ -10,6 +10,7 @@ import wyx.wyx20220905.Solution1592;
 import wyx.wyx20221010.Solution940;
 import wyx.wyx20221024.Solution934;
 import wyx.wyx20221031.Solution754;
+import wyx.wyx20221114.Solution775;
 
 /*
  * @Author: Tungbo
@@ -30,7 +31,7 @@ public class TestUtil {
         // List<int[]> list = Arrays.asList(temp);
         // Collections.shuffle(list);
         // System.out.println(list);
-        System.out.println(new Solution754().reachNumber(2));
+        System.out.println(new Solution775().isIdealPermutation(new int[]{1,2,0}));
     }
 
     public int trap(int[] height) {
