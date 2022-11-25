@@ -12,6 +12,7 @@ import wyx.wyx20221024.Solution934;
 import wyx.wyx20221031.Solution754;
 import wyx.wyx20221114.Solution775;
 import wyx.wyx20221114.Solution792;
+import wyx.wyx20221121.Solution809;
 
 /*
  * @Author: Tungbo
@@ -32,7 +33,7 @@ public class TestUtil {
         // List<int[]> list = Arrays.asList(temp);
         // Collections.shuffle(list);
         // System.out.println(list);
-        System.out.println(new Solution792().numMatchingSubseq("abcde", new String[]{"a","bb","acd","ace"}));
+        System.out.println(new Solution809().expressiveWords("heeellooo", new String[]{"hello", "hi", "helo"}));
     }
 
     public int trap(int[] height) {
