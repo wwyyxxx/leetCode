@@ -13,6 +13,7 @@ import wyx.wyx20221031.Solution754;
 import wyx.wyx20221114.Solution775;
 import wyx.wyx20221114.Solution792;
 import wyx.wyx20221121.Solution809;
+import wyx.wyx20221121.Solution882;
 
 /*
  * @Author: Tungbo
@@ -33,7 +34,7 @@ public class TestUtil {
         // List<int[]> list = Arrays.asList(temp);
         // Collections.shuffle(list);
         // System.out.println(list);
-        System.out.println(new Solution809().expressiveWords("heeellooo", new String[]{"hello", "hi", "helo"}));
+        System.out.println(new Solution882().reachableNodes(new int[][]{{0,1,10},{0,2,1},{1,2,2}}, 6, 3));
     }
 
     public int trap(int[] height) {
