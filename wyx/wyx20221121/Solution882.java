@@ -1,7 +1,7 @@
 /*
  * @Author: Tungbo
  * @Date: 2022-11-26 18:03:53
- * @LastEditTime: 2022-11-26 20:41:38
+ * @LastEditTime: 2022-11-26 20:45:02
  * @LastEditors: Tungbo
  * @Description: leecode: 882. 细分图中的可到达节点
  * 
@@ -51,7 +51,7 @@ public class Solution882 {
     // Dijkstra 算法模板
     // 返回从 start 到每个点的最短路
     private int[] dijkstra(List<int[]>[] g, int start) {
-        var dist = new int[g.length];
+        var dist = new int[g.length]; //start到每个点的最短路
         Arrays.fill(dist, Integer.MAX_VALUE);
         dist[start] = 0;
         PriorityQueue<int[]> pq = new PriorityQueue<int[]>((a,b)-> a[1] - b[1]);

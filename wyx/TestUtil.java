@@ -12,6 +12,7 @@ import wyx.wyx20221024.Solution934;
 import wyx.wyx20221031.Solution754;
 import wyx.wyx20221114.Solution775;
 import wyx.wyx20221114.Solution792;
+import wyx.wyx20221121.Solution1752;
 import wyx.wyx20221121.Solution809;
 import wyx.wyx20221121.Solution882;
 
@@ -34,7 +35,7 @@ public class TestUtil {
         // List<int[]> list = Arrays.asList(temp);
         // Collections.shuffle(list);
         // System.out.println(list);
-        System.out.println(new Solution882().reachableNodes(new int[][]{{0,1,10},{0,2,1},{1,2,2}}, 6, 3));
+        System.out.println(new Solution1752().check(new int[]{7,9,1,1,1,3}));
     }
 
     public int trap(int[] height) {
