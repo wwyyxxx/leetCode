@@ -1,7 +1,7 @@
 /*
  * @Author: Tungbo
  * @Date: 2022-12-02 14:09:47
- * @LastEditTime: 2022-12-02 14:26:41
+ * @LastEditTime: 2022-12-02 14:49:57
  * @LastEditors: Tungbo
  * @Description: leecode: 1769. 移动所有球到每个盒子所需的最小操作数
  * 
@@ -18,18 +18,32 @@ package wyx.wyx20221128;
 public class Solution1769 {
     public int[] minOperations(String boxes) {
         char[] ch = boxes.toCharArray();
-        int[] boxs = new int[ch.length];
-        for (int i = 0; i < boxs.length; i++) {
-            boxs[i] = ch[i] - '0';
-        }
         int[] ans = new int[ch.length];
         for (int i = 0; i < ans.length; i++) {
-            int t = 0;
             for (int j = 0; j < ans.length; j++) {
-                if(j == i || boxs[j] == 0) continue;
-                t += Math.abs(i - j);
+                if(j == i || ch[j] == '0') continue;
+                ans[i] += Math.abs(i - j);
             }
-            ans[i] = t;
+        }
+        return ans;
+    }
+    
+    public int[] minOperations1(String boxes) {
+        char[] ch = boxes.toCharArray();
+        int[] ans = new int[ch.length];
+        int r = 0, l = (ch[0] == '1' ? 1 : 0);
+        for (int i = 1; i < ch.length; i++) {
+            if(ch[i] == '1') {
+                ans[0] += i;
+                r++;
+            }
+        }
+        for (int i = 1; i < ans.length; i++) {
+            ans[i] = ans[i-1] + l - r;
+            if(ch[i] == '1') {
+                r--;
+                l++;
+            }
         }
         return ans;
     }
