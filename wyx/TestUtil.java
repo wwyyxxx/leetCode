@@ -15,6 +15,7 @@ import wyx.wyx20221114.Solution792;
 import wyx.wyx20221121.Solution1752;
 import wyx.wyx20221121.Solution809;
 import wyx.wyx20221121.Solution882;
+import wyx.wyx20221128.Solution1796;
 
 /*
  * @Author: Tungbo
@@ -35,7 +36,7 @@ public class TestUtil {
         // List<int[]> list = Arrays.asList(temp);
         // Collections.shuffle(list);
         // System.out.println(list);
-        System.out.println(new Solution1752().check(new int[]{7,9,1,1,1,3}));
+        System.out.println(new Solution1796().secondHighest1("ck077"));
     }
 
     public int trap(int[] height) {
