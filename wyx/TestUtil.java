@@ -1,3 +1,10 @@
+/*
+ * @Author: Tungbo
+ * @Date: 2021-10-10 17:32:11
+ * @LastEditTime: 2022-12-06 18:52:46
+ * @LastEditors: Tungbo
+ * @Description: leecode: 
+ */
 package wyx;
 
 import java.util.*;
@@ -36,6 +43,7 @@ public class TestUtil {
         // List<int[]> list = Arrays.asList(temp);
         // Collections.shuffle(list);
         // System.out.println(list);
+        Integer.valueOf("011");
         System.out.println(new Solution1796().secondHighest1("ck077"));
     }
 
