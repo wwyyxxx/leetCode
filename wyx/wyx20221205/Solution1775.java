@@ -1,7 +1,7 @@
 /*
  * @Author: Tungbo
  * @Date: 2022-12-07 10:42:53
- * @LastEditTime: 2022-12-07 11:16:55
+ * @LastEditTime: 2022-12-07 11:18:17
  * @LastEditors: Tungbo
  * @Description: leecode: 1775. 通过最少操作次数使数组的和相等
  * 
@@ -35,7 +35,7 @@ public class Solution1775 {
             ++cnt[x - 1];
         for (int i = 5;; i--) {
             if (i * cnt[i] >= diff) {
-                return step + (diff + i - 1) / i;
+                return step + (diff + i - 1) / i;//diff/i + 1
             }
             step += cnt[i];
             diff -= i * cnt[i];
