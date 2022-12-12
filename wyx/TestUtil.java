@@ -1,7 +1,7 @@
 /*
  * @Author: Tungbo
  * @Date: 2021-10-10 17:32:11
- * @LastEditTime: 2022-12-11 19:08:20
+ * @LastEditTime: 2022-12-12 15:46:34
  * @LastEditors: Tungbo
  * @Description: leecode: 
  */
@@ -23,6 +23,7 @@ import wyx.wyx20221121.Solution1752;
 import wyx.wyx20221121.Solution809;
 import wyx.wyx20221121.Solution882;
 import wyx.wyx20221128.Solution1796;
+import wyx.wyx20221212.Solution1781;
 
 /*
  * @Author: Tungbo
@@ -46,7 +47,7 @@ public class TestUtil {
 
         //970. 强整数
         Integer.valueOf("011");
-        System.out.println(new Solution1796().secondHighest1("ck077"));
+        System.out.println(new Solution1781().beautySum("aabcb"));
     }
 
     public int trap(int[] height) {
