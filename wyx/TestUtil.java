@@ -1,7 +1,7 @@
 /*
  * @Author: Tungbo
  * @Date: 2021-10-10 17:32:11
- * @LastEditTime: 2022-12-12 15:46:34
+ * @LastEditTime: 2022-12-15 14:09:14
  * @LastEditors: Tungbo
  * @Description: leecode: 
  */
@@ -9,21 +9,7 @@ package wyx;
 
 import java.util.*;
 
-import wyx.other.Solution;
-import wyx.wyx20220711.MagicDictionary;
-import wyx.wyx20220711.WordFilter;
-import wyx.wyx20220829.Solution646;
-import wyx.wyx20220905.Solution1592;
-import wyx.wyx20221010.Solution940;
-import wyx.wyx20221024.Solution934;
-import wyx.wyx20221031.Solution754;
-import wyx.wyx20221114.Solution775;
-import wyx.wyx20221114.Solution792;
-import wyx.wyx20221121.Solution1752;
-import wyx.wyx20221121.Solution809;
-import wyx.wyx20221121.Solution882;
-import wyx.wyx20221128.Solution1796;
-import wyx.wyx20221212.Solution1781;
+import wyx.wyx20221212.Solution1925;
 
 /*
  * @Author: Tungbo
@@ -45,9 +31,8 @@ public class TestUtil {
         // Collections.shuffle(list);
         // System.out.println(list);
 
-        //970. 强整数
         Integer.valueOf("011");
-        System.out.println(new Solution1781().beautySum("aabcb"));
+        System.out.println(new Solution1925().getLucky("dbvmfhnttvr",5));
     }
 
     public int trap(int[] height) {
