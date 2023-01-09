@@ -5,7 +5,7 @@
  * @LastEditors: Tungbo
  * @Description: leecode: 1658. 将 x 减到 0 的最小操作数
  */
-package wyx.wyx20230112;
+package wyx.wyx20230102;
 
 public class Solution1658 {
 

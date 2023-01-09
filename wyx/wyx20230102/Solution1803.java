@@ -5,7 +5,7 @@
  * @LastEditors: Tungbo
  * @Description: leecode: 1803. 统计异或值在范围内的数对有多少
  */
-package wyx.wyx20230112;
+package wyx.wyx20230102;
 
 import java.util.HashMap;
 

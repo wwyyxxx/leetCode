@@ -9,7 +9,7 @@
  * 正整数的 各位数字之和 是其所有位上的对应数字相加的结果
  * 
  */
-package wyx.wyx20230112;
+package wyx.wyx20230102;
 
 public class Solution2180 {
     public int countEven(int num) {

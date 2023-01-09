@@ -5,7 +5,7 @@
  * @LastEditors: Tungbo
  * @Description: leecode: 2042. 检查句子中的数字是否递增
  */
-package wyx.wyx20230112;
+package wyx.wyx20230102;
 
 public class Solution2042 {
     public boolean areNumbersAscending(String s) {
