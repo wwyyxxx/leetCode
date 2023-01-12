@@ -1,7 +1,7 @@
 /*
  * @Author: Tungbo
  * @Date: 2021-10-10 17:32:11
- * @LastEditTime: 2023-01-09 16:29:57
+ * @LastEditTime: 2023-01-12 16:51:28
  * @LastEditors: Tungbo
  * @Description: leecode: 
  */
@@ -10,6 +10,7 @@ package wyx;
 import java.util.*;
 
 import wyx.wyx20221212.Solution1925;
+import wyx.wyx20230109.Solution1807;
 
 /*
  * @Author: Tungbo
@@ -25,14 +26,17 @@ public class TestUtil {
         // m.buildDict(new String[] { "hello", "hallo", "leetcode", "judge" });
 
         // WordFilter wf = new WordFilter(new String[] { "apple" });
-        // int[][] temp = new int[][]{{-6,9},{1,6},{8,10},{-1,4},{-6,-2},{-9,8},{-5,3},{0,3}};
+        // int[][] temp = new
+        // int[][]{{-6,9},{1,6},{8,10},{-1,4},{-6,-2},{-9,8},{-5,3},{0,3}};
         // Arrays.stream(temp).distinct();
         // List<int[]> list = Arrays.asList(temp);
         // Collections.shuffle(list);
         // System.out.println(list);
-
+        List<List<String>> list = new ArrayList<>();
+        list.add(Arrays.asList("name", "bob"));
+        list.add(Arrays.asList("age", "two"));
         Integer.valueOf("011");
-        System.out.println(new Solution1925().getLucky("dbvmfhnttvr",5));
+        System.out.println(new Solution1807().evaluate("(name)is(age)yearsold", list));
     }
 
     public int trap(int[] height) {
@@ -40,14 +44,14 @@ public class TestUtil {
         int[] maxLeft = new int[height.length];
         int[] maxRight = new int[height.length];
         for (int i = 1; i < height.length - 1; i++) {
-            maxLeft[i] = Math.max(maxLeft[i - 1], height[i -1]);
+            maxLeft[i] = Math.max(maxLeft[i - 1], height[i - 1]);
         }
         for (int i = height.length - 2; i >= 0; i--) {
-            maxRight[i] = Math.max(maxRight[i +1], height[i +1]);
+            maxRight[i] = Math.max(maxRight[i + 1], height[i + 1]);
         }
         for (int i = 1; i < height.length - 1; i++) {
             int min = Math.min(maxLeft[i], maxRight[i]);
-            if(min > height[i]) {
+            if (min > height[i]) {
                 ans += (min - height[i]);
             }
         }
