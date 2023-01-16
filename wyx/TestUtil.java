@@ -1,7 +1,7 @@
 /*
  * @Author: Tungbo
  * @Date: 2021-10-10 17:32:11
- * @LastEditTime: 2023-01-12 16:51:28
+ * @LastEditTime: 2023-01-16 14:39:39
  * @LastEditors: Tungbo
  * @Description: leecode: 
  */
@@ -11,6 +11,7 @@ import java.util.*;
 
 import wyx.wyx20221212.Solution1925;
 import wyx.wyx20230109.Solution1807;
+import wyx.wyx20230116.Solution1813;
 
 /*
  * @Author: Tungbo
@@ -21,22 +22,7 @@ import wyx.wyx20230109.Solution1807;
  */
 public class TestUtil {
     public static void main(String[] args) {
-
-        // MagicDictionary m = new MagicDictionary();
-        // m.buildDict(new String[] { "hello", "hallo", "leetcode", "judge" });
-
-        // WordFilter wf = new WordFilter(new String[] { "apple" });
-        // int[][] temp = new
-        // int[][]{{-6,9},{1,6},{8,10},{-1,4},{-6,-2},{-9,8},{-5,3},{0,3}};
-        // Arrays.stream(temp).distinct();
-        // List<int[]> list = Arrays.asList(temp);
-        // Collections.shuffle(list);
-        // System.out.println(list);
-        List<List<String>> list = new ArrayList<>();
-        list.add(Arrays.asList("name", "bob"));
-        list.add(Arrays.asList("age", "two"));
-        Integer.valueOf("011");
-        System.out.println(new Solution1807().evaluate("(name)is(age)yearsold", list));
+        System.out.println(new Solution1813().areSentencesSimilar("A A AAa","A AAa"));
     }
 
     public int trap(int[] height) {
