@@ -1,7 +1,7 @@
 /*
  * @Author: Tungbo
  * @Date: 2021-10-10 17:32:11
- * @LastEditTime: 2023-01-16 14:39:39
+ * @LastEditTime: 2023-01-17 22:59:18
  * @LastEditors: Tungbo
  * @Description: leecode: 
  */
@@ -12,6 +12,7 @@ import java.util.*;
 import wyx.wyx20221212.Solution1925;
 import wyx.wyx20230109.Solution1807;
 import wyx.wyx20230116.Solution1813;
+import wyx.wyx20230116.Solution1814;
 
 /*
  * @Author: Tungbo
@@ -22,7 +23,7 @@ import wyx.wyx20230116.Solution1813;
  */
 public class TestUtil {
     public static void main(String[] args) {
-        System.out.println(new Solution1813().areSentencesSimilar("A A AAa","A AAa"));
+        System.out.println(new Solution1814().countNicePairs(new int[]{1,10}));
     }
 
     public int trap(int[] height) {
