@@ -1,7 +1,7 @@
 /*
  * @Author: Tungbo
  * @Date: 2021-10-10 17:32:11
- * @LastEditTime: 2023-01-17 22:59:18
+ * @LastEditTime: 2023-01-19 22:43:46
  * @LastEditors: Tungbo
  * @Description: leecode: 
  */
@@ -13,6 +13,7 @@ import wyx.wyx20221212.Solution1925;
 import wyx.wyx20230109.Solution1807;
 import wyx.wyx20230116.Solution1813;
 import wyx.wyx20230116.Solution1814;
+import wyx.wyx20230116.Solution2299;
 
 /*
  * @Author: Tungbo
@@ -23,7 +24,7 @@ import wyx.wyx20230116.Solution1814;
  */
 public class TestUtil {
     public static void main(String[] args) {
-        System.out.println(new Solution1814().countNicePairs(new int[]{1,10}));
+        System.out.println(new Solution2299().strongPasswordCheckerII("IloveLe3tcode!"));
     }
 
     public int trap(int[] height) {
