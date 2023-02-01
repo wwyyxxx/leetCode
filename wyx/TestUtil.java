@@ -14,6 +14,7 @@ import wyx.wyx20230109.Solution1807;
 import wyx.wyx20230116.Solution1813;
 import wyx.wyx20230116.Solution1814;
 import wyx.wyx20230116.Solution2299;
+import wyx.wyx20230130.Solution2325;
 
 /*
  * @Author: Tungbo
@@ -24,7 +25,7 @@ import wyx.wyx20230116.Solution2299;
  */
 public class TestUtil {
     public static void main(String[] args) {
-        System.out.println(new Solution2299().strongPasswordCheckerII("IloveLe3tcode!"));
+        System.out.println(new Solution2325().decodeMessage("the quick brown fox jumps over the lazy dog","vkbs bs t suepuv"));
     }
 
     public int trap(int[] height) {
