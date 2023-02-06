@@ -1,7 +1,7 @@
 /*
  * @Author: Tungbo
  * @Date: 2021-10-10 17:32:11
- * @LastEditTime: 2023-01-19 22:43:46
+ * @LastEditTime: 2023-02-06 14:42:47
  * @LastEditors: Tungbo
  * @Description: leecode: 
  */
@@ -25,7 +25,7 @@ import wyx.wyx20230130.Solution2325;
  */
 public class TestUtil {
     public static void main(String[] args) {
-        System.out.println(new Solution2325().decodeMessage("the quick brown fox jumps over the lazy dog","vkbs bs t suepuv"));
+        // System.out.println(0 || 1);
     }
 
     public int trap(int[] height) {
