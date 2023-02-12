@@ -15,6 +15,7 @@ import wyx.wyx20230116.Solution1813;
 import wyx.wyx20230116.Solution1814;
 import wyx.wyx20230116.Solution2299;
 import wyx.wyx20230130.Solution2325;
+import wyx.wyx20230206.Solution1138;
 
 /*
  * @Author: Tungbo
@@ -25,7 +26,7 @@ import wyx.wyx20230130.Solution2325;
  */
 public class TestUtil {
     public static void main(String[] args) {
-        // System.out.println(0 || 1);
+        System.out.println(new Solution1138().alphabetBoardPath("leet"));
     }
 
     public int trap(int[] height) {
