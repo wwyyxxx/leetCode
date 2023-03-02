@@ -7,7 +7,7 @@ import java.util.Arrays;
  * @Date: 2022-05-12 18:55:12
  * @LastEditTime: 2022-06-22 14:46:29
  * @LastEditors: Tungbo
- * @Description: leecode:  排序数组
+ * @Description: leecode:  八大排序算法数组
  * 
  * 给你一个整数数组 nums，请你将该数组升序排列。
  * 
