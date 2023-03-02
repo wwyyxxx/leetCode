@@ -5,7 +5,7 @@ import java.util.Arrays;
 /*
  * @Author: Tungbo
  * @Date: 2022-05-12 18:55:12
- * @LastEditTime: 2022-06-22 14:46:29
+ * @LastEditTime: 2023-03-02 17:16:40
  * @LastEditors: Tungbo
  * @Description: leecode:  八大排序算法数组
  * 
@@ -18,7 +18,7 @@ public class Solution912 {
         return headSort(nums);
     }
 
-    //冒泡  两层遍历，每次把最大的冒泡到最后
+    //冒泡  两层遍历，每次把最大的冒泡到最后 O(n^2)
     public int[] BubbleSort(int[] nums){
         for(int i = 0;i < nums.length; i++) {
             //每一次把最大的值交换到最后
@@ -41,7 +41,7 @@ public class Solution912 {
         }
     }
     
-    //选择 两层遍历,每次找出最小的一个
+    //选择 两层遍历,每次找出最小的一个 O(n^2)
     public int[] SelectorSort(int[] nums){
         for(int i = 0;i < nums.length-1; i++) {
             int min = i;
@@ -70,7 +70,7 @@ public class Solution912 {
         }
     }
 
-    //插入 
+    //插入 逐渐往前比较 并插入到比它小的前面 O(n^2)
     public int[] InsertSort(int[] nums){
         for(int i = 1;i < nums.length; i++) {
             int j = i;
@@ -87,7 +87,7 @@ public class Solution912 {
         return nums;
     }
 
-    //插入 逐渐往前比较 并插入到比它小的前面
+    //插入 
     public void InsertSort1(int[] nums){
         for (int i = 1; i < nums.length; i++) {
             int j = i;
@@ -99,90 +99,61 @@ public class Solution912 {
         }
     }
     
-    // 快排 选出基点,大小部分递归
+    //快排 选出基点,大小部分递归 O(n log n)， 
+    //最坏情况：每次划分都将序列分成长度为 $n-1$ 和 1 的两个子序列 O(n^2)
     public int[] QuickSort(int[] nums, int left, int right){
         if(left < right) {
-            int p = handleP(nums,left,right);
+            int p = selectPoint(nums,left,right);
             QuickSort(nums,left,p - 1);
             QuickSort(nums,p, right);
         }
         return nums;
     }
     //选出基点
-    private int handleP(int[] nums, int left, int right){
-        int p = left;
-        int index = p + 1;
-        for(int i = index;i<=right;i++) {
-            // 比基点小的移动到基点前面，记录交换后的一个index
-            if(nums[i] < nums[p]) {
-                swap(nums,index,i);
-                index++;
-            }
-        }
-        swap(nums,p,index-1);
-        return index-1;
-    }
-
-    // 快排 选出基点,大小部分递归
-    public void QuickSort1(int[] nums, int left, int right){
-        if(left < right) {
-            int p = selectPoint(nums, left, right);
-            QuickSort(nums, left, p-1);
-            QuickSort(nums,p,right);
-        }
-    }
-    //选出基点
     private int selectPoint(int[] nums, int left, int right){
-        int p = left;
-        int index = left + 1;
-        for (int i = index; i < nums.length; i++) {
-            if(nums[p] > nums[i]) {
-                swap(nums,index,i);
-                index++;
-            }
+        int temp = nums[left];
+        while(left < right) {
+            while(left < right && nums[right] >= temp) right--;
+            nums[left] = nums[right];
+            while(left < right && nums[left] <= temp) left++;
+            nums[right] = nums[left];
         }
-        swap(nums,index-1,p);
-        return index - 1;
+        nums[left] = temp;
+        return left;
     }
-
     
-    //归并排序
-    public int[] sort(int[] nums){
-        if(nums.length < 2) return nums;
-        int mid = nums.length / 2;
-        //递归折半后，然后合并时做排序
-        int[] left = Arrays.copyOfRange(nums, 0, mid);
-        int[] right = Arrays.copyOfRange(nums,mid,nums.length);
-        return merge(sort(left), sort(right));
+    //归并排序 递归折半后，然后合并时做排序 O(n log n)
+    public void mergeSort(int[] nums,int left, int right){
+        if(left >= right) return;
+        int mid = left + (right - left) /2;
+        mergeSort(nums,left, mid);
+        mergeSort(nums,mid+1, right);
+        merge(nums,left,mid,right);
     }
-    private int[] merge(int[] left, int[] right) {
-        int[] res = new int[left.length + right.length];
-        int n = left.length-1;
-        int m = right.length-1;
-        int i = 0;
-        //同时遍历两个数组，插入新数组中
-        while(n>=0 && m>=0) {
-            if(left[n] < right[m]) {
-                res[i++] = left[n];
-                n--;
+    private void merge(int[] arr, int left, int mid, int right) {
+        int[] res = new int[right - left + 1];
+        int i = left;
+        int j = mid+1;
+        int k = 0;
+        while(i<=mid && j<=right) {
+            if(arr[i] <= arr[j]) {
+                res[k++] = arr[i++];
             } else {
-                res[i++] = right[m];
-                m--;
+                res[k++] = arr[j++];
             }
         }
-        //处理数组长度不一致的情况
-        while(n>=0) {
-            res[i++] = left[n];
-            n--;
+        while(i <= mid) {
+            res[k++] = arr[i++];
         }
-        while(m>=0) {
-            res[i++] = right[m];
-            m--;
+        while(j <= right) {
+            res[k++] = arr[j++];
         }
-        return res;
+        for(int p = 0; p < res.length; p++) {
+            arr[left+p] = res[p];
+        }
     }
 
-    //堆排序
+    //堆排序 O(n log n)
     public int[] headSort(int[] nums) {
         //1.构建大顶堆 -- 左 < 右 < 根
         for(int i= nums.length/2-1 ;i>=0;i--){
@@ -215,7 +186,7 @@ public class Solution912 {
         nums[i] = temp;
     }
 
-    //希尔排序
+    //希尔排序 O(n log n) ~ O(n^2)
     private int[] shellSort(int[] nums){
         //对半进行分组
         for (int i = nums.length/2; i > 0; i /= 2) {
