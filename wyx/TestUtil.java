@@ -1,7 +1,7 @@
 /*
  * @Author: Tungbo
  * @Date: 2021-10-10 17:32:11
- * @LastEditTime: 2023-02-06 14:42:47
+ * @LastEditTime: 2023-03-06 11:39:30
  * @LastEditors: Tungbo
  * @Description: leecode: 
  */
@@ -27,6 +27,7 @@ import wyx.wyx20230206.Solution1138;
 public class TestUtil {
     public static void main(String[] args) {
         System.out.println(new Solution1138().alphabetBoardPath("leet"));
+        Arrays.toString(args);
     }
 
     public int trap(int[] height) {
