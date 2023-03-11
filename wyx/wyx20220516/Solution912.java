@@ -5,7 +5,7 @@ import java.util.Arrays;
 /*
  * @Author: Tungbo
  * @Date: 2022-05-12 18:55:12
- * @LastEditTime: 2023-03-02 17:16:40
+ * @LastEditTime: 2023-03-08 11:45:59
  * @LastEditors: Tungbo
  * @Description: leecode:  八大排序算法数组
  * 
@@ -105,7 +105,7 @@ public class Solution912 {
         if(left < right) {
             int p = selectPoint(nums,left,right);
             QuickSort(nums,left,p - 1);
-            QuickSort(nums,p, right);
+            QuickSort(nums,p + 1, right);
         }
         return nums;
     }
