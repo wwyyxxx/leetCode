@@ -1,13 +1,13 @@
 /*
  * @Author: Tungbo
  * @Date: 2023-03-08 11:08:06
- * @LastEditTime: 2023-03-08 11:08:10
+ * @LastEditTime: 2023-03-13 14:40:01
  * @LastEditors: Tungbo
  * @Description: leecode: 剑指 Offer 47. 礼物的最大价值
  */
 package wyx.wyx20230306;
 
-public class SolutionOffer47 {
+public class Solution47 {
     public int maxValue(int[][] grid) {
         int n = grid.length, m = grid[0].length;
         for(int i = 0;i < n; i++) {
