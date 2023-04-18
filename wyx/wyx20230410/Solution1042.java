@@ -15,15 +15,15 @@ public class Solution1042 {
     public int[] gardenNoAdj(int n, int[][] paths) {
         List<Integer> g[] = new ArrayList[n];
         Arrays.setAll(g, e -> new ArrayList<>());
-        for (var e : paths) {
+        for (int[] e : paths) {
             int x = e[0] - 1, y = e[1] - 1; // 编号改从 0 开始
             g[x].add(y);
             g[y].add(x); // 建图
         }
-        var color = new int[n];
+        int[] color = new int[n];
         for (int i = 0; i < n; ++i) {
-            var used = new boolean[5];
-            for (var j : g[i])
+            boolean[] used = new boolean[5];
+            for (int j : g[i])
                 used[color[j]] = true;
             while (used[++color[i]]);
         }

@@ -21,11 +21,11 @@ import java.util.concurrent.TimeUnit;
 public class TestUtil {
    public static void main(String[] args) {
       System.out.println("中文测试");
-      // Arrays.toString(args);
-      LockA la = new LockA();
-      new Thread(la).start();
-      LockB lb = new LockB();
-      new Thread(lb).start();
+      // // Arrays.toString(args);
+      // LockA la = new LockA();
+      // new Thread(la).start();
+      // LockB lb = new LockB();
+      // new Thread(lb).start();
    }
 
    public int trap(int[] height) {
