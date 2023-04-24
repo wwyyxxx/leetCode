@@ -11,6 +11,8 @@ import java.util.*;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
 
+import wyx.wyx20230424.Solution1163;
+
 /*
  * @Author: Tungbo
  * @Date: 2021-09-03 15:09:15
@@ -20,7 +22,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class TestUtil {
    public static void main(String[] args) {
-      System.out.println("中文测试");
+      System.out.println(new Solution1163().lastSubstring("leetcode"));
       // // Arrays.toString(args);
       // LockA la = new LockA();
       // new Thread(la).start();
