@@ -22,7 +22,7 @@ import wyx.wyx20230424.Solution1163;
  */
 public class TestUtil {
    public static void main(String[] args) {
-      System.out.println(new Solution1163().lastSubstring("leetcode"));
+      System.out.println("我是中文");
       // // Arrays.toString(args);
       // LockA la = new LockA();
       // new Thread(la).start();
