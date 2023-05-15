@@ -12,6 +12,7 @@ import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
 
 import wyx.wyx20230424.Solution1163;
+import wyx.wyx20230509.Solution1064;
 
 /*
  * @Author: Tungbo
@@ -22,7 +23,7 @@ import wyx.wyx20230424.Solution1163;
  */
 public class TestUtil {
    public static void main(String[] args) {
-      System.out.println("我是中文");
+      System.out.println(new Solution1064().rearrangeBarcodes(new int[]{1,1,1,2,2,2}));
       // // Arrays.toString(args);
       // LockA la = new LockA();
       // new Thread(la).start();
