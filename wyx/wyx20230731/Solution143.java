@@ -1,11 +1,11 @@
 /*
  * @Author: Tungbo
  * @Date: 2023-07-31 11:41:08
- * @LastEditTime: 2023-07-31 13:39:53
+ * @LastEditTime: 2023-08-03 15:07:40
  * @LastEditors: Tungbo
  * @Description: leecode: 143. 重排链表
  */
-package wyx.wyx20230522;
+package wyx.wyx20230731;
 
 import java.util.List;
 
