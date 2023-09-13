@@ -1,11 +1,11 @@
 /*
  * @Author: Tungbo
  * @Date: 2023-09-10 17:18:58
- * @LastEditTime: 2023-09-10 17:19:02
+ * @LastEditTime: 2023-09-12 16:53:28
  * @LastEditors: Tungbo
  * @Description: leecode: 210. 课程表 II
  */
-package wyx.wyx20230904;
+package wyx.wyx20230912;
 
 import java.util.HashSet;
 import java.util.LinkedList;
