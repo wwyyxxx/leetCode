@@ -1,39 +1,47 @@
 /*
  * @Author: Tungbo
  * @Date: 2023-09-12 17:01:33
- * @LastEditTime: 2023-09-12 17:20:10
+ * @LastEditTime: 2023-09-18 14:00:22
  * @LastEditors: Tungbo
- * @Description: leecode: 
+ * @Description: leecode: 1462. 课程表 IV
  */
 package wyx.wyx20230911;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class Solution1462 {
     public List<Boolean> checkIfPrerequisite(int numCourses, int[][] prerequisites, int[][] queries) {
-        List<List<Integer>> list = new ArrayList<>(numCourses);
-        List<Boolean> res = new ArrayList<>();
-        Collections.fill(list, new ArrayList<>());
-        for (int i = 0; i < prerequisites.length; i++) {
-            list.get(prerequisites[i][1]).add(prerequisites[i][0]);
+        List<Integer>[] g = new List[numCourses];
+        for (int i = 0; i < numCourses; i++) {
+            g[i] = new ArrayList<Integer>();
         }
-        for(int[] querie : queries) {
-            int u = querie[0], v = querie[1];
-            List<Integer> temp = list.get(u);
-            if(temp.isEmpty()) {
-                res.add(false);
-            } else {
-                boolean flag = false;
-                for (int i = 0; i < queries.length; i++) {
-                    temp
-                }
-            }
+        boolean[] vi = new boolean[numCourses];
+        boolean[][] isPre = new boolean[numCourses][numCourses];
+        for (int[] p : prerequisites) {
+            g[p[0]].add(p[1]);
         }
+        for (int i = 0; i < numCourses; ++i) {
+            dfs(g, isPre, vi, i);
+        }
+        List<Boolean> res = new ArrayList<Boolean>();
+        for (int[] query : queries) {
+            res.add(isPre[query[0]][query[1]]);
+        }
+        return res;
     }
 
-    private boolean searchResult() {
-        
+    public void dfs(List<Integer>[] g, boolean[][] isPre, boolean[] vi, int cur) {
+        if (vi[cur]) {
+            return;
+        }
+        vi[cur] = true;
+        for (int ne : g[cur]) {
+            dfs(g, isPre, vi, ne);
+            isPre[cur][ne] = true;
+            for (int i = 0; i < isPre.length; ++i) {
+                isPre[cur][i] = isPre[cur][i] | isPre[ne][i];
+            }
+        }
     }
 }
