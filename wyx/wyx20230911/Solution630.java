@@ -5,7 +5,7 @@
  * @LastEditors: Tungbo
  * @Description: leecode: 630. 课程表 III
  */
-package wyx.wyx20230912;
+package wyx.wyx20230911;
 
 import java.util.Arrays;
 import java.util.PriorityQueue;

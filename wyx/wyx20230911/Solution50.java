@@ -5,7 +5,7 @@
  * @LastEditors: Tungbo
  * @Description: leecode: LCP 50. 宝石补给
  */
-package wyx.wyx20230912;
+package wyx.wyx20230911;
 
 public class Solution50 {
     public int giveGem(int[] gem, int[][] operations) {

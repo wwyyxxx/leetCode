@@ -5,7 +5,7 @@
  * @LastEditors: Tungbo
  * @Description: leecode: 210. 课程表 II
  */
-package wyx.wyx20230912;
+package wyx.wyx20230911;
 
 import java.util.HashSet;
 import java.util.LinkedList;

@@ -5,7 +5,7 @@
  * @LastEditors: Tungbo
  * @Description: leecode: 2596. 检查骑士巡视方案
  */
-package wyx.wyx20230912;
+package wyx.wyx20230911;
 
 public class Solution2596 {
     public boolean checkValidGrid(int[][] grid) {
