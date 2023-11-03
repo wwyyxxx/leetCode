@@ -1,7 +1,7 @@
 /*
  * @Author: Tungbo
  * @Date: 2021-08-28 17:18:25
- * @LastEditTime: 2022-05-26 21:58:38
+ * @LastEditTime: 2023-11-03 15:13:25
  * @LastEditors: Tungbo
  * @Description: leecode: wyx
  */
@@ -26,5 +26,12 @@ public class Node {
         val = _val;
         left = _left;
         right = _right;
+    }
+
+    public Node(int _val, Node _left, Node _right, Node _next) {
+        val = _val;
+        left = _left;
+        right = _right;
+        next = _next;
     }
 }
