@@ -1,11 +1,11 @@
 /*
  * @Author: Tungbo
  * @Date: 2023-12-18 17:07:46
- * @LastEditTime: 2023-12-18 17:07:48
+ * @LastEditTime: 2023-12-18 17:09:37
  * @LastEditors: Tungbo
  * @Description: leecode: 162. 寻找峰值
  */
-package wyx.wyx20231211;
+package wyx.wyx20231707;
 
 public class Solution162 {
     public int findPeakElement(int[] nums) {
