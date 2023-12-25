@@ -5,7 +5,7 @@
  * @LastEditors: Tungbo
  * @Description: leecode: 1901. 寻找峰值 II
  */
-package wyx.wyx20231707;
+package wyx.wyx20231218;
 
 public class Solution1901 {
     public int[] findPeakGrid(int[][] mat) {

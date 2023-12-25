@@ -5,7 +5,7 @@
  * @LastEditors: Tungbo
  * @Description: leecode: 746. 使用最小花费爬楼梯
  */
-package wyx.wyx20231707;
+package wyx.wyx20231218;
 
 public class Solution746 {
     public int minCostClimbingStairs(int[] cost) {

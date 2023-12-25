@@ -5,7 +5,7 @@
  * @LastEditors: Tungbo
  * @Description: leecode: 162. 寻找峰值
  */
-package wyx.wyx20231707;
+package wyx.wyx20231218;
 
 public class Solution162 {
     public int findPeakElement(int[] nums) {
