@@ -1,7 +1,7 @@
 /*
  * @Author: Tungbo
  * @Date: 2021-10-10 17:32:11
- * @LastEditTime: 2023-08-07 15:48:10
+ * @LastEditTime: 2024-01-15 15:09:47
  * @LastEditors: Tungbo
  * @Description: leecode: 
  */
@@ -10,9 +10,6 @@ package wyx;
 import java.util.*;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
-
-import wyx.wyx20230424.Solution1163;
-import wyx.wyx20230509.Solution1064;
 
 /*
  * @Author: Tungbo
@@ -23,7 +20,7 @@ import wyx.wyx20230509.Solution1064;
  */
 public class TestUtil {
    public static void main(String[] args) {
-      System.out.println(new Solution1064().rearrangeBarcodes(new int[]{1,1,1,2,2,2}));
+      // System.out.println(new Solution1064().rearrangeBarcodes(new int[]{1,1,1,2,2,2}));
       // // Arrays.toString(args);
       // LockA la = new LockA();
       // new Thread(la).start();

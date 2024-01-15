@@ -1,11 +1,11 @@
 /*
  * @Author: Tungbo
  * @Date: 2024-01-12 10:48:15
- * @LastEditTime: 2024-01-12 10:56:32
+ * @LastEditTime: 2024-01-15 15:09:18
  * @LastEditors: Tungbo
  * @Description: leecode: 2085. 统计出现过一次的公共字符串
  */
-package wyx.wyx20240109;
+package wyx.leetcode2024.wyx20240109;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -5,7 +5,7 @@
  * @LastEditors: Tungbo
  * @Description: leecode: 2696. 删除子串后的字符串最小长度
  */
-package wyx.wyx20240109;
+package wyx.leetcode2024.wyx20240109;
 
 import java.util.ArrayDeque;
 import java.util.Deque;

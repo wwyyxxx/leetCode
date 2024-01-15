@@ -5,7 +5,7 @@
  * @LastEditors: Tungbo
  * @Description: leecode: 2645. 构造有效字符串的最少插入数
  */
-package wyx.wyx20240109;
+package wyx.leetcode2024.wyx20240109;
 
 public class Solution2645 {
     public int addMinimum(String word) {

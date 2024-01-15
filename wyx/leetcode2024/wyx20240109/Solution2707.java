@@ -1,11 +1,11 @@
 /*
  * @Author: Tungbo
  * @Date: 2024-01-09 17:49:32
- * @LastEditTime: 2024-01-09 17:49:34
+ * @LastEditTime: 2024-01-15 15:09:29
  * @LastEditors: Tungbo
  * @Description: leecode: 2707. 字符串中的额外字符
  */
-package wyx.wyx20240109;
+package wyx.leetcode2024.wyx20240109;
 
 import java.util.HashSet;
 import java.util.Set;
