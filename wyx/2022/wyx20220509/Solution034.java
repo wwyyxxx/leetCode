@@ -1,9 +1,8 @@
-package wyx.wyx20220509;
 
 /*
  * @Author: Tungbo
  * @Date: 2022-05-13 10:47:28
- * @LastEditTime: 2022-05-13 11:11:35
+ * @LastEditTime: 2024-01-15 15:05:02
  * @LastEditors: Tungbo
  * @Description: leecode: 剑指 Offer II 034. 外星语言是否排序
  * 

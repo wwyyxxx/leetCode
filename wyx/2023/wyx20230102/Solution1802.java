@@ -5,7 +5,7 @@
  * @LastEditors: Tungbo
  * @Description: leecode: 1802. 有界数组中指定下标处的最大值
  */
-package wyx.wyx20230102;
+
 
 public class Solution1802 {
     public int maxValue(int n, int index, int maxSum) {
