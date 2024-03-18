@@ -1,7 +1,7 @@
 /*
  * @Author: Tungbo
  * @Date: 2021-10-10 17:32:11
- * @LastEditTime: 2024-03-04 09:47:54
+ * @LastEditTime: 2024-03-18 09:45:43
  * @LastEditors: Tungbo
  * @Description: leecode: 
  */
@@ -21,8 +21,7 @@ import java.util.concurrent.TimeUnit;
 public class TestUtil {
    public static void main(String[] args) {
       List<String> list = new ArrayList<>();
-      list.add("866620069277638");
-      list.add("860596054326653");
+      list.add("867578070147345");
       
       
       for(String imei : list) {
