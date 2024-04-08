@@ -1,7 +1,7 @@
 /*
  * @Author: Tungbo
  * @Date: 2021-10-10 17:32:11
- * @LastEditTime: 2024-03-18 09:45:43
+ * @LastEditTime: 2024-04-08 10:03:55
  * @LastEditors: Tungbo
  * @Description: leecode: 
  */
@@ -24,17 +24,27 @@ public class TestUtil {
       list.add("867578070147345");
       
       
-      for(String imei : list) {
-         System.out.println(vaildImei(imei));
-      }
+      // for(String imei : list) {
+      //    System.out.println(vaildImei(imei));
+      // }
 
       // // Arrays.toString(args);
       // LockA la = new LockA();
       // new Thread(la).start();
       // LockB lb = new LockB();
       // new Thread(lb).start();
+      int[] nums = new int[]{1, 2, 3, 3, 4, 5};
+      int j = 1;
+      for (int i = 1; i < nums.length; i++) {
+         if (nums[i] != nums[i - 1]) {
+             nums[j++] = nums[i]; // 原地去重
+         }
+     }
+     System.out.println(Arrays.toString(nums));
    }
 
+
+   
    public static boolean isIMEI(String imei) {
       char[] imeiChar = imei.toCharArray();
       int resultInt = 0;
