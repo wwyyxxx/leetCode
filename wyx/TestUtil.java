@@ -1,49 +1,37 @@
-/*
- * @Author: Tungbo
- * @Date: 2021-10-10 17:32:11
- * @LastEditTime: 2024-04-08 10:03:55
- * @LastEditors: Tungbo
- * @Description: leecode: 
- */
 package wyx;
 
 import java.util.*;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
 
+import wyx.utils.ExcelUtil;
+
 /*
  * @Author: Tungbo
  * @Date: 2021-09-03 15:09:15
- * @LastEditTime: 2022-10-14 15:47:22
+ * @LastEditTime: 2024-04-09 10:27:41
  * @LastEditors: Tungbo
  * @Description: leecode: 
  */
 public class TestUtil {
    public static void main(String[] args) {
-      List<String> list = new ArrayList<>();
-      list.add("867578070147345");
-      
-      
-      // for(String imei : list) {
-      //    System.out.println(vaildImei(imei));
-      // }
-
-      // // Arrays.toString(args);
-      // LockA la = new LockA();
-      // new Thread(la).start();
-      // LockB lb = new LockB();
-      // new Thread(lb).start();
-      int[] nums = new int[]{1, 2, 3, 3, 4, 5};
-      int j = 1;
-      for (int i = 1; i < nums.length; i++) {
-         if (nums[i] != nums[i - 1]) {
-             nums[j++] = nums[i]; // 原地去重
-         }
-     }
-     System.out.println(Arrays.toString(nums));
+   //    List<String> list = new ArrayList<>();
+   //    list.add("867578070147345");
+   //    int[] nums = new int[]{1, 2, 3, 3, 4, 5};
+   //    int j = 1;
+   //    for (int i = 1; i < nums.length; i++) {
+   //       if (nums[i] != nums[i - 1]) {
+   //           nums[j++] = nums[i]; // 原地去重
+   //       }
+   //   }
+   //   System.out.println(Arrays.toString(nums));
+   //   System.out.println(isIMEI("867589059240410"));
+   
+      new Thread(()->{
+         ExcelUtil.handleExcel();
+         // ExcelUtil.compareAndOutputToExcel("wyx", "wyy", "wyx/assets/test.xls");
+      }).start();
    }
-
-
    
    public static boolean isIMEI(String imei) {
       char[] imeiChar = imei.toCharArray();

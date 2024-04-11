@@ -1,0 +1,9 @@
+{
+    "java.project.sourcePaths": [
+        "."
+    ],
+    "java.project.referencedLibraries": [
+        "libs/poi-5.2.5.jar",
+        "libs/**/*.jar"
+    ]
+}
