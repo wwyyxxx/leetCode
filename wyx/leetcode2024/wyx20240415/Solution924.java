@@ -1,15 +1,13 @@
 /*
  * @Author: Tungbo
  * @Date: 2024-04-16 15:03:07
- * @LastEditTime: 2024-04-16 15:06:22
+ * @LastEditTime: 2024-04-16 15:11:04
  * @LastEditors: Tungbo
  * @Description: leecode: 924. 尽量减少恶意软件的传播
  */
 package wyx.leetcode2024.wyx20240415;
 
 public class Solution924 {
-    private int nodeId, size;
-
     public int minMalwareSpread(int[][] graph, int[] initial) {
         int n = graph.length;
         boolean[] vis = new boolean[n];
@@ -17,14 +15,16 @@ public class Solution924 {
         int mn = Integer.MAX_VALUE;
         for (int x : initial) {
             isInitial[x] = true;
-            mn = Math.min(x, mn);
+            mn = Math.min(mn, x);
         }
 
         int ans = -1;
         int maxSize = 0;
         for (int x : initial) {
-            if (vis[x])
+            if (vis[x]) {
                 continue;
+            }
+            nodeId = -1;
             size = 0;
             dfs(x, graph, vis, isInitial);
             if (nodeId >= 0 && (size > maxSize || size == maxSize && nodeId < ans)) {
@@ -34,6 +34,8 @@ public class Solution924 {
         }
         return ans < 0 ? mn : ans;
     }
+
+    private int nodeId, size;
 
     private void dfs(int x, int[][] graph, boolean[] vis, boolean[] isInitial) {
         vis[x] = true;
