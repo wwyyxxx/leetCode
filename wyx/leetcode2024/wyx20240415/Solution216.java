@@ -6,7 +6,7 @@ import java.util.List;
 /*
  * @Author: Tungbo
  * @Date: 2024-04-21 22:53:36
- * @LastEditTime: 2024-04-21 22:54:42
+ * @LastEditTime: 2024-04-22 15:05:53
  * @LastEditors: Tungbo
  * @Description: leecode:  216. 组合总和 III
  */
@@ -21,7 +21,7 @@ public class Solution216 {
     private void dfs(int i, int t, int k, List<List<Integer>> ans, List<Integer> path) {
         int d = k - path.size(); // 还要选 d 个数
         if (t < 0 || t > (i * 2 - d + 1) * d / 2) { // 剪枝
-            return;
+            return; // (18 - 3 + 1) * 3 / 2
         }
         if (d == 0) { // 找到一个合法组合
             ans.add(new ArrayList<>(path));
