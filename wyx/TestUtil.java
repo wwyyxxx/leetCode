@@ -1,15 +1,26 @@
 package wyx;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.*;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
 
+import net.sourceforge.pinyin4j.PinyinHelper;
+import net.sourceforge.pinyin4j.format.HanyuPinyinCaseType;
+import net.sourceforge.pinyin4j.format.HanyuPinyinOutputFormat;
+import net.sourceforge.pinyin4j.format.HanyuPinyinToneType;
+import net.sourceforge.pinyin4j.format.HanyuPinyinVCharType;
+import wyx.LockB.PinyinComparator;
 import wyx.utils.ExcelUtil;
 
 /*
  * @Author: Tungbo
  * @Date: 2021-09-03 15:09:15
- * @LastEditTime: 2024-04-09 10:27:41
+ * @LastEditTime: 2024-05-22 19:40:20
  * @LastEditors: Tungbo
  * @Description: leecode: 
  */
@@ -27,10 +38,71 @@ public class TestUtil {
    //   System.out.println(Arrays.toString(nums));
    //   System.out.println(isIMEI("867589059240410"));
    
-      new Thread(()->{
-         ExcelUtil.handleExcel();
-         // ExcelUtil.compareAndOutputToExcel("wyx", "wyy", "wyx/assets/test.xls");
-      }).start();
+      // new Thread(()->{
+      //    ExcelUtil.handleExcel();
+      //    // ExcelUtil.compareAndOutputToExcel("wyx", "wyy", "wyx/assets/test.xls");
+      // }).start();
+      // sort();
+      //wyx/assets/test.png
+      calculateMD5();
+   }
+   
+   public static void calculateMD5() {
+      // 创建 MessageDigest 实例，指定算法为 MD5
+      MessageDigest md;
+      try {
+         md = MessageDigest.getInstance("MD5");
+         // 读取文件并更新摘要
+         try (FileInputStream fis = new FileInputStream(new File("wyx/assets/123.png"))) {
+            byte[] buffer = new byte[1024];
+            int bytesRead;
+            while ((bytesRead = fis.read(buffer)) != -1) {
+               md.update(buffer, 0, bytesRead);
+            }
+         }
+
+         // 计算 MD5 哈希值
+         byte[] hashBytes = md.digest();
+
+         // 将字节数组转换为十六进制字符串
+         StringBuilder sb = new StringBuilder();
+         for (byte b : hashBytes) {
+            sb.append(String.format("%02x", b));
+         }
+
+         System.out.println(calculateMD5(sb.toString()+System.currentTimeMillis()));
+      } catch (Exception e) {
+         // TODO Auto-generated catch block
+         e.printStackTrace();
+      }
+   
+   }
+
+   public static String calculateMD5(String input) {
+      try {
+          // 创建 MessageDigest 实例，指定算法为 MD5
+          MessageDigest md = MessageDigest.getInstance("MD5");
+  
+          // 计算 MD5 哈希值
+          byte[] hashBytes = md.digest(input.getBytes());
+  
+          // 将字节数组转换为十六进制字符串
+          StringBuilder sb = new StringBuilder();
+          for (byte b : hashBytes) {
+              sb.append(String.format("%02x", b));
+          }
+  
+          return sb.toString();
+      } catch (NoSuchAlgorithmException e) {
+          throw new RuntimeException("MD5 algorithm not found", e);
+      }
+  }
+
+   public static void sort(){
+      String str = "米迎澳;张绩伟;程军;李金城;王计宽;郑圣飞;黄棉通;李科;施广胜;何书俊;王声亮;陈凤彩;魏咏琴;劳慧合;钟旭辉;褚翠红;何诗小;徐红菊;马志阳;滕家顺;张洪龙;董志刚;蒋瑶;王佳泽;郭煜彬;曾鹏;梁永雄;黄遥;俞佳明;李正干;陈奇恩;杨高明;甘思鸿;叶伟茂;谭金果;王轮;熊志涛;江文发;李迪山;刘斐;寇明珠;林楚葵;刘子文;陈婕;刘兵;刘凯法;彭俊平;邱腾龙;祝超;方水城";
+      String[] names = str.split(";");
+      Arrays.sort(names, new PinyinComparator());
+      System.out.println(Arrays.toString(names));
    }
    
    public static boolean isIMEI(String imei) {
@@ -143,7 +215,40 @@ class LockB implements Runnable {
       }
    }
 
-   private void testJson() {
+   static class PinyinComparator implements Comparator<String> {
+      private HanyuPinyinOutputFormat format = new HanyuPinyinOutputFormat();
 
-   }
+      public PinyinComparator() {
+          format.setCaseType(HanyuPinyinCaseType.LOWERCASE);
+          format.setToneType(HanyuPinyinToneType.WITHOUT_TONE);
+          format.setVCharType(HanyuPinyinVCharType.WITH_V);
+      }
+
+      @Override
+      public int compare(String o1, String o2) {
+          try {
+              String pinyin1 = toPinyin(o1);
+              String pinyin2 = toPinyin(o2);
+              return pinyin1.compareTo(pinyin2);
+          } catch (Exception e) {
+              e.printStackTrace();
+              return 0;
+          }
+      }
+
+      private String toPinyin(String chinese) throws Exception {
+          StringBuilder pinyin = new StringBuilder();
+          for (char c : chinese.toCharArray()) {
+              if (Character.toString(c).matches("[\\u4E00-\\u9FA5]+")) {
+                  String[] pinyins = PinyinHelper.toHanyuPinyinStringArray(c, format);
+                  if (pinyins != null) {
+                      pinyin.append(pinyins[0]);
+                  }
+              } else {
+                  pinyin.append(c);
+              }
+          }
+          return pinyin.toString();
+      }
+  }
 }
