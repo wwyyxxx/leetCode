@@ -1,9 +1,9 @@
 /*
  * @Author: Tungbo
  * @Date: 2024-06-22 17:23:54
- * @LastEditTime: 2024-06-22 17:41:42
+ * @LastEditTime: 2024-06-22 17:53:43
  * @LastEditors: Tungbo
- * @Description: leecode: 
+ * @Description: leecode: 48. 旋转图像
  */
 package wyx.leetcode2024.wyx20240617;
 
