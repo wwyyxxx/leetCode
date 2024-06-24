@@ -1,7 +1,7 @@
 /*
  * @Author: Tungbo
  * @Date: 2024-06-24 19:01:16
- * @LastEditTime: 2024-06-24 19:03:27
+ * @LastEditTime: 2024-06-24 19:39:43
  * @LastEditors: Tungbo
  * @Description: leecode: 206. 反转链表
  */
@@ -18,6 +18,6 @@ public class Solution206 {
             prevNode = curNode;
             curNode = temp;
         }
-        return head;
+        return prevNode;
     }
 }
