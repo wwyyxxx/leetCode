@@ -1,9 +1,9 @@
-package wyx.leetcode2024.wyx20240617;
+package wyx.leetcode2024.wyx20240624;
 
 /*
  * @Author: Tungbo
  * @Date: 2024-06-29 20:43:40
- * @LastEditTime: 2024-06-29 20:43:44
+ * @LastEditTime: 2024-06-29 20:44:49
  * @LastEditors: Tungbo
  * @Description: leecode: 2710. 移除字符串中的尾随零
  */
