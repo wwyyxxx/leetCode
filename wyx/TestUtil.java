@@ -15,6 +15,9 @@ import net.sourceforge.pinyin4j.format.HanyuPinyinOutputFormat;
 import net.sourceforge.pinyin4j.format.HanyuPinyinToneType;
 import net.sourceforge.pinyin4j.format.HanyuPinyinVCharType;
 import wyx.LockB.PinyinComparator;
+import wyx.bean.ListNode;
+import wyx.leetcode2024.wyx20240624.Solution234;
+import wyx.other.Solution;
 import wyx.utils.ExcelUtil;
 
 /*
@@ -45,6 +48,11 @@ public class TestUtil {
       // sort();
       //wyx/assets/test.png
       calculateMD5();
+      ListNode listNode = new ListNode(1);
+      listNode.next = new ListNode(1);
+      listNode.next.next = new ListNode(2);
+      listNode.next.next.next = new ListNode(1);
+      System.out.println(new Solution234().isPalindrome(listNode));
    }
    
    public static void calculateMD5() {
