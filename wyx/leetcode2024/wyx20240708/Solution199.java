@@ -1,11 +1,11 @@
 /*
  * @Author: Tungbo
  * @Date: 2024-07-08 19:22:59
- * @LastEditTime: 2024-07-08 19:31:36
+ * @LastEditTime: 2024-07-08 19:32:16
  * @LastEditors: Tungbo
  * @Description: leecode: 199. 二叉树的右视图
  */
-package wyx.leetcode2024.wyx20240701;
+package wyx.leetcode2024.wyx20240708;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
