@@ -1,9 +1,9 @@
 /*
  * @Author: Tungbo
  * @Date: 2024-07-11 17:41:00
- * @LastEditTime: 2024-07-11 17:43:23
+ * @LastEditTime: 2024-07-11 17:45:51
  * @LastEditors: Tungbo
- * @Description: leecode: 
+ * @Description: leecode: 236. 二叉树的最近公共祖先
  */
 package wyx.leetcode2024.wyx20240708;
 
