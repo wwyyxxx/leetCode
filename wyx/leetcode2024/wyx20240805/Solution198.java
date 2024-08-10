@@ -5,7 +5,7 @@ package wyx.leetcode2024.wyx20240805;
  * @Date: 2024-08-05 16:26:18
  * @LastEditTime: 2024-08-10 18:40:51
  * @LastEditors: Tungbo
- * @Description: leecode: c
+ * @Description: leecode: 198. 打家劫舍
  */
 public class Solution198 {
 
