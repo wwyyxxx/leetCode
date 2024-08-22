@@ -1,7 +1,7 @@
 /*
  * @Author: Tungbo
  * @Date: 2024-08-22 15:39:45
- * @LastEditTime: 2024-08-22 15:45:58
+ * @LastEditTime: 2024-08-22 15:48:13
  * @LastEditors: Tungbo
  * @Description: leecode: 152. 乘积最大子数组
  */
@@ -15,7 +15,7 @@ public class Solution152 {
             if (nums[i] < 0) {
                 int tmp = imax;
                 imax = imin;
-                imin = imax;
+                imin = tmp;
             }
 
             imax = Math.max(imax * nums[i], nums[i]);
