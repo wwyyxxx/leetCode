@@ -41,27 +41,59 @@ public class TestUtil {
    //   System.out.println(Arrays.toString(nums));
    //   System.out.println(isIMEI("867589059240410"));
    
-      // new Thread(()->{
-      //    ExcelUtil.handleExcel();
-      //    // ExcelUtil.compareAndOutputToExcel("wyx", "wyy", "wyx/assets/test.xls");
-      // }).start();
+      new Thread(()->{
+         ExcelUtil.handlePicture();
+         // ExcelUtil.compareAndOutputToExcel("wyx", "wyy", "wyx/assets/test.xls");
+      }).start();
       // sort();
       //wyx/assets/test.png
-      calculateMD5();
-      ListNode listNode = new ListNode(1);
-      listNode.next = new ListNode(1);
-      listNode.next.next = new ListNode(2);
-      listNode.next.next.next = new ListNode(1);
-      System.out.println(new Solution234().isPalindrome(listNode));
+      // calculateMD5();
+      // ListNode listNode = new ListNode(1);
+      // listNode.next = new ListNode(1);
+      // listNode.next.next = new ListNode(2);
+      // listNode.next.next.next = new ListNode(1);
+      // System.out.println(md5v2("wyx/assets/p6.jpg"));
+      
    }
    
+   public static String md5v2(String filePath) {
+     try {
+      MessageDigest md = MessageDigest.getInstance("MD5");
+      FileInputStream fis = new FileInputStream(filePath);
+      byte[] dataBytes = new byte[1024];
+      int bytesRead;
+
+      // 逐块读取文件
+      while ((bytesRead = fis.read(dataBytes)) != -1) {
+          md.update(dataBytes, 0, bytesRead);
+      }
+
+      // 关闭输入流
+      fis.close();
+
+      // 获取 MD5 哈希值
+      byte[] mdBytes = md.digest();
+
+      // 将字节转换为十六进制字符串
+      StringBuilder sb = new StringBuilder();
+      for (byte b : mdBytes) {
+          sb.append(String.format("%02x", b));
+      }
+
+      return sb.toString();
+     } catch(Exception e) {
+      return "";
+     }
+      
+   }
+
    public static void calculateMD5() {
       // 创建 MessageDigest 实例，指定算法为 MD5
       MessageDigest md;
       try {
          md = MessageDigest.getInstance("MD5");
          // 读取文件并更新摘要
-         try (FileInputStream fis = new FileInputStream(new File("wyx/assets/123.png"))) {
+         try (FileInputStream fis = new FileInputStream(new File("wyx/assets/p6.jpg"))) {
             byte[] buffer = new byte[1024];
             int bytesRead;
             while ((bytesRead = fis.read(buffer)) != -1) {
@@ -75,10 +107,10 @@ public class TestUtil {
          // 将字节数组转换为十六进制字符串
          StringBuilder sb = new StringBuilder();
          for (byte b : hashBytes) {
-            sb.append(String.format("%02x", b));
+            sb.append(b);
          }
 
-         System.out.println(calculateMD5(sb.toString()+System.currentTimeMillis()));
+         System.out.println(sb.toString());
       } catch (Exception e) {
          // TODO Auto-generated catch block
          e.printStackTrace();
@@ -129,7 +161,8 @@ public class TestUtil {
       return (resultInt == crc);
   }
 
-   private static boolean vaildImei(String imei) {
+   public static boolean vaildImei(String imei) {
+      if(imei.length() != 15) return false;
       char[] ch = imei.toCharArray();
       int sum1 = 0, sum2 = 0;
       for (int i = 0; i < ch.length - 1; i++) {
