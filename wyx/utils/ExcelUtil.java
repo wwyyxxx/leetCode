@@ -1,7 +1,7 @@
 /*
  * @Author: Tungbo
  * @Date: 2024-04-08 14:34:56
- * @LastEditTime: 2024-11-12 17:22:23
+ * @LastEditTime: 2024-11-14 21:12:19
  * @LastEditors: Tungbo
  * @Description: leecode: 
  */
@@ -248,4 +248,40 @@ public class ExcelUtil {
         }
     }
 
+    public static void readExcel(){
+        String str = "wyx/assets/sn数据.xlsx";
+        try (FileInputStream fis = new FileInputStream(new File(str));
+
+            Workbook workbook = WorkbookFactory.create(fis)) {
+            // Get the first sheet
+            Sheet sheet = workbook.getSheetAt(0);
+            for (Row row : sheet) {
+                // Iterate over cells
+                Cell imeiCell = row.getCell(0); // 假设IMEI在第一列
+                try {
+                    if (imeiCell != null) {
+                        String imei = imeiCell.getStringCellValue();
+                        boolean isValid = TestUtil.vaildSn(imei);
+                        // 输出结果到最后一列
+                        Cell resultCell = row.createCell(row.getLastCellNum());
+                        resultCell.setCellValue(isValid);
+                    }
+                } catch (Exception e) {
+
+                }
+            }
+
+            // 写入新的Excel文件
+            try (FileOutputStream fos = new FileOutputStream("wyx/assets/" + System.currentTimeMillis() + ".xlsx")) {
+                workbook.write(fos);
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        
+    }
+    
 }

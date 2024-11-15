@@ -42,7 +42,7 @@ public class TestUtil {
    //   System.out.println(isIMEI("867589059240410"));
    
       new Thread(()->{
-         ExcelUtil.handlePicture();
+         ExcelUtil.readExcel();
          // ExcelUtil.compareAndOutputToExcel("wyx", "wyy", "wyx/assets/test.xls");
       }).start();
       // sort();
@@ -166,14 +166,22 @@ public class TestUtil {
       char[] ch = imei.toCharArray();
       int sum1 = 0, sum2 = 0;
       for (int i = 0; i < ch.length - 1; i++) {
+         char c = ch[i];
+         if (c < '0' || c > '9') {
+            return false;
+         }
          if (i % 2 == 0) {
-            sum1 += ch[i] - '0';
+            sum1 += c - '0';
          } else {
-            int temp = (ch[i] - '0') * 2;
+            int temp = (c - '0') * 2;
             sum2 += temp >= 10 ? temp % 10 + temp / 10 : temp;
          }
       }
       return (sum1 + sum2 + ch[ch.length - 1] - '0') % 10 == 0;
+   }
+
+   public static boolean vaildSn(String sn) {
+      return !sn.contains(":") && !sn.contains("：");
    }
 
    public int trap(int[] height) {
