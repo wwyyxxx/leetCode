@@ -42,7 +42,7 @@ public class TestUtil {
    //   System.out.println(isIMEI("867589059240410"));
    
       new Thread(()->{
-         ExcelUtil.readExcel();
+         ExcelUtil.compareWebApi();
          // ExcelUtil.compareAndOutputToExcel("wyx", "wyy", "wyx/assets/test.xls");
       }).start();
       // sort();

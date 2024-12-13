@@ -1,7 +1,7 @@
 /*
  * @Author: Tungbo
  * @Date: 2024-04-08 14:34:56
- * @LastEditTime: 2024-11-14 21:12:19
+ * @LastEditTime: 2024-12-05 15:59:30
  * @LastEditors: Tungbo
  * @Description: leecode: 
  */
@@ -14,8 +14,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -248,8 +250,8 @@ public class ExcelUtil {
         }
     }
 
-    public static void readExcel(){
-        String str = "wyx/assets/sn数据.xlsx";
+    public static void calculateImeiSn(){
+        String str = "wyx/assets/476683010_B5DCBF_imei来源.xlsx";
         try (FileInputStream fis = new FileInputStream(new File(str));
 
             Workbook workbook = WorkbookFactory.create(fis)) {
@@ -257,18 +259,12 @@ public class ExcelUtil {
             Sheet sheet = workbook.getSheetAt(0);
             for (Row row : sheet) {
                 // Iterate over cells
-                Cell imeiCell = row.getCell(0); // 假设IMEI在第一列
-                try {
-                    if (imeiCell != null) {
-                        String imei = imeiCell.getStringCellValue();
-                        boolean isValid = TestUtil.vaildSn(imei);
-                        // 输出结果到最后一列
-                        Cell resultCell = row.createCell(row.getLastCellNum());
-                        resultCell.setCellValue(isValid);
-                    }
-                } catch (Exception e) {
-
-                }
+                Cell imeiCell = row.getCell(1); // 假设IMEI在第一列
+                String onlineimei = imeiCell.getStringCellValue();
+                boolean isValid = TestUtil.vaildImei(onlineimei);
+                // 输出结果到最后一列
+                Cell resultCell = row.createCell(row.getLastCellNum());
+                resultCell.setCellValue(isValid);
             }
 
             // 写入新的Excel文件
@@ -280,8 +276,38 @@ public class ExcelUtil {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+    
+    public static void compareWebApi(){
+        String str = "wyx/assets/转转WebViewAPI.xlsx";
+        Set<String> set = new HashSet<>();
+        try (FileInputStream fis = new FileInputStream(new File(str));
+            
+            Workbook workbook = WorkbookFactory.create(fis)) {
+            // Get the first sheet
+            Sheet sheet = workbook.getSheetAt(0);
+            for (Row row : sheet) {
+                Cell api = row.getCell(0);
+                set.add(api.getStringCellValue());
+            }
 
-        
+            sheet = workbook.getSheetAt(2);
+            for (Row row : sheet) {
+                Cell api = row.getCell(0);
+                // 输出结果到最后一列
+                Cell resultCell = row.createCell(row.getLastCellNum());
+                resultCell.setCellValue(set.contains(api.getStringCellValue()));
+            }
+
+            // 写入新的Excel文件
+            try (FileOutputStream fos = new FileOutputStream("wyx/assets/" + System.currentTimeMillis() + ".xlsx")) {
+                workbook.write(fos);
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
     
 }
