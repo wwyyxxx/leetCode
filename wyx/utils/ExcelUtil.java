@@ -1,7 +1,7 @@
 /*
  * @Author: Tungbo
  * @Date: 2024-04-08 14:34:56
- * @LastEditTime: 2024-12-05 15:59:30
+ * @LastEditTime: 2024-12-17 21:30:44
  * @LastEditors: Tungbo
  * @Description: leecode: 
  */
@@ -310,4 +310,37 @@ public class ExcelUtil {
         }
     }
     
+    
+    public static void readExcel(){
+        List list = new  ArrayList();
+        System.out.println(" readExcel");
+
+        String excelFilePath1 = "wyx/assets/zzzztttttt33.xlsx";
+        // List<ImeiChangeBean> list = new ArrayList<>();
+        int initFalse = 0;
+        int false2Ture = 0;
+        int false2false = 0;
+        Gson gson = new Gson();
+        Map<String, Integer> dicKeep = new HashMap<>();
+        Map<String, Integer> dicChange = new HashMap<>();
+
+        Map<String, Integer> dicKeepType = new HashMap<>();
+        Map<String, Integer> dicChangeType = new HashMap<>();
+
+        try (FileInputStream fis = new FileInputStream(new File(excelFilePath1));
+                Workbook workbook = WorkbookFactory.create(fis)){
+                   
+               // Get the first sheet
+               Sheet sheet = workbook.getSheetAt(0);
+               int i = 0;
+               for (Row row : sheet) {
+                System.out.println(row);
+               }
+            
+        } catch (IOException exception) {
+            exception.printStackTrace();
+        }
+       
+    }
+ 
 }
