@@ -1,7 +1,7 @@
 /*
  * @Author: Tungbo
  * @Date: 2022-07-19 17:13:06
- * @LastEditTime: 2022-07-19 17:24:57
+ * @LastEditTime: 2025-01-02 23:05:31
  * @LastEditors: Tungbo
  * @Description: leecode: 731. 我的日程安排表 II
  * 
@@ -12,7 +12,7 @@
  * 请按照以下步骤调用MyCalendar 类: MyCalendar cal = new MyCalendar(); MyCalendar.book(start, end)
  * 
  */
-package wyx.wyx20220718;
+package wyx.leetcode2022.wyx20220718;
 
 import java.util.Map;
 import java.util.TreeMap;

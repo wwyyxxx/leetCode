@@ -10,7 +10,7 @@
  * 日程可以用一对整数 start 和 end 表示，这里的时间是半开区间，即 [start, end), 实数 x 的范围为，  start <= x < end
  * 
  */
-package wyx.wyx20220704;
+package wyx.leetcode2022.wyx20220704;
 
 import java.util.ArrayList;
 import java.util.List;

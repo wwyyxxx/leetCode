@@ -9,7 +9,7 @@
  * 混合字符串 由小写英文字母和数字组成。
  * 
  */
-package wyx.wyx20221128;
+package wyx.leetcode2022.wyx20221128;
 
 import java.util.HashSet;
 import java.util.PriorityQueue;

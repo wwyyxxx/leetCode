@@ -12,7 +12,7 @@
  *      int book(int start, int end) 返回一个整数 k ，表示日历中存在的 k 次预订的最大值。
  * 
  */
-package wyx.wyx20220606;
+package wyx.leetcode2022.wyx20220606;
 
 import java.util.Map;
 import java.util.TreeMap;
