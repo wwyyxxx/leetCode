@@ -14,19 +14,9 @@ import java.util.PriorityQueue;
 
 public class MyCalendar {
 
-    PriorityQueue<Integer[]> pQueue;
     List<int[]> list;
 
     public MyCalendar() {
-        pQueue = new PriorityQueue<>(new Comparator<Integer[]>() {
-
-            @Override
-            public int compare(Integer[] a, Integer[] b) {
-                return a[0] != b[0] ? a[0] - b[0] : a[1] - b[1];
-            }
-            
-        });
-
         list = new ArrayList<>();
     }
     
