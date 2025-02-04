@@ -4,6 +4,19 @@
     ],
     "java.project.referencedLibraries": [
         "libs/poi-5.2.5.jar",
-        "libs/**/*.jar"
+        "libs/**/*.jar",
+        "practice/leetcode/lib/commons-collections4-4.4.jar",
+        "practice/leetcode/lib/commons-compress-1.27.1.jar",
+        "practice/leetcode/lib/commons-io-2.15.1.jar",
+        "practice/leetcode/lib/gson-2.10.1.jar",
+        "practice/leetcode/lib/log4j-api-2.17.1.jar",
+        "practice/leetcode/lib/log4j-core-2.17.1.jar",
+        "practice/leetcode/lib/log4j-slf4j-impl-2.17.1.jar",
+        "practice/leetcode/lib/pinyin4j-2.5.1.jar",
+        "practice/leetcode/lib/poi-5.2.5.jar",
+        "practice/leetcode/lib/poi-ooxml-5.2.5.jar",
+        "practice/leetcode/lib/poi-ooxml-lite-5.2.3.jar",
+        "practice/leetcode/lib/SparseBitSet-1.2.jar",
+        "practice/leetcode/lib/xmlbeans-5.2.0.jar"
     ]
 }
