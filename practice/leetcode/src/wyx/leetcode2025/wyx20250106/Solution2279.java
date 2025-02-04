@@ -5,7 +5,7 @@
  * @LastEditors: Tungbo
  * @Description: leecode: 2270. 分割数组的方案数
  */
-package practice.leetcode.src.wyx.leetcode2024.wyx20250106;
+package practice.leetcode.src.wyx.leetcode2025.wyx20250106;
 
 public class Solution2279 {
     public int waysToSplitArray(int[] nums) {

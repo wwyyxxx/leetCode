@@ -5,7 +5,7 @@
  * @LastEditors: Tungbo
  * @Description: leecode: 1561. 你可以获得的最大硬币数目
  */
-package practice.leetcode.src.wyx.leetcode2024.wyx20250120;
+package practice.leetcode.src.wyx.leetcode2025.wyx20250120;
 
 import java.util.Arrays;
 

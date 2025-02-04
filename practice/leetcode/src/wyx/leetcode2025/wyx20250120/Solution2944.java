@@ -5,7 +5,7 @@
  * @LastEditors: Tungbo
  * @Description: leecode: 2944. 购买水果需要的最少金币数
  */
-package practice.leetcode.src.wyx.leetcode2024.wyx20250120;
+package practice.leetcode.src.wyx.leetcode2025.wyx20250120;
 
 import java.util.List;
 

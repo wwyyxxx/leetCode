@@ -1,4 +1,4 @@
-package practice.leetcode.src.wyx.leetcode2024.wyx20250106;
+package practice.leetcode.src.wyx.leetcode2025.wyx20250106;
 
 import java.util.Arrays;
 

@@ -5,7 +5,7 @@
  * @LastEditors: Tungbo
  * @Description: leecode: 81. 搜索旋转排序数组 II
  */
-package practice.leetcode.src.wyx.leetcode2024.wyx20250128;
+package practice.leetcode.src.wyx.leetcode2025.wyx20250128;
 
 public class Solution81 {
     public boolean search(int[] nums, int target) {

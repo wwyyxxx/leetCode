@@ -5,7 +5,7 @@
  * @LastEditors: Tungbo
  * @Description: leecode: 40. 组合总和 II
  */
-package practice.leetcode.src.wyx.leetcode2024.wyx20250120;
+package practice.leetcode.src.wyx.leetcode2025.wyx20250120;
 
 import java.util.ArrayList;
 import java.util.Arrays;

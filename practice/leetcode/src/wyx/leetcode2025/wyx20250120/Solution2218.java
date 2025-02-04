@@ -5,7 +5,7 @@
  * @LastEditors: Tungbo
  * @Description: leecode: 2218. 从栈中取出 K 个硬币的最大面值和
  */
-package practice.leetcode.src.wyx.leetcode2024.wyx20250120;
+package practice.leetcode.src.wyx.leetcode2025.wyx20250120;
 
 import java.util.List;
 

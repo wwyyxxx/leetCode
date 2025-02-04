@@ -5,7 +5,7 @@
  * @LastEditors: Tungbo
  * @Description: leecode: 33. 搜索旋转排序数组
  */
-package practice.leetcode.src.wyx.leetcode2024.wyx20250128;
+package practice.leetcode.src.wyx.leetcode2025.wyx20250128;
 
 public class Solution33 {
     public int search(int[] nums, int target) {

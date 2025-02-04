@@ -1,4 +1,5 @@
-package practice.leetcode.src.wyx.leetcode2024.wyx20250203;
+
+package practice.leetcode.src.wyx.leetcode2025.wyx20250203;
 
 /*
  * @Author: Tungbo

@@ -5,7 +5,7 @@
  * @LastEditors: Tungbo
  * @Description: leecode: 2412. 完成所有交易的初始最少钱数
  */
-package practice.leetcode.src.wyx.leetcode2024.wyx20250120;
+package practice.leetcode.src.wyx.leetcode2025.wyx20250120;
 
 public class Solution2412 {
     public long minimumMoney(int[][] transactions) {

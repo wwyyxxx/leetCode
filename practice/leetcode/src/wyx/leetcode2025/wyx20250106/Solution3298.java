@@ -5,7 +5,7 @@
  * @LastEditors: Tungbo
  * @Description: leecode: 3298. 统计重新排列后包含另一个字符串的子字符串数目 II
  */
-package practice.leetcode.src.wyx.leetcode2024.wyx20250106;
+package practice.leetcode.src.wyx.leetcode2025.wyx20250106;
 
 public class Solution3298 {
 

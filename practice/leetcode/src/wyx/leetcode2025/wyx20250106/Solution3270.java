@@ -5,7 +5,7 @@
  * @LastEditors: Tungbo
  * @Description: leecode: 3270. 求出数字答案
  */
-package practice.leetcode.src.wyx.leetcode2024.wyx20250106;
+package practice.leetcode.src.wyx.leetcode2025.wyx20250106;
 
 public class Solution3270 {
     public int generateKey(int num1, int num2, int num3) {

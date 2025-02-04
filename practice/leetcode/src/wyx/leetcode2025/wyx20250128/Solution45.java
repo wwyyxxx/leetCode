@@ -5,7 +5,7 @@
  * @LastEditors: Tungbo
  * @Description: leecode: 45. 跳跃游戏 II
  */
-package practice.leetcode.src.wyx.leetcode2024.wyx20250128;
+package practice.leetcode.src.wyx.leetcode2025.wyx20250128;
 
 import java.util.Arrays;
 

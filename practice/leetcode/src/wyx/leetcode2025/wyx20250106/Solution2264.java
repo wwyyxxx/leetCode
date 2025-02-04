@@ -1,11 +1,11 @@
 /*
  * @Author: Tungbo
  * @Date: 2025-01-08 11:47:38
- * @LastEditTime: 2025-01-09 14:22:24
+ * @LastEditTime: 2025-02-04 17:17:11
  * @LastEditors: Tungbo
  * @Description: leecode: 2264. 字符串中最大的 3 位相同数字
  */
-package practice.leetcode.src.wyx.leetcode2024.wyx20250106;
+package practice.leetcode.src.wyx.leetcode2025.wyx20250106;
 
 public class Solution2264 {
 
