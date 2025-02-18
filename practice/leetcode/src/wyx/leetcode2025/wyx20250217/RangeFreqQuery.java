@@ -11,8 +11,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import practice.leetcode.src.wyx.other.record;
-
 public class RangeFreqQuery {
 
     HashMap<Integer, List<Integer>> dic = new HashMap<>();
