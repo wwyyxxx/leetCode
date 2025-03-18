@@ -5,7 +5,7 @@
  * @LastEditors: Tungbo
  * @Description: leecode: 1963. 使字符串平衡的最小交换次数
  */
-package practice.leetcode.src.wyx.leetcode2025.wyx0311;
+package practice.leetcode.src.wyx.leetcode2025.wyx0317;
 
 public class Solution1963 {
     public int minSwaps1(String S) {
